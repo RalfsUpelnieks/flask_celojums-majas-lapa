@@ -70,10 +70,7 @@ body{
     justify-content: center;
     margin:50px;
     width:auto;
-}
-#travel-list-flexbox{
     max-width: 1919px;
-
 }
 .trip {
     margin:auto;
@@ -112,4 +109,22 @@ body{
     border:none;
     color: white;
     background-color: #0070D8;
+}
+#guarantee-list-flexbox{
+    display: flex;
+    justify-content: center;
+    text-align:center;
+    margin:50px;
+    margin-top: 20px;
+}
+#guarantee-list-flexbox div{
+    width:450px;
+    margin:auto;
+}
+#guarantee-list-flexbox div p{
+    font-size: 24px;
+}
+#guarantee-list-flexbox div img {
+    width:150px;
+    height:150px;
 }
