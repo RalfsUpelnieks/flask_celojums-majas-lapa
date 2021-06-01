@@ -1,18 +1,57 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link href="static/css/style.css" rel="stylesheet">
-    <title>Your Site</title>
-  </head>
-  <body>
-    <nav>
-      <ul>
-        <li><a href="#" class="active">HOME</a></li>
-        <li><a href="./about">ABOUT</a></li>
-      </ul>
-    </nav>
-    <h1>Flask Site Template</h1>
-    <h2>Just a Template!</h2>
-  </body>
-  <script src="static/js/script.js"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/generic.css">
+    <link rel="stylesheet" href="static/css/style_main.css">
+    <link href="https://fonts.googleapis.com/css?family=Thasadith&display=swap" rel="stylesheet"/>
+    <title>Document</title>
+</head>
+<body>
+    <div id="body_wrap">
+        <header id="header_main">
+            <img id="logo" src="static/img/png.png" width="90" height="90" />
+            <h1 id="title">Travely</h1>
+            <h1 id="number">+371 29749980</h1>
+            <button id="login"><a href="profile.html"><span class="nice">LOG IN</span></a></button>
+        </header>
+        <div id="page_middle">
+            <div id="search_bar_back">
+                <div id="searchPage">
+                    <input id="input1" type="text" placeholder="Kur jūs velaties doties">
+                    <input id="input2" type="text" placeholder="Datums">
+                    <button id="searchButton">Meklēt</button>
+                </div>
+            </div>
+            <div id="about_us">
+                <h1 class="subtitle about_us_title">Travely - Generic catchy slogan</h1>
+                <p class="about_us_desc">Apskatiet mūsu galamērķu klāstu jūsu sapņu ceļojumam! Mēs piedāvājam izbraucienus uz kaimiņvalstīm, kā arī garus ceļojumus uz pasaules otru pusi!</p>
+                <button id="moveto_destinations"><span class="nice"><a href="meklešanas_lapa.html">Ceļojumi</a></span></button>
+            </div>
+            <div id="travel_list">
+                <h1 class="sub_title">Populārākie galamērķi</h1>
+                <div id="travel_list_flexbox">
+                    <div class="trip_1 trip">
+                        <img src="static/img/destinations/lisabon.png" class="trip_img">
+                        <h1 class="travel_list_title">Lisabona</h1>
+                    </div>
+                    <div class="trip_2 trip">
+                        <img src="static/img/destinations/paris.png" class="trip_img">
+                        <h1 class="travel_list_title">Parīze</h1>
+                    </div>
+                    <div class="trip_3 trip">
+                        <img src="static/img/destinations/santorine.png" class="trip_img">
+                        <h1 class="travel_list_title">Santorine</h1>
+                    </div>
+                    <div class="trip_4 trip">
+                        <img src="static/img/destinations/new_york.png" class="trip_img">
+                        <h1 class="travel_list_title">Ņujorka</h1>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

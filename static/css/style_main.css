@@ -1,0 +1,115 @@
+body{
+    background-image: linear-gradient(aliceblue, white);
+    background-repeat: no-repeat;
+}
+#body_wrap{
+    margin-left: auto;
+    margin-right: auto;
+    background-image: linear-gradient(aliceblue, white);
+    background-repeat: no-repeat;
+    max-width: 1919px;
+    
+}
+
+#searchPage {
+    display: flex;
+    background-color: rgb(73, 158, 255);
+    width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    border-radius: 16px;
+    margin-top:83.5px;
+}
+
+#searchButton {
+    height: 35px;
+    width: 90px;
+    border-radius: 16px;
+    font-family: Sulphur Point;
+    font-size: 17px;
+    border:none;
+    color: white;
+    background-color: #0070D8;
+    margin-left: 15px;
+}
+
+#input1 {
+    border-radius: 13px;
+    width: 320px;
+    outline: none;
+    border-style: none;
+    text-indent: 10px;
+}
+
+#input2 {
+    border-radius: 13px;
+    outline: none;
+    width: 120px;
+    margin-left: 15px;
+    border-style: none;
+    text-indent: 10px;
+}
+
+#search_bar_back {
+    background-image: url(../img/search_bar_back_main.png);
+    background-repeat: no-repeat;
+    height:222px;
+    width: 100%;
+    margin:none;
+    text-align:center;
+    background-position:50%;
+    background-size:scale;
+    overflow: hidden;
+}
+.sub_title {
+    margin: 30px;
+}
+#travel_list_flexbox{
+    display: flex;
+    justify-content: center;
+    margin:50px;
+    width:auto;
+}
+#travel_list_flexbox{
+    max-width: 1919px;
+
+}
+.trip {
+    margin:auto;
+    margin-left:10px;
+    margin-right:10px;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+.travel_list_title {
+    text-align: center;
+}
+.trip_img {
+    width: 100%;
+    height: 100%;
+}
+.trip:hover {
+    transform:scale(1.03, 1.03);
+    text-decoration: underline;
+    cursor:pointer;
+}
+#about_us {
+    text-align: center;
+    margin-top: 30px;
+}
+.about_us_desc {
+    font-size: 28px;
+    margin-left: 10%;
+    margin-right:10%;
+}
+#moveto_destinations {
+    height:42px;
+    width:138px;
+    border-radius: 16px;
+    margin-top: 20px;
+    border:none;
+    color: white;
+    background-color: #0070D8;
+}
