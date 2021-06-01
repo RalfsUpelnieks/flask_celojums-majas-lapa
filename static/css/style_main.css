@@ -2,7 +2,7 @@ body{
     background-image: linear-gradient(aliceblue, white);
     background-repeat: no-repeat;
 }
-#body_wrap{
+#body-wrap{
     margin-left: auto;
     margin-right: auto;
     background-image: linear-gradient(aliceblue, white);
@@ -11,7 +11,7 @@ body{
     
 }
 
-#searchPage {
+#search-page {
     display: flex;
     background-color: rgb(73, 158, 255);
     width: 560px;
@@ -22,7 +22,7 @@ body{
     margin-top:83.5px;
 }
 
-#searchButton {
+#search-button {
     height: 35px;
     width: 90px;
     border-radius: 16px;
@@ -51,8 +51,8 @@ body{
     text-indent: 10px;
 }
 
-#search_bar_back {
-    background-image: url(../img/search_bar_back_main.png);
+#search-bar-back {
+    background-image: url(../images/search_bar_back_main.png);
     background-repeat: no-repeat;
     height:222px;
     width: 100%;
@@ -62,16 +62,16 @@ body{
     background-size:scale;
     overflow: hidden;
 }
-.sub_title {
+.sub-title {
     margin: 30px;
 }
-#travel_list_flexbox{
+#travel-list-flexbox{
     display: flex;
     justify-content: center;
     margin:50px;
     width:auto;
 }
-#travel_list_flexbox{
+#travel-list-flexbox{
     max-width: 1919px;
 
 }
@@ -83,10 +83,10 @@ body{
     -moz-transition: all .2s;
     transition: all .2s;
 }
-.travel_list_title {
+.travel-list-title {
     text-align: center;
 }
-.trip_img {
+.trip-img {
     width: 100%;
     height: 100%;
 }
@@ -95,16 +95,16 @@ body{
     text-decoration: underline;
     cursor:pointer;
 }
-#about_us {
+#about-us {
     text-align: center;
     margin-top: 30px;
 }
-.about_us_desc {
+.about-us-desc {
     font-size: 28px;
     margin-left: 10%;
     margin-right:10%;
 }
-#moveto_destinations {
+#move-to-destinations {
     height:42px;
     width:138px;
     border-radius: 16px;

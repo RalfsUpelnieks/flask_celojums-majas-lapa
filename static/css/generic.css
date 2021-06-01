@@ -36,7 +36,7 @@ header{
     margin-right: 39px;
     border-bottom: 1px solid #ADADAD;
 }
-#header_main {
+#header-main {
     display:flex;
     padding-bottom: 29px;
     margin-left: 39px;
@@ -60,7 +60,7 @@ header{
     color: white;
     background-color: #0070D8;
 }
-.nice {
+.button-text {
     font-family: Sulphur Point;
     font-weight: normal;
     font-size: 24px;

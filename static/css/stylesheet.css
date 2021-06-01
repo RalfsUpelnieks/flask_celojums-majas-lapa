@@ -62,18 +62,30 @@ header{
     font-size: 24px;
 }
 
-
 #pages {
     margin-left: 40px;
     margin-top: 15px;
-}
-
-.pages {
-    background: none;
-    border: none;
+    font-family: Thasadith;
+    font-weight: bold;
     color: #3175c2;
     font-size: 15px;
     margin-bottom: 15px;
+}
+
+a:visited, a:link {
+  text-decoration: none;
+  font-family: Thasadith;
+  font-weight: bold;
+  color: #3175c2;
+  font-size: 15px;
+}
+
+a:hover, a:active {
+  text-decoration: underline;
+  font-family: Thasadith;
+  font-weight: bold;
+  color: #3175c2;
+  font-size: 15px;
 }
 
 #background {
