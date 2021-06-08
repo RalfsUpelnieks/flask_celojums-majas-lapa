@@ -217,7 +217,6 @@ a:hover, a:active {
 }
 #rezervet {
     display: flex;
-    justify-content: flex-end;
     font-family: Sulphur Point;
     font-style: normal;
     font-weight: normal;
@@ -225,14 +224,15 @@ a:hover, a:active {
     line-height: 27px;
     text-align: right;
     color: #000000;
-    margin-top: 15px;
-    margin-right: 670px;
+    margin-top: 5px;
     margin-bottom: 15px;
+    margin-left: 250px;
 }
 #profile {
     background-color: #F4F4F4;
     width: 650px;
     height: 163px;
+    margin-top: 47px;
     margin-left: 100px;
 }
 #informacija {
@@ -409,12 +409,12 @@ a:hover, a:active {
     margin-top: 20px;
 }
 #log-in-panel {
-  display: flex;
+  display: none;
   flex-direction: column;
   position: fixed;
-  left: 50%;
+  left: 45%;
   top: 30%;
-  width: 200px;
+  width: 10%;
   height: 300px;
   background-color: white;
   padding: 20px;
@@ -423,4 +423,35 @@ a:hover, a:active {
   border: solid;
   border-width: 1px;
   border-radius: 40px;
+}
+#log-in-input1 {
+  background-color: #EDEDED;
+  width: 160px;
+  height: 40px;
+  border-radius: 15px;
+  border: none;
+  margin-top: 20px;
+  text-indent: 10px;
+}
+#log-in-input2 {
+  background-color: #EDEDED;
+  width: 160px;
+  height: 40px;
+  border-radius: 15px;
+  border: none;
+  margin-top: 20px;
+  text-indent: 10px;
+}
+#cancel {
+  align-self: flex-end;
+  background: #0070D8;
+  color: #fff;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 23px;
+  font-weight: bold;
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 12px;
+  margin-left: 50px;
 }

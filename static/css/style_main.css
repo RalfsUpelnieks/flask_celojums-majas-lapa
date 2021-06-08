@@ -1,6 +1,8 @@
 body{
     background-image: linear-gradient(aliceblue, white);
     background-repeat: no-repeat;
+    display:flex; 
+    flex-direction:column;
 }
 #body-wrap{
     margin-left: auto;
@@ -79,6 +81,8 @@ body{
     -webkit-transition: all .2s;
     -moz-transition: all .2s;
     transition: all .2s;
+    position: relative;
+    z-index: 1;
 }
 .travel-list-title {
     text-align: center;
@@ -89,7 +93,6 @@ body{
 }
 .trip:hover {
     transform:scale(1.03, 1.03);
-    text-decoration: underline;
     cursor:pointer;
 }
 #about-us {
@@ -115,7 +118,7 @@ body{
     justify-content: center;
     text-align:center;
     margin:50px;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 #guarantee-list-flexbox div{
     width:450px;
@@ -127,4 +130,43 @@ body{
 #guarantee-list-flexbox div img {
     width:150px;
     height:150px;
+}
+.trip-header {
+    height: 28px;
+    margin-bottom: -28px;
+    z-index: 2;
+    position: relative;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding-left: 10px;
+    font-size: 20px;
+    color: white;
+    align-items: center;
+}
+.trip-header-views {
+    margin-left: auto;
+    padding-right:10px;
+    font-size: 16px;
+    line-height: 16px;
+}
+footer {
+    height: 30px;
+    text-align: center;
+    border-top: 1px solid #ADADAD;
+    font-size: 14px;
+    background-color:aliceblue;
+    margin-top:auto;
+}
+#cancel {
+  align-self: flex-end;
+  background: #0070D8;
+  color: #fff;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 23px;
+  font-weight: bold;
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 12px;
+  margin-left: 50px;
 }

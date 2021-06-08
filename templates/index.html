@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="static/css/generic.css">
     <link rel="stylesheet" href="static/css/style_main.css">
     <link href="https://fonts.googleapis.com/css?family=Thasadith&display=swap" rel="stylesheet"/>
+    <script src="../static/js/script.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -15,7 +16,7 @@
             <img id="logo" src="static/images/png.png" width="90" height="90" />
             <h1 id="title">Travely</h1>
             <h1 id="number">+371 29749980</h1>
-            <button id="login"><a href="/profils"><span class="button-text">LOG IN</span></a></button>
+            <button id="login"><span class="button-text">LOG IN</span></button>
         </header>
         <div id="page-middle">
             <div id="search-bar-back">
@@ -53,24 +54,50 @@
                 <h1 class="sub-title">Populārākie galamērķi</h1>
                 <div id="travel-list-flexbox">
                     <div class="trip-1 trip">
+                        <div class="trip-header">
+                            <span class="trip-header-title">Lisabona</span>
+                            <span class="trip-header-views">4 skatījumi</span>
+                        </div>
                         <img src="static/images/destinations/lisabon.png" class="trip-img">
-                        <h1 class="travel-list-title">Lisabona</h1>
                     </div>
                     <div class="trip-2 trip">
+                        <div class="trip-header">
+                            <span class="trip-header-title">Parīze</span>
+                            <span class="trip-header-views">17 skatījumi</span>
+
+                        </div>
                         <img src="static/images/destinations/paris.png" class="trip-img">
-                        <h1 class="travel-list-title">Parīze</h1>
                     </div>
                     <div class="trip-3 trip">
+                        <div class="trip-header">
+                            <span class="trip-header-title">Santorine</span>
+                            <span class="trip-header-views">2 skatījumi</span>
+                        </div>
                         <img src="static/images/destinations/santorine.png" class="trip-img">
-                        <h1 class="travel-list-title">Santorine</h1>
                     </div>
                     <div class="trip-4 trip">
+                        <div class="trip-header">
+                            <span class="trip-header-title">Ņujorka</span>
+                            <span class="trip-header-views">8 skatījumi</span>
+                        </div>
                         <img src="static/images/destinations/new_york.png" class="trip-img">
-                        <h1 class="travel-list-title">Ņujorka</h1>
                 </div>
                 </div>
             </div>
         </div>
+        <div id="log-in-panel">
+            <div id="cancel">
+                <button><span>X</span></button>
+            </div>
+            <h1>Pieslēgties</h1>
+            <input id="log-in-input1" type="text" placeholder="Lietotājvārds">
+            <input id="log-in-input2" type="text" placeholder="Parole">
+            <button id="login"><span class="nice">LOG IN</span></button>
+        </div>
+        <!-- hear !-->
     </div>
+    <footer>
+            <span>© 2021 SIA "Travely"</span>
+    </footer>
 </body>
 </html>
