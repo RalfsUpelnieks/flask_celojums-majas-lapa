@@ -1,7 +1,27 @@
 from flask import Flask, render_template, redirect
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import text
 from flask.helpers import url_for
+from datetime import datetime
 
 app = Flask('app')
+
+# Database Connection
+db_name = 'test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_name
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
+db = SQLAlchemy(app)
+
+class Todo(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  content = db.Column(db.String(200), nullable=False)
+  completed = db.Column(db.Integer, default=0)
+  date_created = db.Column(db.DateTime, default=datetime.utcnow)
+
+  def __repr__(self):
+    return '<Task %r>' % self.id
+
 @app.route('/')
 def index():
   return render_template("index.html")
