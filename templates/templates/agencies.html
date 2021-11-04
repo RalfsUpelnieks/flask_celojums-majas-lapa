@@ -1,0 +1,37 @@
+{% extends "admin.html" %}
+{% block title %}
+<div id="admin-page-content">
+    <div id="ap-selector">
+        <div id="ap-selector-list">
+            <ul class="nav-ul">
+                <li class="selector" id="selected">Ceļojumu aģentūras</li>
+                <a href="/admin/countries"><li class="selector">Valstis</li></a>
+                <a href="/admin/trips"><li class="selector">Pieejamie ceļojumi</li></a>
+            </ul>
+        </div>
+        <div id="ap-selector-display">  
+            <h2 class="subtitle">Ceļojumu aģentūras</h2>
+            <div id="ap-selector-display-list">
+                {% if 2 == 2 %}
+                    {% for x in num %}
+                    <div class="ap-list-member">
+                        <ul class="list-ul">
+                            <li style="font-weight: bold;">Tex Mex asian restaurant</li>
+                            <li>Rīgas iela 69, Bauska</li>
+                            <li>+371 29749980</li>
+                        </ul>
+                        <h2 class="ap-list-control correct">Labot</h2>
+                        <h2 class="ap-list-control">Dzēst</h2>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <p id="ap-description">Nav bļe</p>
+                {% endif %}
+            </div>
+            <div id="ap-selector-footer">
+                <h2 class="ap-list-add">Pievienot</h2>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
