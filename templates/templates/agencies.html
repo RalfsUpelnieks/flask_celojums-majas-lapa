@@ -5,27 +5,26 @@
         <div id="ap-selector-list">
             <ul class="nav-ul">
                 <li class="selector" id="selected">Ceļojumu aģentūras</li>
-                <a href="/admin/countries"><li class="selector">Valstis</li></a>
                 <a href="/admin/trips"><li class="selector">Pieejamie ceļojumi</li></a>
             </ul>
         </div>
         <div id="ap-selector-display">  
             <h2 class="subtitle">Ceļojumu aģentūras</h2>
             <div id="ap-selector-display-list">
-                {% if 2 == 2 %}
-                    {% for x in num %}
+                {% if agencies %}
+                    {% for agency in agencies %}
                     <div class="ap-list-member">
                         <ul class="list-ul">
-                            <li style="font-weight: bold;">Tex Mex asian restaurant</li>
-                            <li>Rīgas iela 69, Bauska</li>
-                            <li>+371 29749980</li>
+                            <li style="font-weight: bold;">{{ agency.name }}</li>
+                            <li>{{ agency.address }}</li>
+                            <li>{{ agency.number }}</li>
                         </ul>
                         <h2 class="ap-list-control correct">Labot</h2>
                         <h2 class="ap-list-control">Dzēst</h2>
                     </div>
                     {% endfor %}
                 {% else %}
-                <p id="ap-description">Nav bļe</p>
+                <p id="ap-description">Nav agencies, perhaps 404?</p>
                 {% endif %}
             </div>
             <div id="ap-selector-footer">

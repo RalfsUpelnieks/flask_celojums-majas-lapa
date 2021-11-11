@@ -34,6 +34,7 @@ body{
     color: white;
     background-color: #0070D8;
     margin-left: 15px;
+    cursor: pointer;
 }
 
 #input1 {
@@ -112,6 +113,7 @@ body{
     border:none;
     color: white;
     background-color: #0070D8;
+    cursor: pointer;
 }
 #guarantee-list-flexbox{
     display: flex;

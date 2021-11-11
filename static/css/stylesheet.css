@@ -310,6 +310,7 @@ a:hover, a:active {
     height: 202px;
     background: #FFFFFF;
     border-radius: 8px;
+    cursor: pointer;
 }
 .box-text {
     font-family: Thasadith;
