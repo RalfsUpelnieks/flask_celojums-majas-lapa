@@ -1,0 +1,45 @@
+{% extends "admin.html" %}
+{% block title %}
+    <div id="ap-selector">
+        <div id="ap-selector-list">
+            <ul class="nav-ul">
+                <a href="/admin/add/agencies"><li class="selector">Ceļojumu aģentūras</li></a>
+                <li class="selector" id="selected">Pieejamie ceļojumi</li>
+            </ul>
+        </div>
+        <div id="ap-selector-display">  
+            <h2 class="subtitle">Ceļojumu aģentūras</h2>
+            <form method="POST" action="{{ url_for('admin_add_trips') }}">
+                {{ form.agency.label }}
+                {{ form.agency }}
+                <br/>
+                {{ form.country_from.label }}
+                {{ form.country_from }}
+                <br/>
+                {{ form.country_to.label }}
+                {{ form.country_to }}
+                <br/>
+                {{ form.date_from.label }}
+                {{ form.date_from }}
+                <br/>
+                {{ form.date_to.label }}
+                {{ form.date_to }}
+                <br/>
+                {{ form.description.label}}
+                {{ form.description }}
+                <br/>
+                {{ form.cost.label}}
+                {{ form.cost }}
+                <br/>
+                {{ form.ticket_amount.label}}
+                {{ form.ticket_amount }}
+
+                <div id="ap-selector-footer">
+                    <input class="ap-list-submit" type="submit" value="Pievienot" />
+                </div>
+                
+                {{ form.csrf_token }}
+            </form>
+        </div>
+    </div>
+{% endblock %}
