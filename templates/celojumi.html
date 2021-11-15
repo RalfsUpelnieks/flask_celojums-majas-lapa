@@ -28,15 +28,28 @@
                 <input id="input2" type="text" placeholder="Datums">
                 <button id="searchButton">Meklēt</button>
             </div>
-            <div id="travelPanel">
-                <img id="travelImage" src="static/images/riga.jpg"></img>
-                <div id="travelText">
-                    <h1>Latvija - Rīga</h1>
-                    <h3>No 20.04.2021 līdz 11.11.2021</h3>
+            <!--
+                --Gundars
+                Iespējams, dizainu būs nepieciešams mainīt, bet pašlaik visiem elementiem ir 'id' atribūti, kas, veidojot vairākus elementus, neder.
+                Vai nu celojumi.html un stylesheet.css vajag mainīt visu uz 'class' vai investēt šo laiku uzveidojot citu dizainu. 
+            -->
+            {% if trips %}
+                {% for trip in trips %}
+                <div id="travelPanel">
+                    <img id="travelImage" src="static/images/riga.jpg"></img>
+                    <div id="travelText">
+                        <h1>{{ trip.country_from }}</h1>
+                        <h3>No {{ trip.date_from }} līdz {{ trip.date_to }}</h3>
+                        <h3>{{ trip.get_agency_from_id().name }}</h3>
+                        <h3>{{ trip.cost }} eiro</h3>
+                        <h3>{{ trip.ticket_amount }} vietas</h3>
+                        <h4>{{ trip.views }} skatījumi</h4>
+                    </div>
+                    <h3 style="margin-top: 15px; width: 600px;">{{ trip.description }}</h3>
+                    <button id="reserveButton">Rezervēt</button>   
                 </div>
-                <h3 style="margin-top: 15px; width: 600px;">Rīga ir pilsēta ar izsmalcinātu pagātni, kura ir atspoguļota jaunatjaunotajā Vecrīgā, Iespējams arī apskatīt Ķengaraga bloka mājas lai ievērotu PSRS vadības influenci Latvijas pērlē.</h3>
-                <button id="reserveButton">Rezervēt</button>   
-            </div>
+                {% endfor %}
+            {% endif %}
             
     </div>
     <div id="log-in-panel">

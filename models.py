@@ -15,7 +15,7 @@ class Agency(db.Model):
     number = db.Column(db.String(18))
     children = db.relationship("Trip", cascade="all, delete")
     def __repr__(self):
-        return f'<Agency: {self.id} - {self.name}>'
+        return self.name
 
 class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -30,3 +30,6 @@ class Trip(db.Model):
     views = db.Column(db.Integer)
     def __repr__(self):
         return f'<Trip: {self.country_from} - {self.country_to} from agency {self.agency_id}>'
+
+    def get_agency_from_id(self):
+        return Agency.query.filter(Agency.id == self.agency_id).first()
