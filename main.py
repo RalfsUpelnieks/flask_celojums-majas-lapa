@@ -29,6 +29,7 @@ def admin_agencies():
 def admin_trips():
     return render_template("templates/trips.html", trips = get_trips(), agencies = get_agencies())
 
+# Aģentūru un ceļojumu pievienošana
 @app.route('/admin/add')
 def admin_add():
     return redirect(url_for("admin_add_agencies"))
@@ -66,6 +67,21 @@ def admin_add_trips():
         db.session.commit()
         return redirect(url_for('admin_trips'))
     return render_template("templates/add_trip.html", form=form)
+
+# Aģentūru un ceļojumu dzēšana
+@app.route('/admin/remove/agency/<int:id>')
+def admin_remove_agency(id):
+    remove_agency = Agency.query.filter_by(id=id).first()
+    db.session.delete(remove_agency)
+    db.session.commit()
+    return redirect(url_for('admin_agencies'))
+
+@app.route('/admin/remove/trip/<int:id>')
+def admin_remove_trip(id):
+    remove_trip = Trip.query.filter_by(id=id).first()
+    db.session.delete(remove_trip)
+    db.session.commit()
+    return redirect(url_for('admin_trips'))
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)

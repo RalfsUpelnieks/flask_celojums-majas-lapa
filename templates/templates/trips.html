@@ -25,8 +25,8 @@
                             <li>80e</li>
                             <li>15 pieejamas vietas</li>
                         </ul>
-                        <h2 class="ap-list-control correct">Labot</h2>
-                        <h2 class="ap-list-control">Dzēst</h2>
+                        <a href="/admin/edit/trip/{{ trip.id }}"><h2 class="ap-list-control correct">Labot</h2></a> <!-- Poga uz datu labošanas lapu -->
+                        <a href="/admin/remove/trip/{{ trip.id }}"><h2 class="ap-list-control">Dzēst</h2></a> <!-- Poga kas dzēš ceļojumu -->
                     </div>
                     {% endfor %}
                 {% else %}

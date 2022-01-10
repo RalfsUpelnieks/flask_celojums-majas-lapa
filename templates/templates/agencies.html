@@ -19,8 +19,8 @@
                             <li>{{ agency.address }}</li>
                             <li>{{ agency.number }}</li>
                         </ul>
-                        <h2 class="ap-list-control correct">Labot</h2>
-                        <h2 class="ap-list-control">Dzēst</h2>
+                        <a href="/admin/edit/agency/{{ agency.id }}"><h2 class="ap-list-control correct">Labot</h2></a><!-- Poga uz datu labošanas lapu -->
+                        <a href="/admin/remove/agency/{{ agency.id }}"><h2 class="ap-list-control">Dzēst</h2></a> <!-- Poga kas dzēš aģentūru -->
                     </div>
                     {% endfor %}
                 {% else %}
