@@ -15,6 +15,7 @@ class AddAgencyForm(FlaskForm):
 
 class AddTripForm(FlaskForm):
     agencies = Agency.query.all()
+
     agency = SelectField('Aģentūra', choices = agencies, validators=[DataRequired()])
     country_from = StringField('Atiešanas valsts:', validators=[DataRequired()])
     country_to = StringField('Galamērķa valsts:', validators=[DataRequired()])

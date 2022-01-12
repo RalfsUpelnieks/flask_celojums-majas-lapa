@@ -1,5 +1,7 @@
 from flask import render_template, redirect
 from flask.helpers import url_for
+from wtforms.fields.choices import SelectField
+from wtforms.validators import DataRequired
 from controllers import get_agencies, get_trips
 from settings import app
 from forms import AddAgencyForm, AddTripForm
@@ -49,6 +51,12 @@ def admin_add_agencies():
 
 @app.route('/admin/add/trips', methods=['GET', 'POST'])
 def admin_add_trips():
+    # Lai dinamiski atjauninātu aģentūru sarakstu ceļojumu izveides lapā
+    # Aģentūru izvēlnes attribūts tiek pievienots klases struktūrai, ne instancei
+    agencies = SelectField('Aģentūra', choices=Agency.query.all(), validators=[DataRequired()])
+    setattr(AddTripForm, 'agency', agencies)
+    
+    # Pēc tā var izveidot 'form' objektu ar atjauninātu aģentūru sarakstu
     form = AddTripForm()
     if form.validate_on_submit():
         # Pārbaude
