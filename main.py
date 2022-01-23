@@ -2,7 +2,6 @@ from flask import render_template, redirect
 from flask.helpers import url_for
 from wtforms.fields.choices import SelectField
 from wtforms.validators import DataRequired
-from controllers import get_agencies, get_trips
 from settings import app
 from forms import AddAgencyForm, AddTripForm
 from models import db, Agency, Trip
@@ -13,7 +12,7 @@ def index():
 
 @app.route('/ceļojumi')
 def celojumi():
-    return render_template("celojumi.html", trips = get_trips())
+    return render_template("celojumi.html", trips = Trip.query.all())
 
 @app.route('/admin')
 def admin():
@@ -25,11 +24,11 @@ def profils():
 
 @app.route('/admin/agencies')
 def admin_agencies():
-    return render_template("templates/agencies.html", agencies = get_agencies())
+    return render_template("templates/agencies.html", agencies = Agency.query.all())
 
 @app.route('/admin/trips')
 def admin_trips():
-    return render_template("templates/trips.html", trips = get_trips(), agencies = get_agencies())
+    return render_template("templates/trips.html", trips = Trip.query.all(), agencies = Agency.query.all())
 
 # Aģentūru un ceļojumu pievienošana
 @app.route('/admin/add')
