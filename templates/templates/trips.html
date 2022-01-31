@@ -5,6 +5,7 @@
         <div id="ap-selector-list">
             <ul class="nav-ul">
                 <a href="/admin/agencies"><li class="selector">Ceļojumu aģentūras</li></a>
+                <a href="/admin/countries"><li class="selector">Ceļojamās valstis</li></a>
                 <li class="selector" id="selected">Pieejamie ceļojumi</li>
             </ul>
         </div>
@@ -22,8 +23,8 @@
                                 {% endif %}
                             {% endfor %}
                             <li>{{ trip.date_from }} - {{ trip.date_to }}</li>
-                            <li>80e</li>
-                            <li>15 pieejamas vietas</li>
+                            <li>{{ trip.cost }}€</li>
+                            <li>{{ trip.ticket_amount }} pieejamas vietas</li>
                         </ul>
                         <a href="/admin/edit/trip/{{ trip.id }}"><h2 class="ap-list-control correct">Labot</h2></a> <!-- Poga uz datu labošanas lapu -->
                         <a href="/admin/remove/trip/{{ trip.id }}"><h2 class="ap-list-control">Dzēst</h2></a> <!-- Poga kas dzēš ceļojumu -->

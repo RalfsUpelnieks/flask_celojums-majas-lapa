@@ -3,16 +3,16 @@ from flask.helpers import url_for
 from wtforms.fields.choices import SelectField
 from wtforms.validators import DataRequired
 from settings import app
-from forms import AddAgencyForm, AddTripForm
-from models import db, Agency, Trip
+from forms import *
+from models import *
 
 @app.route('/')
 def index():
     return render_template("index.html")
 
-@app.route('/ceļojumi')
+@app.route('/catalogue')
 def celojumi():
-    return render_template("celojumi.html", trips = Trip.query.all())
+    return render_template("catalogue.html", trips = Trip.query.all())
 
 @app.route('/admin')
 def admin():
@@ -25,6 +25,10 @@ def profils():
 @app.route('/admin/agencies')
 def admin_agencies():
     return render_template("templates/agencies.html", agencies = Agency.query.all())
+
+@app.route('/admin/countries')
+def admin_countries():
+    return render_template("templates/countries.html", countries = Country.query.all(), agencies = Agency.query.all())
 
 @app.route('/admin/trips')
 def admin_trips():
@@ -47,6 +51,16 @@ def admin_add_agencies():
         db.session.commit()
         return redirect(url_for('admin'))
     return render_template("templates/add_agency.html", form=form)
+
+@app.route('/admin/add/country', methods=['GET', 'POST'])
+def admin_add_country():
+    form = AddCountryForm()
+    if form.validate_on_submit():
+        country = Country(country=form.country.data, abbreviation=form.abbreviation.data)
+        db.session.add(country)
+        db.session.commit()
+        return redirect(url_for('admin_countries'))
+    return render_template("templates/add_country.html", form=form)
 
 @app.route('/admin/add/trips', methods=['GET', 'POST'])
 def admin_add_trips():
@@ -82,6 +96,13 @@ def admin_remove_agency(id):
     db.session.delete(remove_agency)
     db.session.commit()
     return redirect(url_for('admin_agencies'))
+
+@app.route('/admin/remove/country/<int:id>')
+def admin_remove_country(id):
+    remove_country = Country.query.filter_by(id=id).first()
+    db.session.delete(remove_country)
+    db.session.commit()
+    return redirect(url_for('admin_countries'))
 
 @app.route('/admin/remove/trip/<int:id>')
 def admin_remove_trip(id):

@@ -13,6 +13,10 @@ class AddAgencyForm(FlaskForm):
     address = StringField('Adrese', validators=[DataRequired()])
     phone_number = StringField('Numurs', validators=[DataRequired()])
 
+class AddCountryForm(FlaskForm):
+    country = StringField('Valsts nosaukums', validators=[DataRequired()])
+    abbreviation = StringField('Saīsinājums', validators=[DataRequired()])
+
 class AddTripForm(FlaskForm):
     agencies = Agency.query.all()
 
