@@ -1,12 +1,30 @@
-from flask_sqlalchemy import SQLAlchemy
 from settings import app
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from sqlalchemy import MetaData
+
+# Database
+
+convention = {
+    "ix": 'ix_%(column_0_label)s',
+    "uq": "uq_%(table_name)s_%(column_0_name)s",
+    "ck": "ck_%(table_name)s_%(constraint_name)s",
+    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+    "pk": "pk_%(table_name)s"
+}
+
+_metadata = MetaData(naming_convention=convention)
 
 # Database Connection
 db_name = 'travely_database.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_name
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
-db = SQLAlchemy(app)
+db = SQLAlchemy(app, metadata=_metadata)
+
+# Migrate
+migrate = Migrate(app, db, render_as_batch=True)
+
 
 class Agency(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -16,6 +34,13 @@ class Agency(db.Model):
     children = db.relationship("Trip", cascade="all, delete")
     def __repr__(self):
         return self.name
+
+class Country(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    country = db.Column(db.String(48), nullable=False)
+    abbreviation = db.Column(db.String(2), nullable=False)
+    def __repr__(self):
+        return f'<Country: {self.country} - {self.abbreviation}>'
 
 class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -33,3 +58,16 @@ class Trip(db.Model):
 
     def get_agency_from_id(self):
         return Agency.query.filter(Agency.id == self.agency_id).first()
+    
+
+'''
+set FLASK_APP=models.py
+
+flask db init
+
+flask db migrate -m "(nosaukums)"
+
+flask db upgrade
+
+flask db migrate -m "Atbilstoši, esmu pievienojis jaunu, kritiski vajadzīgu tabulu iekš jau iepriekšveidotās datubāzes, ko izmantojam šajā vietnē. Atbilstoši, tabulas nosaukums ir Country."
+'''

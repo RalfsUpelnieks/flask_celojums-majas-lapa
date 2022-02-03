@@ -1,0 +1,36 @@
+{% extends "admin.html" %}
+{% block title %}
+<div id="admin-page-content">
+    <div id="ap-selector">
+        <div id="ap-selector-list">
+            <ul class="nav-ul">
+                <a href="/admin/agencies"><li class="selector">Ceļojumu aģentūras</li></a>
+                <li class="selector" id="selected">Ceļojamās valstis</li></a>
+                <a href="/admin/trips"><li class="selector">Pieejamie ceļojumi</li></a>
+            </ul>
+        </div>
+        <div id="ap-selector-display">  
+            <h2 class="subtitle">Ceļojamās valstis</h2>
+            <div id="ap-selector-display-list">
+                {% if countries %}
+                    {% for country in countries %}
+                    <div class="ap-list-member">
+                        <ul class="list-ul">
+                            <li style="font-weight: bold;">{{ country.country }}</li>
+                            <li>{{ country.abbreviation }}</li>
+                        </ul>
+                        <a href="/admin/edit/country/{{ country.id }}"><h2 class="ap-list-control correct">Labot</h2></a><!-- Poga uz datu labošanas lapu -->
+                        <a href="/admin/remove/country/{{ country.id }}"><h2 class="ap-list-control">Dzēst</h2></a> <!-- Poga kas dzēš aģentūru -->
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <p id="ap-description">Nav countries, perhaps 404?</p>
+                {% endif %}
+            </div>
+            <div id="ap-selector-footer">
+                <a href="/admin/add/country" style="margin-left: auto;"><h2 class="ap-list-add">Pievienot</h2></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

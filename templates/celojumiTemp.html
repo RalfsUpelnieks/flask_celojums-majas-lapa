@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/stylesheet.css">
+    <link href="https://fonts.googleapis.com/css?family=Thasadith&display=swap" rel="stylesheet"/>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <img id="logo" src="static/images/png.png" width="90" height="90" />
+        <h1 id="title">Travely</h1>
+        <h1 id="number">+371 29749980</h1>
+        <button id="login"><span class="button-text">LOG IN</span></button>
+    </header>
+
+    <div id="pages">
+        <a href="/">Sākumlapa</a>
+        <span class="pages"><b>></b></span>
+        <a href="/ceļojumi">Meklēšana</a>
+    </div>
+
+    <div id="background">
+            <div id="searchPage2">
+                <input id="input1" type="text" placeholder="Kur jūs velaties doties">
+                <input id="input2" type="text" placeholder="Datums">
+                <button id="search-button">Meklēt</button>
+            </div>
+            <!--
+                --Gundars
+                Iespējams, dizainu būs nepieciešams mainīt, bet pašlaik visiem elementiem ir 'id' atribūti, kas, veidojot vairākus elementus, neder.
+                Vai nu celojumi.html un stylesheet.css vajag mainīt visu uz 'class' vai investēt šo laiku uzveidojot citu dizainu. 
+            -->
+            {% if trips %}
+                {% for trip in trips %}
+                <div id="travelPanel">
+                    <img id="travelImage" src="static/images/riga.jpg"></img>
+                    <div id="travelText">
+                        <h1>{{ trip.country_from }}</h1>
+                        <h3>No {{ trip.date_from }} līdz {{ trip.date_to }}</h3>
+                        <h3>{{ trip.get_agency_from_id().name }}</h3>
+                        <h3>{{ trip.cost }} eiro</h3>
+                        <h3>{{ trip.ticket_amount }} vietas</h3>
+                        <h4>{{ trip.views }} skatījumi</h4>
+                    </div>
+                    <h3 style="margin-top: 15px; width: 600px;">{{ trip.description }}</h3>
+                    <button id="reserveButton">Rezervēt</button>   
+                </div>
+                {% endfor %}
+            {% endif %}
+            
+    </div>
+    <div id="log-in-panel">
+        <div id="cancel">
+            <button><span>X</span></button>
+        </div>
+        <h1>Pieslēgties</h1>
+        <input id="log-in-input1" type="text" placeholder="Lietotājvārds">
+        <input id="log-in-input2" type="text" placeholder="Parole">
+        <button id="login"><span class="button-text">LOG IN</span></button>
+    </div>
+    
+
+</body>
+</html>

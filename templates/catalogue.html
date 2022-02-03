@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+{% block content %}
+<!-- Lapu navigators - norāda ceļu uz apakšlapām -->
+<div id="search-bar-back" class="one-pixel-search-back">
+    <div class="catalogue-search-page">
+
+        <div>
+            <p>Ceļojums:</p>
+            <div>
+                <input type="text" placeholder="No">
+                <input type="text" placeholder="Uz">
+            </div>
+        </div>
+        <div>
+            <p>Datums:</p>
+            <div>
+                <input type="date" placeholder="No">
+                <input type="date" placeholder="Līdz">
+            </div>
+        </div>
+        <button class="search-button" type="submit">Meklēt</button>
+    </div>
+</div>
+
+<!-- NEaizTiec -->
+<div id="catalogue-list">
+    {% if trips %}
+        {% for trip in trips %}
+            <div class="catalogue-list-element">
+                <img src="static/images/destinations/lisabon.png" class="catalogue-list-element-img">
+                <div class="catalogue-list-element-text">
+                    <h2>{{ trip.country_from }} - {{ trip.country_to }}</h2>
+                    <p>{{ trip.description }}</p>
+                    <h2>{{ trip.cost }}€</h2>
+                    <p>{{ trip.date_from }} - {{ trip.date_to }}</p>
+                </div>
+                <button class="reserve-button">Rezervēt</button>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}
