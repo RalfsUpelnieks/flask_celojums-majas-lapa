@@ -16,7 +16,17 @@
                     {% for trip in trips %}
                     <div class="ap-list-member">
                         <ul class="list-ul">
-                            <li style="font-weight: bold;">{{ trip.country_from }} - {{ trip.country_to }}</li>
+                            <li style="font-weight: bold;">
+                            {% for country in countries %}
+                                {% if country.id == trip.country_from %}
+                                    {{ country.country }} - 
+                                {% endif %}
+                                
+                                {% if country.id == trip.country_to %}
+                                    {{ country.country }}
+                                {% endif %}
+                            {% endfor %}
+                            </li>
                             {% for agency in agencies %}
                                 {% if agency.id == trip.agency_id %}
                                 <li style="font-weight: bold;">Aģentūra: {{ agency.name }}</li>
