@@ -40,13 +40,13 @@ class Country(db.Model):
     country = db.Column(db.String(48), nullable=False)
     abbreviation = db.Column(db.String(2), nullable=False)
     def __repr__(self):
-        return f'<Country: {self.country} - {self.abbreviation}>'
+        return f'{self.country}, {self.abbreviation}'
 
 class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     agency_id = db.Column(db.Integer, db.ForeignKey("agency.id"))
-    country_from = db.Column(db.String(30))
-    country_to = db.Column(db.String(30))
+    country_from = db.Column(db.Integer)
+    country_to = db.Column(db.Integer)
     date_from = db.Column(db.Date)
     date_to = db.Column(db.Date)
     description = db.Column(db.String(280))
@@ -58,6 +58,16 @@ class Trip(db.Model):
 
     def get_agency_from_id(self):
         return Agency.query.filter(Agency.id == self.agency_id).first()
+    
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(30), nullable=False, unique=True)
+    password = db.Column(db.String(30), nullable=False)
+    name = db.Column(db.String(30), nullable=False)
+    surname = db.Column(db.String(30), nullable=False)
+    role_id = db.Column(db.Integer)
+    def __repr__(self):
+        return f'User: {self.name} {self.surname}, roleID = {self.role_id}'
     
 
 '''
