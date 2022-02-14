@@ -4,99 +4,91 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/css/stylesheet.css">
+    <link rel="stylesheet" href="/static/css/stylesheet.css">
+    <link rel="Icon" href="/static/images/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Thasadith&display=swap" rel="stylesheet"/>
-    <script src="../static/js/script.js"></script>
     <title>Document</title>
 </head>
 <body>
     <div id="body-wrap">
         <header id="header-main">
-            <img id="logo" src="static/images/png.png" width="90" height="90" />
-            <h1 id="title">Travely</h1>
+            <a href="/"><img id="logo" src="/static/images/png.png" width="60" height="60" /></a>
+            <h1 id="title">Ceļot Prieks!</h1></a>
             <h1 id="number">+371 29749980</h1>
             <button id="login"><span class="button-text">LOG IN</span></button>
         </header>
-        <div id="page-middle">
-            <div id="search-bar-back">
-                <div id="search-page">
-                    <input id="input1" type="text" placeholder="Kur jūs velaties doties">
-                    <input id="input2" type="text" placeholder="Datums">
-                    <button id="search-button"><a href="ceļojumi" id="search-button">Meklēt</a></button>
+        {% block content %}
+            <div id="page-middle">
+                <div id="search-bar-back">
+                    <div id="search-page">
+                        <input id="input1" type="text" placeholder="Kur jūs velaties doties">
+                        <input id="input2" type="text" placeholder="Datums">
+                        <button id="search-button"><a href="catalogue" id="search-button">Meklēt</a></button>
+                    </div>
                 </div>
-            </div>
-            <div id="about-us">
-                <h1 class="subtitle about-us-title">Travely - Generic catchy slogan</h1>
-                <p class="about-us-desc">Apskatiet mūsu galamērķu klāstu jūsu sapņu ceļojumam! Mēs piedāvājam izbraucienus uz kaimiņvalstīm, kā arī garus ceļojumus uz pasaules otru pusi!</p>
-                <button id="move-to-destinations"><span><a href="/ceļojumi" class="button-text">Ceļojumi</a></span></button>
-            </div>
-            <div id="guarantee">
-              <div id="guarantee-list-flexbox">
-                  <div>
-                    <img src="static/images/logo/wallet.png">
-                    <h1>Lēti piedāvājumi</h1>
-                    <p>Mūsu ceļojuma piedāvājumi ir piemēroti jebkuram budžeta plānam</p>
-                  </div>
-                  <div>
-                    <img src="static/images/logo/heart.png">
-                    <h1>Veselības apdrošināšana</h1>
-                    <p>Visi medicīniskie pakalpojumi nelaimes gadījumos tiek apmaksāti</p>
-                  </div>
-                  <div>
-                    <img src="static/images/logo/cash.png">
-                    <h1>Garantēta naudas atgriezšana</h1>
-                    <p>Garantējam naudas atmaksu ceļojuma atcelšanas gadījumā - pat pēc ceļojuma!</p>
-                  </div>
-              </div>
-            </div>
-            <div id="travel-list">
-                <h1 class="sub-title">Populārākie galamērķi</h1>
-                <div id="travel-list-flexbox">
-                    <div class="trip-1 trip">
-                        <div class="trip-header">
-                            <span class="trip-header-title">Lisabona</span>
-                            <span class="trip-header-views">4 skatījumi</span>
-                        </div>
-                        <img src="static/images/destinations/lisabon.png" class="trip-img">
+                <div id="about-us">
+                    <h1 class="subtitle about-us-title">Travely - Generic catchy slogan</h1>
+                    <p class="about-us-desc">Apskatiet mūsu galamērķu klāstu jūsu sapņu ceļojumam! Mēs piedāvājam izbraucienus uz kaimiņvalstīm, kā arī garus ceļojumus uz pasaules otru pusi!</p>
+                    <button id="move-to-destinations"><span><a href="/catalogue" class="button-text">Ceļojumi</a></span></button>
+                </div>
+                <div id="guarantee">
+                <div id="guarantee-list-flexbox">
+                    <div>
+                        <img src="static/images/logo/wallet.png">
+                        <h1>Lēti piedāvājumi</h1>
+                        <p>Mūsu ceļojuma piedāvājumi ir piemēroti jebkuram budžeta plānam</p>
                     </div>
-                    <div class="trip-2 trip">
-                        <div class="trip-header">
-                            <span class="trip-header-title">Parīze</span>
-                            <span class="trip-header-views">17 skatījumi</span>
-
-                        </div>
-                        <img src="static/images/destinations/paris.png" class="trip-img">
+                    <div>
+                        <img src="static/images/logo/heart.png">
+                        <h1>Veselības apdrošināšana</h1>
+                        <p>Visi medicīniskie pakalpojumi nelaimes gadījumos tiek apmaksāti</p>
                     </div>
-                    <div class="trip-3 trip">
-                        <div class="trip-header">
-                            <span class="trip-header-title">Santorine</span>
-                            <span class="trip-header-views">2 skatījumi</span>
-                        </div>
-                        <img src="static/images/destinations/santorine.png" class="trip-img">
+                    <div>
+                        <img src="static/images/logo/cash.png">
+                        <h1>Garantēta naudas atgriezšana</h1>
+                        <p>Garantējam naudas atmaksu ceļojuma atcelšanas gadījumā - pat pēc ceļojuma!</p>
                     </div>
-                    <div class="trip-4 trip">
-                        <div class="trip-header">
-                            <span class="trip-header-title">Ņujorka</span>
-                            <span class="trip-header-views">8 skatījumi</span>
-                        </div>
-                        <img src="static/images/destinations/new_york.png" class="trip-img">
                 </div>
                 </div>
+                <div id="travel-list">
+                    <h1 class="sub-title">Populārākie galamērķi</h1>
+                    <div id="travel-list-flexbox">
+                        <div class="trip-1 trip">
+                            <div class="trip-header">
+                                <span class="trip-header-title">Lisabona</span>
+                                <span class="trip-header-views">4 skatījumi</span>
+                            </div>
+                            <img src="static/images/destinations/lisabon.png" class="trip-img">
+                        </div>
+                        <div class="trip-2 trip">
+                            <div class="trip-header">
+                                <span class="trip-header-title">Parīze</span>
+                                <span class="trip-header-views">17 skatījumi</span>
+        
+                            </div>
+                            <img src="static/images/destinations/paris.png" class="trip-img">
+                        </div>
+                        <div class="trip-3 trip">
+                            <div class="trip-header">
+                                <span class="trip-header-title">Santorine</span>
+                                <span class="trip-header-views">2 skatījumi</span>
+                            </div>
+                            <img src="static/images/destinations/santorine.png" class="trip-img">
+                        </div>
+                        <div class="trip-4 trip">
+                            <div class="trip-header">
+                                <span class="trip-header-title">Ņujorka</span>
+                                <span class="trip-header-views">8 skatījumi</span>
+                            </div>
+                            <img src="static/images/destinations/new_york.png" class="trip-img">
+                    </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div id="log-in-panel">
-            <div id="cancel">
-                <button><span>X</span></button>
-            </div>
-            <h1>Pieslēgties</h1>
-            <input id="log-in-input1" type="text" placeholder="Lietotājvārds">
-            <input id="log-in-input2" type="text" placeholder="Parole">
-            <button id="login"><span class="button-text">LOG IN</span></button>
-        </div>
-        <!-- hear !-->
+        {% endblock %}
+        <footer>
+            <span>© 2022 SIA "Travely"</span>
+        </footer>
     </div>
-    <footer>
-            <span>© 2021 SIA "Travely"</span>
-    </footer>
 </body>
 </html>
