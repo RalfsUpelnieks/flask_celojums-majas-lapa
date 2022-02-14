@@ -1,0 +1,40 @@
+{% extends "index.html" %}
+{% block content %}
+<!-- NEaizTiec -->
+<div id="catalogue-list">
+    {% if trip %}
+        <div id="reservation-elements">
+            <div class="reservetion-list-element">
+                <img src="/static/images/destinations/lisabon.png" class="reservetion-list-element-img">
+                <div class="reservetion-list-element-text">
+                    <h2>
+                        {% for country in countries %}
+                            {% if country.id == trip.country_from %}
+                                {{ country.country }} - 
+                            {% endif %}
+                                    
+                            {% if country.id == trip.country_to %}
+                                {{ country.country }}
+                            {% endif %}
+                        {% endfor %}
+                    </h2>
+                    <p>{{ trip.description }}</p>
+                    <h2>{{ trip.cost }}€</h2>
+                    <p>{{ trip.date_from }} - {{ trip.date_to }}</p>
+                </div>
+            </div>
+            <div id="personal-info">
+                <h2 id="informacija">Personīgā informācija</h2>
+                <div id="personiga-informacija">
+                    <h2>Vārds:</h2>
+                    <h2>E-pasts:</h2>
+                    <h2>Tel. nr.:</h2>
+                </div>
+                <a href="/reservation/{{ trip.id }}" class="reserve-button"><span class="reserve-button-text">Mainīt</span></a>
+            </div>
+            <a href="/reservation/add/{{ trip.id }}" class="reserve-button" style="float: right;"><span class="reserve-button-text">Rezervēt</span></a>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}
