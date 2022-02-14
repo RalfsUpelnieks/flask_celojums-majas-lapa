@@ -59,6 +59,22 @@ class Trip(db.Model):
     def get_agency_from_id(self):
         return Agency.query.filter(Agency.id == self.agency_id).first()
     
+    def serialize(self):
+        return {
+            "id": self.id,
+            "agency_id": self.agency_id,
+            "country_from_id": self.country_from,
+            "country_to_id": self.country_to,
+            "country_from": "",
+            "country_to": "",
+            "date_from": self.date_from,
+            "date_to": self.date_to,
+            "description": self.description,
+            "cost": self.cost,
+            "ticket_amount": self.ticket_amount,
+            "views": self.views
+            }
+            
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(30), nullable=False, unique=True)
