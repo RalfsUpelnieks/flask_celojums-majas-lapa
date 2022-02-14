@@ -69,7 +69,10 @@ class User(db.Model):
     def __repr__(self):
         return f'User: {self.name} {self.surname}, roleID = {self.role_id}'
     
-
+class Reservation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    trip_id = db.Column(db.Integer, db.ForeignKey("trip.id"))
 '''
 set FLASK_APP=models.py
 

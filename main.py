@@ -1,4 +1,5 @@
 from os import name
+from random import randint, random
 from flask import render_template, redirect, request
 from flask.helpers import url_for
 from wtforms.fields.choices import SelectField
@@ -14,7 +15,7 @@ def index():
 
 @app.route('/catalogue')
 def celojumi():
-    return render_template("catalogue.html", trips = Trip.query.all())
+    return render_template("catalogue.html", trips = Trip.query.all(), countries = Country.query.all())
 
 @app.route('/admin')
 def admin():
@@ -22,7 +23,7 @@ def admin():
 
 @app.route('/profils')
 def profils():
-    return render_template("profile.html")
+    return render_template("profile.html", reservation = Reservation.query.all(), trips = Trip.query.all(), countries = Country.query.all())
 
 @app.route('/register')
 def register():
@@ -152,6 +153,31 @@ def sign_in():
     return "404"
     # return render_template("templates/register.html") # To Do
 
+#rezervācijas sistēma
+@app.route('/reservation/<int:id>')
+def reservation(id):
+    trip = Trip.query.get(id)
+    return render_template("reservation.html", trip = trip, countries = Country.query.all())
+    
+
+@app.route('/reservation/add/<int:id>')
+def reservation_add(id):
+    user = 1
+    id = randint(100000000, 1000000000)
+    if(Reservation.query.get(id)):
+        id = randint(100000000, 1000000000)
+    reservation = Reservation(id = id, user_id=user, trip_id=id)
+    db.session.add(reservation)
+    db.session.commit()
+    return redirect(url_for('celojumi'))
+
+# Aģentūru un ceļojumu dzēšana
+@app.route('/reservation/remove/<int:id>')
+def reservation_remove(id):
+    remove_reservation = Reservation.query.filter_by(id=id).first()
+    db.session.delete(remove_reservation)
+    db.session.commit()
+    return redirect(url_for('profils'))
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)

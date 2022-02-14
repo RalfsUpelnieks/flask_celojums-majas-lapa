@@ -29,12 +29,22 @@
             <div class="catalogue-list-element">
                 <img src="static/images/destinations/lisabon.png" class="catalogue-list-element-img">
                 <div class="catalogue-list-element-text">
-                    <h2>{{ trip.country_from }} - {{ trip.country_to }}</h2>
+                    <h2>
+                    {% for country in countries %}
+                        {% if country.id == trip.country_from %}
+                            {{ country.country }} - 
+                        {% endif %}
+                                
+                        {% if country.id == trip.country_to %}
+                            {{ country.country }}
+                        {% endif %}
+                    {% endfor %}
+                    </h2>
                     <p>{{ trip.description }}</p>
                     <h2>{{ trip.cost }}€</h2>
                     <p>{{ trip.date_from }} - {{ trip.date_to }}</p>
                 </div>
-                <button class="reserve-button">Rezervēt</button>
+                <a href="/reservation/{{ trip.id }}" class="reserve-button"><span class="reserve-button-text">Rezervēt</span></a>
             </div>
         {% endfor %}
     {% endif %}
