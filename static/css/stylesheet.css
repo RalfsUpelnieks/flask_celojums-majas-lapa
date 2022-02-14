@@ -24,7 +24,7 @@ h2 {
 }
 
 p {
-    font-weight: 00;
+    font-weight: 200;
 }
 #logo {
     margin-top: 15px;
@@ -240,7 +240,7 @@ a:hover, a:active {
     padding-top: 8px;
     font-style: normal;
     font-weight: normal;
-    font-size: 22px;
+    font-size: 27px;
     line-height: 27px;
     text-align: left;
 
@@ -315,7 +315,7 @@ a:hover, a:active {
 .box-text {
     font-family: Thasadith;
     font-weight: lighter;
-    font-size: 20px;
+    font-size: 24px;
     margin-top: 1px;
 }
 #profile-content {
@@ -624,7 +624,8 @@ body{
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
-    border-radius: 3px;
+    border-radius: 5px;
+    align-items: flex-end;
 }
 
 .catalogue-search-page > div {
@@ -641,38 +642,55 @@ body{
     display: flex;
     flex-direction: row;
     margin-left: 2%;
+    gap: 5%;
+    margin-top: 1%;
+    height: 40px;
+    color: white;
+    align-items: center;
 }
 
-#input1 {
-    border-radius: 3px;
-    width: 320px;
+.catalogue-search-page > div > div > select, .catalogue-search-page > div > div > input {
+    border-radius: 5px;
     outline: none;
-    border-style: none;
-    text-indent: 10px;
+    border: 2px solid #dfdfdf;
+    color: #757575;
+    height: 30px;
+    padding-left: 1%;
+    font-family: 'Roboto', sans-serif;
+    width: 150px;
+    cursor: pointer;
 }
 
-#input2 {
-    border-radius: 3px;
+.catalogue-search-page > div > div > select {
+    height: 35px;
+}
+
+.catalogue-search-page > div > div > input::placeholder {
+    color: #c1c2c4;
+}
+
+.catalogue-search-page  > button {
+    border-radius: 5px;
     outline: none;
-    width: 120px;
-    margin-left: 15px;
-    border-style: none;
-    text-indent: 10px;
+    border: none;
+    background-color: #0070D8;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+    width: 15%;
+    height: 40px;
+    cursor: pointer;
 }
 
 #search-bar-back {
-    /* position: absolute; */
+    display: flex;
+    align-items: center;
     background-image: url(../images/search_bar_back_main.png);
     background-repeat: no-repeat;
-    /* height:222px; */
-    width: 100%;
-    /* height: 100%; */
-    /* text-align:center; */
-    /* background-position:50%; */
+    height: 222px;
+    background-position: 50%;
     z-index: -4;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    text-align: center;
+    box-shadow: inset 0px -30px 20px -30px #000000;
 }
 
 .one-pixel-search-back {
@@ -820,73 +838,12 @@ footer {
     width: 70%;
 }
 .reserve-button {
-    color:white;
-    text-decoration: none;
-    text-align: center;
     height: 35px;
     width: 120px;
-    border-radius: 3px;
+    border-radius: 16px;
     font-size: 17px;
     border:none;
+    color: white;
     background-color: #0070D8;
     margin-top: auto;
-    margin-left: auto;
-}
-
-/* priekš reservation.html */
-#personal-info {
-    background-color: #F4F4F4;
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction:column;
-
-    padding: 1%;
-    border-radius: 10px;
-    gap: 2%;
-    margin: 1%;
-    width: 300px;
-    height: 200px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-}
-
-.reserve-button-text {
-    color:white;
-    text-align: center;
-    margin-top: 53px;
-    font-size: 17px;
-    
-}
-#reservation-elements{
-    background-color: white;
-    color:black;
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction:column;
-    padding: 1%;
-    border-radius: 10px;
-    gap: 2%;
-    margin: 1%;
-    width: 60%;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.reservetion-list-element {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    padding: 1%;
-    gap: 2%;
-    margin: 1%;
-    margin-right: auto;
-}
-.reservetion-list-element-img {
-    width: 170px;
-    height: 150px;
-    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
-    border-radius: 5px;
-}
-.reservetion-list-element-text {
-    width: 70%;
 }

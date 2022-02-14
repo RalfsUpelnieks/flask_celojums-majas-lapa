@@ -38,21 +38,34 @@
         <div>
             <h1 id="rezervet">Rezervētie ceļojumi</h1>
             <div id="rezervetie-celojumi" class="DivToScroll DivWithScroll">
-                {% for reserve in reservation %}
-                    <div id="celojumi">
-                        <div id="celojuma-atcelt">
-                            <div id="celojuma-informacija">
-                                <h1 class="box-text">Rez nr.:{{ reserve.id }}</h1>
-                                <h1 class="box-text">Maršuts:</h1>
-                                <h1 class="box-text">Izbraukšana:</h1>
-                                <h1 class="box-text">Atgriešanās:</h1>
-                                <h1 class="box-text">Dienu skaits:</h1>
-                                <h1 class="box-text">Cena:</h1>
-                            </div>
-                            <a href="/reservation/remove/{{ reserve.id }}" class="reserve-button"><span class="reserve-button-text">Atcelt</span></a>
+                <div id="celojumi">
+                    <div id="celojuma-atcelt">
+                        <div id="celojuma-informacija">
+                            <h1 class="box-text">Rez nr.:</h1>
+                            <h1 class="box-text">Maršuts:</h1>
+                            <h1 class="box-text">Izbraukšana:</h1>
+                            <h1 class="box-text">Atgriešanās:</h1>
+                            <h1 class="box-text">Dienu skaits:</h1>
+                            <h1 class="box-text">Cena:</h1>
                         </div>
+                        <button id="atcelt"><span class="button-text">Atcelt</span></button> 
                     </div>
-                {% endfor %}
+                </div>
+
+                <div id="celojumi">
+                    <div id="celojuma-atcelt">
+                        <div id="celojuma-informacija">
+                            <h1 class="box-text">Rez nr.:</h1>
+                            <h1 class="box-text">Maršuts:</h1>
+                            <h1 class="box-text">Izbraukšana:</h1>
+                            <h1 class="box-text">Atgriešanās:</h1>
+                            <h1 class="box-text">Dienu skaits:</h1>
+                            <h1 class="box-text">Cena:</h1>
+                        </div>
+                        <button id="atcelt"><span class="button-text">Atcelt</span></button> 
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

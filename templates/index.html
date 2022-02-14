@@ -4,27 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/stylesheet.css">
-    <link rel="Icon" href="/static/images/favicon.ico">
+    <link rel="stylesheet" href="static/css/stylesheet.css">
+    <link rel="Icon" href="static/images/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Thasadith&display=swap" rel="stylesheet"/>
     <title>Document</title>
 </head>
 <body>
     <div id="body-wrap">
         <header id="header-main">
-            <a href="/"><img id="logo" src="/static/images/png.png" width="60" height="60" /></a>
-            <h1 id="title">Ceļot Prieks!</h1></a>
+            <img id="logo" src="static/images/png.png" width="60" height="60" />
+            <h1 id="title">Ceļot Prieks!</h1>
             <h1 id="number">+371 29749980</h1>
             <button id="login"><span class="button-text">LOG IN</span></button>
         </header>
         {% block content %}
             <div id="page-middle">
                 <div id="search-bar-back">
-                    <div id="search-page">
+                    <!-- <div id="search-page">
                         <input id="input1" type="text" placeholder="Kur jūs velaties doties">
                         <input id="input2" type="text" placeholder="Datums">
                         <button id="search-button"><a href="catalogue" id="search-button">Meklēt</a></button>
-                    </div>
+                    </div> -->
                 </div>
                 <div id="about-us">
                     <h1 class="subtitle about-us-title">Travely - Generic catchy slogan</h1>
@@ -86,9 +86,6 @@
                 </div>
             </div>
         {% endblock %}
-        <footer>
-            <span>© 2022 SIA "Travely"</span>
-        </footer>
     </div>
 </body>
 </html>

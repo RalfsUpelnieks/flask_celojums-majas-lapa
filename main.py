@@ -1,13 +1,14 @@
 from os import name
-from random import randint, random
-from flask import render_template, redirect, request
+from flask import render_template, redirect, request, Response
 from flask.helpers import url_for
 from wtforms.fields.choices import SelectField
 from wtforms.validators import DataRequired
 from settings import app
 from forms import *
 from models import *
+import json
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 @app.route('/')
 def index():
@@ -15,7 +16,7 @@ def index():
 
 @app.route('/catalogue')
 def celojumi():
-    return render_template("catalogue.html", trips = Trip.query.all(), countries = Country.query.all())
+    return render_template("catalogue.html", trips=Trip.query.all(), countries=Country.query.all())
 
 @app.route('/admin')
 def admin():
@@ -23,7 +24,7 @@ def admin():
 
 @app.route('/profils')
 def profils():
-    return render_template("profile.html", reservation = Reservation.query.all(), trips = Trip.query.all(), countries = Country.query.all())
+    return render_template("profile.html")
 
 @app.route('/register')
 def register():
@@ -153,31 +154,29 @@ def sign_in():
     return "404"
     # return render_template("templates/register.html") # To Do
 
-#rezervācijas sistēma
-@app.route('/reservation/<int:id>')
-def reservation(id):
-    trip = Trip.query.get(id)
-    return render_template("reservation.html", trip = trip, countries = Country.query.all())
-    
+@app.route('/catalogue_filter', methods=["POST"])
+def catalogue_filtes():
+    country_from = None if not request.form['from'] else int(request.form['from'])
+    country_to = None if not request.form['to'] else int(request.form['to'])
+    from_date = None if not request.form['from_date'] else datetime.strptime(request.form['from_date'], '%Y-%m-%d').date()
+    to_date = None if not request.form['to_date'] else datetime.strptime(request.form['to_date'], '%Y-%m-%d').date()
+    Trips = Trip.query.filter((Trip.country_from == country_from) | (Trip.country_to == country_to) | (Trip.date_from == from_date) | (Trip.date_to == to_date)).all()
+    output = []
 
-@app.route('/reservation/add/<int:id>')
-def reservation_add(id):
-    user = 1
-    id = randint(100000000, 1000000000)
-    if(Reservation.query.get(id)):
-        id = randint(100000000, 1000000000)
-    reservation = Reservation(id = id, user_id=user, trip_id=id)
-    db.session.add(reservation)
-    db.session.commit()
-    return redirect(url_for('celojumi'))
+    for trip in Trips:
+        if (country_from != None and int(trip.country_from) != int(country_from) or
+            country_to != None and int(trip.country_to) != int(country_to) or
+            from_date != None and trip.date_from != from_date or
+            to_date != None and trip.date_to != to_date):
+            continue
 
-# Aģentūru un ceļojumu dzēšana
-@app.route('/reservation/remove/<int:id>')
-def reservation_remove(id):
-    remove_reservation = Reservation.query.filter_by(id=id).first()
-    db.session.delete(remove_reservation)
-    db.session.commit()
-    return redirect(url_for('profils'))
+        trip.cost = float(trip.cost)
+        trip = trip.serialize()
+        trip['country_from'] = Country.query.filter(Country.id==trip['country_from_id']).first().country
+        trip['country_to'] = Country.query.filter(Country.id==trip['country_to_id']).first().country
+        output.append(trip)
+    return Response(json.dumps(output, default=str), mimetype='application/json')
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
