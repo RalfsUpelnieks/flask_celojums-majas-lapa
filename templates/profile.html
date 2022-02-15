@@ -10,11 +10,11 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <img id="logo" src="static/images/png.png" width="90" height="90" />
+    <header id="header-main">
+        <img id="logo" src="../static/images/png.png" width="60" height="60" />
         <h1 id="title">Travely</h1>
-        <h1 id="number">+371 29749980</h1>
-        <button id="login"><span class="button-text">Mans profils</span></button>
+        <a href="tel:+37129749980" id="number">tel. +371 29749980</h1>
+        <a href="/profils" class="button" id="button-login">LOG IN</a>
     </header>
     <div id="pages">
         <a href="/">Sākumlapa</a>
@@ -49,7 +49,8 @@
                                 <h1 class="box-text">Dienu skaits:</h1>
                                 <h1 class="box-text">Cena:</h1>
                             </div>
-                            <a href="/reservation/remove/{{ reserve.id }}" class="reserve-button"><span class="reserve-button-text">Atcelt</span></a>
+                            <!--<a href="/reservation/remove/{{ reserve.id }}" class="reserve-button"><span class="reserve-button-text">Atcelt</span></a> -->
+                            <a href="/reservation/remove/{{ reserve.id }}" class="button" id="button-reserve">Atcelt</a>
                         </div>
                     </div>
                 {% endfor %}

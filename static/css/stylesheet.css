@@ -6,13 +6,12 @@
     margin:0;
     padding:0;
 }
+
 body{
     font-family: 'Roboto', sans-serif;
     color:#575757;
-}
-a {
-    color: inherit;
-    text-decoration: inherit;
+    background-image: linear-gradient(aliceblue, white);
+    background-repeat: no-repeat;
 }
 
 h1 {
@@ -26,6 +25,40 @@ h2 {
 p {
     font-weight: 200;
 }
+
+a{
+    text-decoration: none;
+}
+
+a.button{
+    display: inline-block;
+    color: white !important;
+    text-align: center;
+    font-size: 22px !important;
+    font-family: Thasadith;
+    text-decoration: none;
+    line-height: 42px;
+    font-weight: normal !important;
+    background-color: #0070D8;
+    border-radius: 3px;
+    padding-right: 22px;
+    padding-left: 22px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+a.button:hover {
+    background-color: #0362bb;
+}
+
+#body-wrap{
+    margin-left: auto;
+    margin-right: auto;
+    background-image: linear-gradient(aliceblue, white);
+    background-repeat: no-repeat;
+    max-width: 1919px;
+}
+
 #logo {
     margin-top: 15px;
     margin-left: 1%;
@@ -38,6 +71,7 @@ p {
     font-size: 32px;
     line-height: 90px;
 }
+
 header{
     position: relative;
     display:flex;
@@ -50,24 +84,52 @@ header{
 }
 
 #number{
-    line-height: 90px;
+    line-height: 96px;
     text-align:right;
     margin-left:auto;
     margin-right: 30px;
-    font-size: 16px;
+    font-size: 18px;
+    color: #000000;
 }
 
-#login{
+#button-login {
+    height:40px;
+    width:90px;
     margin-top: 23px;
-    height:42px;
-    width:138px;
     margin-right:5%;
     border-radius: 3px;
-    border:none;
-    color: white;
-    background-color: #0070D8;
-    cursor: pointer;
 }
+
+#search-bar-back {
+    display: flex;
+    align-items: center;
+    background-image: url(../images/search_bar_back_main.png);
+    background-repeat: no-repeat;
+    height: 222px;
+    background-position: 50%;
+    box-shadow: inset 0px -30px 20px -30px #000000;
+}
+
+#about-us {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.about-us-desc {
+    font-size: 28px;
+    margin-left: 10%;
+    margin-right:10%;
+}
+
+.subtitle {
+    margin: 10px;
+}
+
+#button-trips {
+    margin-top: 20px;
+    font-size: 24px !important;
+}
+
 .button-text {
     line-height: 42px;
     font-weight: normal !important;
@@ -83,21 +145,6 @@ header{
     color: #3175c2;
     font-size: 15px;
     margin-bottom: 15px;
-}
-
-a:visited, a:link {
-  text-decoration: none;
-  font-family: Thasadith;
-  font-weight: bold;
-  color: #3175c2;
-  font-size: 15px;
-}
-
-a:hover, a:active {
-  font-family: Thasadith;
-  font-weight: bold;
-  color: #3175c2;
-  font-size: 15px;
 }
 
 #background {
@@ -186,17 +233,6 @@ a:hover, a:active {
     width: 250px;
 }
 
-#search_bar_back {
-    background-image: url(../images/search_bar_back_main.png);
-    background-repeat: no-repeat;
-    height:222px;
-    width: 100%;
-    margin:none;
-    text-align:center;
-    background-position:50%;
-    background-size:scale;
-    overflow: hidden;
-}
 .sub_title {
     margin: 30px;
 }
@@ -514,9 +550,7 @@ a:hover, a:active {
     color:#292929;
     text-decoration: none;
 }
-.subtitle {
-    margin: 10px;
-}
+
 #ap-selector-display-list {
     margin:10px;
     background-color: whitesmoke;
@@ -594,18 +628,6 @@ a:hover, a:active {
 }
 
 /* No style_main.css */
-body{
-    background-image: linear-gradient(aliceblue, white);
-    background-repeat: no-repeat;
-}
-
-#body-wrap{
-    margin-left: auto;
-    margin-right: auto;
-    background-image: linear-gradient(aliceblue, white);
-    background-repeat: no-repeat;
-    max-width: 1919px;
-}
 
 #search-page {
     display: flex;
@@ -679,17 +701,6 @@ body{
     cursor: pointer;
 }
 
-#search-bar-back {
-    display: flex;
-    align-items: center;
-    background-image: url(../images/search_bar_back_main.png);
-    background-repeat: no-repeat;
-    height: 222px;
-    background-position: 50%;
-    z-index: -4;
-    box-shadow: inset 0px -30px 20px -30px #000000;
-}
-
 .one-pixel-search-back {
     margin-left: -1px
 }
@@ -724,15 +735,6 @@ body{
 .trip:hover {
     transform:scale(1.03, 1.03);
     cursor:pointer;
-}
-#about-us {
-    text-align: center;
-    margin-top: 30px;
-}
-.about-us-desc {
-    font-size: 28px;
-    margin-left: 10%;
-    margin-right:10%;
 }
 #move-to-destinations {
     height:42px;
@@ -834,20 +836,6 @@ footer {
 .catalogue-list-element-text {
     width: 70%;
 }
-.reserve-button {
-    color:white;
-    text-decoration: none;
-    text-align: center;
-    height: 35px;
-    width: 120px;
-    border-radius: 16px;
-    font-size: 17px;
-    border:none;
-    color: white;
-    background-color: #0070D8;
-    margin-top: auto;
-    margin-left: auto;
-}
 
 /* priekš reservation.html */
 #personal-info {
@@ -865,13 +853,6 @@ footer {
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.reserve-button-text {
-    color:white;
-    text-align: center;
-    margin-top: 53px;
-    font-size: 17px;
-    
-}
 #reservation-elements{
     background-color: white;
     color:black;
@@ -905,4 +886,20 @@ footer {
 }
 .reservetion-list-element-text {
     width: 70%;
+}
+
+#button-reserve {
+    font-size: 20px !important;
+    height:40px;
+    width:74px;
+    margin-top: auto;
+    margin-left: auto;
+}
+
+#button-reserve-change {
+    font-size: 20px !important;
+    height:40px;
+    width:74px;
+    margin-top: auto;
+    margin-left: auto;
 }

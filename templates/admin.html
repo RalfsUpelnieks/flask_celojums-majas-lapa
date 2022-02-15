@@ -10,11 +10,11 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <img id="logo" src="{{ url_for('static', filename = 'images/png.png') }}" width="90" height="90" />
-        <h1 id="title">Travely Administrācija</h1>
-        <h1 id="number">+371 29749980</h1>
-        <button id="login"><span class="button-text">LOG IN</span></button>
+    <header id="header-main">
+        <img id="logo" src="../static/images/png.png" width="60" height="60" />
+        <h1 id="title">Travely</h1>
+        <a href="tel:+37129749980" id="number">tel. +371 29749980</h1>
+        <a href="/" class="button" id="button-login">LOG OUT</a>
     </header>
 
     {% block title %}

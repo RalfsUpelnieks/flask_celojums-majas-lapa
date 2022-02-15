@@ -54,7 +54,7 @@
                     <h2>{{ trip.cost }}€</h2>
                     <p>{{ trip.date_from }} - {{ trip.date_to }}</p>
                 </div>
-                <a href="/reservation/{{ trip.id }}" class="reserve-button"><span class="reserve-button-text">Rezervēt</span></a>
+                <a href="/reservation/{{ trip.id }}" class="button" id="button-reserve">Rezervēt</a>
             </div>
         {% endfor %}
     {% endif %}
