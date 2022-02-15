@@ -62,9 +62,12 @@ a.button:hover {
 #logo {
     margin-top: 15px;
     margin-left: 1%;
+    src: url(../images/background.png);
 }
 
 #title{
+    text-decoration: none;
+    color: #575757;
     margin-left: 1%;
     vertical-align: text-bottom;
     font-weight: normal;
@@ -89,7 +92,7 @@ header{
     margin-left:auto;
     margin-right: 30px;
     font-size: 18px;
-    color: #000000;
+    color: #2e2e2e;
 }
 
 #button-login {
@@ -751,7 +754,15 @@ header{
     justify-content: center;
     text-align:center;
     margin:50px;
-    margin-top: 50px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fffffff5;
+    border-top: solid;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: #c0c0c0;
+    padding: 10px;
 }
 #guarantee-list-flexbox div{
     width:450px;

@@ -23,7 +23,7 @@ def celojumi():
 def admin():
     return redirect(url_for("admin_agencies"))
 
-@app.route('/profils')
+@app.route('/profile')
 def profils():
     return render_template("profile.html", reservation = Reservation.query.all(), trips = Trip.query.all(), countries = Country.query.all())
 
