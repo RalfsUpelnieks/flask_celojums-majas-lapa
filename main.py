@@ -31,6 +31,14 @@ def profils():
 def register():
     return render_template("templates/register.html") # To Do
 
+@app.route('/register')
+def register():
+    return render_template("register.html")
+
+@app.route('/log_in')
+def log_in():
+    return render_template("log-in.html")
+
 @app.route('/admin/agencies')
 def admin_agencies():
     return render_template("templates/agencies.html", agencies = Agency.query.all())

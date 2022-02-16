@@ -135,6 +135,7 @@ header{
 
 .button-text {
     line-height: 42px;
+    color: white;
     font-weight: normal !important;
     font-size: 24px !important;
     color: inherit !important;
@@ -190,7 +191,6 @@ header{
     border:none;
     color: white;
     background-color: #0070D8;
-    margin-left: 15px;
     cursor: pointer;
 }
 
@@ -209,6 +209,7 @@ header{
     margin-left: 15px;
     border-style: none;
     text-indent: 10px;
+    margin-right: 15px;
 }
 
 #travelPanel {
@@ -766,7 +767,6 @@ header{
 }
 #guarantee-list-flexbox div{
     width:450px;
-    margin:auto;
 }
 #guarantee-list-flexbox div p{
     font-size: 24px;
@@ -904,7 +904,6 @@ footer {
     height:40px;
     width:74px;
     margin-top: auto;
-    margin-left: auto;
 }
 
 #button-reserve-change {
@@ -912,5 +911,100 @@ footer {
     height:40px;
     width:74px;
     margin-top: auto;
+    margin-left: auto;
+}
+
+.modal-body {
+    padding: 60px 40px 40px !important;
+    align-content: center;
+}
+.modal-body .title {
+    color: #026fd4;
+    font-size: 33px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0 0 10px;
+}
+.modal-body .description {
+    color: #9A9EA9;
+    font-size: 16px;
+    margin: 0 0 20px;
+}
+.modal-body .form-group {
+    text-align: left;
+    margin-bottom: 20px;
+    position: relative;
+}
+.modal-body .form-control {
+    font-size: 17px;
+    height: 45px;
+    width: 500px;
+    padding: 6px 0 6px 15px;
+    margin: 0 auto;
+    border: 2px solid #eee;
+    border-radius: 15px;
+    box-shadow: none;
+    outline: none;
+}
+.form-control::placeholder {
+    color: #AEAFB1;
+}
+.forgot-pass:hover {
+    color: #9A9EA9;
+    text-decoration: underline;
+}
+.profile-btn{
+    margin-top: 23px;
+    height:42px;
+    width:138px;
+    margin-right:5%;
+    border-radius: 3px;
+    border:none;
+    color: white;
+    background-color: #0070D8;
+    cursor: pointer;
+}
+.profile-important {
+    color: red;
+    font-size: large;
+}
+.modal-content .modal-body .btn{
+    margin-top: 10px;
+    color: #fff;
+    background-color: #0070D8;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 38px;
+    width: 400px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 15px;
+    border: none;
+    display: inline-block;
+}
+#profile-box {
+    padding: 20px;
+    border: #575757;
+    border-style: solid;
+    border-width: 2px;
+    align-self: left;
+    font-size: 20px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    margin-left: 200px;
+    margin-right: 200px;
+    border-radius: 5px;
+    align-items: left;
+}
+.profile-text {
+    margin-bottom: 10px;
+    align-self: left;
+}
+#profile-data {
+    margin-bottom: 50px;
+    margin-top: 50px;
     margin-left: auto;
 }
