@@ -10,7 +10,7 @@
         </div>
         <div id="ap-selector-display">  
             <h2 class="subtitle">Ceļojumu aģentūras</h2>
-            <form method="POST" action="{{ url_for('admin_add_trips') }}">
+            <form method="POST" action="{{ url_for('admin_add_trips') }}" enctype="multipart/form-data">
                 {{ form.agency.label }}
                 {{ form.agency }}
                 <br/>
@@ -34,6 +34,9 @@
                 <br/>
                 {{ form.ticket_amount.label}}
                 {{ form.ticket_amount }}
+                <br>
+                {{ form.photo.label}}
+                {{ form.photo}}
 
                 <div id="ap-selector-footer">
                     <input class="ap-list-submit" type="submit" value="Pievienot" />

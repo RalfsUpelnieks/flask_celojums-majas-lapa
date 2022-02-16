@@ -5,7 +5,7 @@
     {% if trip %}
         <div id="reservation-elements">
             <div class="reservetion-list-element">
-                <img src="/static/images/destinations/lisabon.png" class="reservetion-list-element-img">
+                <img src="{{ url_for('static', filename='/images/destinations/' + trip.img_file) }}" class="catalogue-list-element-img">
                 <div class="reservetion-list-element-text">
                     <h2>
                         {% for country in countries %}
