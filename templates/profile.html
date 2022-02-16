@@ -1,44 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/css/stylesheet.css">
-    <link rel="Icon" href="static/images/favicon.ico">
-    <link href="https://fonts.googleapis.com/css?family=Thasadith&display=swap" rel="stylesheet"/>
-    <title>Document</title>
-</head>
-<body>
-    <div id="body-wrap">
-        <header id="header-main">
-            <a href="/"><img id="logo" src="static/images/png.png" width="60" height="60" /></a>
-            <h1 id="title">Ceļot Prieks!</h1>
-            <h1 id="number">+371 29749980</h1>
-            <button id="login"><span class="button-text">IZIET</span></button>
-        </header>
-        {% block content %}
-        <div>
-            <div id="profile-data" align="center">
-                <h1>Mani Dati</h1>
-                <div id="profile-box">
-                    <p class="profile-text" align="left">Vārds:</p>
-                    <p class="profile-text" align="left">Uzvārds:</p>
-                    <p class="profile-text" align="left">E-pasta adrese:</p>
-                    <p class="profile-text" align="left">Telefona numurs:</p>
+{% extends "index.html" %}
+{% block content %}
+<div>
+    <div id="pages">
+        <a href="/">Sākumlapa</a>
+        <span class="pages"><b>></b></span>
+        <a href="/profils">Mans Profils</a>
+    </div>
+    <div id="profile-content">
+        <div id="profile">
+            <h2 id="informacija">Personīgā informācija</h2>
+
+            <div id="informacija-mainit">
+                <div id="personiga-informacija">
+                    <h1><span class="box-text">Vārds:</span></h1>
+                    <h1><span class="box-text">E-pasts:</span></h1>
+                    <h1><span class="box-text">Tel. nr.:</span></h1>
                 </div>
-            </div>
-            <div div align="center">
-                <h1>Mani Ceļojumi</h1>
-                <div id="profile-box">
-            
-                </div>
+                <button id="mainit"><span class="button-text">Mainīt</span></button> 
             </div>
         </div>
-        {% endblock %}
-        <footer>
-            <span>© 2022 SIA "Travely"</span>
-        </footer>
+
+        <div>
+            <h1 id="rezervet">Rezervētie ceļojumi</h1>
+            <div id="rezervetie-celojumi" class="DivToScroll DivWithScroll">
+                {% for reserve in reservation %}
+                    <div id="celojumi">
+                        <div id="celojuma-atcelt">
+                            <div id="celojuma-informacija">
+                                <h1 class="box-text">Rez nr.:{{ reserve.id }}</h1>
+                                <h1 class="box-text">Maršuts:</h1>
+                                <h1 class="box-text">Izbraukšana:</h1>
+                                <h1 class="box-text">Atgriešanās:</h1>
+                                <h1 class="box-text">Dienu skaits:</h1>
+                                <h1 class="box-text">Cena:</h1>
+                            </div>
+                            <a href="/reservation/remove/{{ reserve.id }}" class="button" id="button-reserve">Atcelt</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

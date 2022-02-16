@@ -10,11 +10,11 @@
     <title>Travely</title>
 </head>
 <body>
-    <header>
-        <a href="/"><img id="logo" src="{{ url_for('static', filename = 'images/png.png') }}" width="60" height="60"/></a>
-        <h1 id="title">Travely Admininistrācija</h1>
-        <h1 id="number">+371 29749980</h1>
-        <button id="login"><span class="button-text">IZIET</span></button>
+    <header id="header-main">
+        <a href="/" style="margin-left: 1%;"><img id="logo" src="../static/images/png.png" width="60" height="60" /></a>
+        <a href="/" id="title">Travely</a>
+        <a href="tel:+37129749980" id="number">tel. +371 29749980</h1>
+        <a href="/" class="button" id="button-login">LOG OUT</a>
     </header>
 
     {% block title %}
