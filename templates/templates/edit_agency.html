@@ -1,0 +1,29 @@
+{% extends "admin.html" %}
+{% block title %}
+<div id="ap-selector">
+    <div id="ap-selector-list">
+        <ul class="nav-ul">
+            <a href="/admin/agencies"><li class="selector">Ceļojumu aģentūras</li></a>
+            <a href="/admin/countries"><li class="selector">Ceļojamās valstis</li></a>
+            <a href="/admin/trips"><li class="selector">Pieejamie ceļojumi</li></a>
+        </ul>
+    </div>
+    <div id="ap-selector-display">  
+        <h2 class="subtitle">Ceļojumu aģentūra - rediģēšana</h2>
+        <form method="POST" action="{{ url_for('admin_edit_agency', id=id) }}">
+            {{ form.name.label }}
+            {{ form.name(value=agency.name) }}
+            <br/>
+            {{ form.address.label }}
+            {{ form.address(value=agency.address) }}
+            <br/>
+            {{ form.phone_number.label }}
+            {{ form.phone_number(value=agency.number) }}
+            <div id="ap-selector-footer">
+                <input class="ap-list-submit" type="submit" value="Pievienot" />
+            </div>
+            {{ form.csrf_token }}
+        </form>
+    </div>
+</div>
+{% endblock %}

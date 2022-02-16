@@ -23,7 +23,7 @@ class AddTripForm(FlaskForm):
     date_from = DateField('Izbraukšanas datums', validators=[DataRequired()])
     date_to = DateField('Ierašanās datums', validators=[DataRequired()])
     description = StringField('Paskaidrojums', validators=[DataRequired()])
-    cost = IntegerField('Cena', validators=[DataRequired()])
+    cost = FloatField('Cena', validators=[DataRequired()])
     ticket_amount = IntegerField('Biļešu skaits', validators=[DataRequired()])
 
 class AddUserForm(FlaskForm):
