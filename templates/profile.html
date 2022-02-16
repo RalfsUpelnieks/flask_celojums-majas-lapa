@@ -1,45 +1,47 @@
 {% extends "index.html" %}
 {% block content %}
-<div>
-    <div id="pages">
-        <a href="/">Sākumlapa</a>
-        <span class="pages"><b>></b></span>
-        <a href="/profils">Mans Profils</a>
-    </div>
     <div id="profile-content">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <h1 style="color:red;">{{ message }}</h1>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <div id="profile">
-            <h2 id="informacija">Personīgā informācija</h2>
-
+            <div class="profile-titlebar">
+                <h1 id="profile-titlebar-text">Profils</h1>
+            </div>
             <div id="informacija-mainit">
-                <div id="personiga-informacija">
-                    <h1><span class="box-text">Vārds:</span></h1>
-                    <h1><span class="box-text">E-pasts:</span></h1>
-                    <h1><span class="box-text">Tel. nr.:</span></h1>
-                </div>
-                <button id="mainit"><span class="button-text">Mainīt</span></button> 
+                <img class="profile-image" src="../static/images/logo/Group 1.svg">
+                <h1 class="profile-box-text">Vārds Uzvārds</h1>
+                <h1 class="profile-box-text">E-pasts:</h1>
+                <button id="profile-buttons">Admin</button>
+                <button id="profile-buttons">Dzēst datus</button>
+                <button id="profile-buttons">Lejupielādēt datus</button>
             </div>
         </div>
 
-        <div>
-            <h1 id="rezervet">Rezervētie ceļojumi</h1>
-            <div id="rezervetie-celojumi" class="DivToScroll DivWithScroll">
-                {% for reserve in reservation %}
-                    <div id="celojumi">
-                        <div id="celojuma-atcelt">
-                            <div id="celojuma-informacija">
-                                <h1 class="box-text">Rez nr.:{{ reserve.id }}</h1>
-                                <h1 class="box-text">Maršuts:</h1>
-                                <h1 class="box-text">Izbraukšana:</h1>
-                                <h1 class="box-text">Atgriešanās:</h1>
-                                <h1 class="box-text">Dienu skaits:</h1>
-                                <h1 class="box-text">Cena:</h1>
-                            </div>
-                            <a href="/reservation/remove/{{ reserve.id }}" class="button" id="button-reserve">Atcelt</a>
+        <div class="rezervetie-celojumi-padding">
+            <div class="reservation-list-titlebar">
+                <h1 id="reservation-titlebar-text">Rezervētie ceļojumi</h1>
+            </div>
+            <div id="rezervetie-celojumi">
+                <div class="DivToScroll DivWithScroll">
+                    {% for reservation in reservations %}
+                        <div id="celojumi">
+                            <h1 class="box-text-bold">{{ reservation.country_from }} - {{ reservation.country_to }}</h1>
+                            <h1 class="reservation-box-text">{{ reservation.owner_name }} {{ reservation.owner_surname }} Rez.nr. {{ reservation.reservation_number }}</h1>
+                            <h1 class="reservation-box-text">Dienu skaits: {{ reservation.days }}</h1>
+                            <h1 class="box-text-bold">Cena: {{ reservation.price }}</h1>
+                            <h1 class="reservation-box-text">Izbraukšana:<b>{{ reservation.date_from }}</b></h1>
+                            <h1 class="reservation-box-text">Atgriešanās:<b>{{ reservation.date_to }}</b></h1>
+                            <a href="/upload/{{ reservation.id }}/{{ reservation.onwer_id }}"><button id="print">Printeris</button></a>
+                            <button id="atcelt">Atcelt</button> 
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

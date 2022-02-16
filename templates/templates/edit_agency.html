@@ -11,6 +11,7 @@
     <div id="ap-selector-display">  
         <h2 class="subtitle">Ceļojumu aģentūra - rediģēšana</h2>
         <form method="POST" action="{{ url_for('admin_edit_agency', id=id) }}">
+            {{ form.csrf_token }}
             {{ form.name.label }}
             {{ form.name(value=agency.name) }}
             <br/>
@@ -22,7 +23,6 @@
             <div id="ap-selector-footer">
                 <input class="ap-list-submit" type="submit" value="Iesniegt"/>
             </div>
-            {{ form.csrf_token }}
         </form>
     </div>
 </div>

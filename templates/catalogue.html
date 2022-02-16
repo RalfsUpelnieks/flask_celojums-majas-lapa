@@ -39,7 +39,18 @@
             <div class="catalogue-list-element">
                 <img src="{{ url_for('static', filename='/images/destinations/' + trip.img_file) }}" class="catalogue-list-element-img">
                 <div class="catalogue-list-element-text">
-                    <h2>{{ countries[trip.country_from - 1].country }} - {{ countries[trip.country_to - 1].country }}</h2>
+                    <h2>
+                        {% for country in countries %}
+                            {% if country.id == trip.country_from %}
+                                {{ country.country }} -
+                            {% endif %}
+                        {% endfor %}
+                        {% for country in countries %}
+                            {% if country.id == trip.country_to %}
+                                {{ country.country }}
+                            {% endif %}
+                        {% endfor %}
+                    </h2>
                     <p>{{ trip.description }}</p>
                     <h2>{{ trip.cost }}€</h2>
                     <p>{{ trip.date_from }} - {{ trip.date_to }}</p>

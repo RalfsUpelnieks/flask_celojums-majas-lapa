@@ -1,7 +1,6 @@
 import os
-from random import randint
-from flask import render_template, redirect, request, Response
-from flask.helpers import url_for
+from flask import render_template, redirect, request, Response, flash, session
+from flask.helpers import url_for, send_file
 from wtforms.fields.choices import SelectField
 from wtforms.validators import DataRequired
 from settings import app
@@ -12,6 +11,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
+
+def is_user_logged():
+    return True if 'user' in session else False
+
+def get_user_data(id):
+    return User.query.filter_by(id=id).first()
 
 @app.route('/')
 def index():
@@ -28,15 +33,18 @@ def admin():
 
 @app.route('/profile')
 def profils():
-    return render_template("profile.html", reservation = Reservation.query.all(), trips = Trip.query.all(), countries = Country.query.all())
+    if is_user_logged():
+        return render_template("profile.html", reservations = Reservation.query.filter_by(onwer_id=session['user']).all(), trips = Trip.query.all(), countries = Country.query.all())
+    else:
+        return redirect(url_for("login"))
 
 @app.route('/register')
 def register():
-    return render_template("register.html")
+    return render_template("register.html", form = AddUserForm())
 
-@app.route('/log_in')
-def log_in():
-    return render_template("log-in.html")
+@app.route('/login')
+def login():
+    return render_template("login.html", form = SignInForm())
 
 @app.route('/admin/agencies')
 def admin_agencies():
@@ -193,7 +201,6 @@ def admin_edit_agency(id):
 
 @app.route('/sign_up', methods=['POST'])
 def sign_up():
-    form = AddUserForm()
     if request.method == "POST":
         user = User(
             email = request.form['email'],
@@ -203,18 +210,19 @@ def sign_up():
             role_id = 0 )
         db.session.add(user)
         db.session.commit()
-        return str(user)
+        return redirect(url_for('profils'))
     return "404"
 
 @app.route('/sign_in', methods=['POST'])
 def sign_in():
-    form = SignInForm()
     if request.method == "POST":
         user = User.query.filter_by(email=request.form['email']).first()
         if not user or not check_password_hash(user.password, request.form['password']):
-            return "Nav tāds lietotājs"
+            flash("Nav tāds lietotājs")
+            return redirect(url_for('login'))
         else:
-            return str(user)
+            session['user'] = user.id
+            return redirect(url_for('profils'))
 
     return "404"
     # return render_template("templates/register.html") # To Do
@@ -222,22 +230,43 @@ def sign_in():
 #rezervācijas sistēma
 @app.route('/reservation/<int:id>')
 def reservation(id):
-    trip = Trip.query.get(id)
-    trip.views += 1
-    db.session.commit()
-    return render_template("reservation.html", trip = trip, countries = Country.query.all())
-    
+    if is_user_logged():
+        trip = Trip.query.get(id)
+        trip.views += 1
+        db.session.commit()
+        return render_template("reservation.html", trip = trip, countries = Country.query.all())
+    flash("Lūdzu pieslēdzaties!")
+    return redirect(url_for('login'))
 
 @app.route('/reservation/add/<int:id>')
 def reservation_add(id):
-    user = 1
-    id = randint(100000000, 1000000000)
-    if(Reservation.query.get(id)):
-        id = randint(100000000, 1000000000)
-    reservation = Reservation(id = id, user_id=user, trip_id=id)
-    db.session.add(reservation)
-    db.session.commit()
-    return redirect(url_for('celojumi'))
+    if is_user_logged():
+        user = get_user_data(session['user'])
+        trip = Trip.query.filter_by(id=id).first()
+        trip = trip.serialize()
+        country_from = Country.query.filter(Country.id==trip['country_from_id']).first()
+        country_to = Country.query.filter(Country.id==trip['country_to_id']).first()
+        trip['country_from'] = country_from.country
+        trip['country_to'] = country_to.country
+        reservation = Reservation(
+            owner_name=user.name,
+            owner_surname=user.surname,
+            country_from=trip['country_from']+f"({country_from.abbreviation})",
+            country_to=trip['country_to']+f"({country_to.abbreviation})",
+            date_from=trip['date_from'],
+            date_to=trip['date_to'],
+            days=(trip['date_to']-trip['date_from']).days,
+            price=trip['cost'],
+            reservation_number=1000000001+Reservation.query.order_by(-Reservation.id).first().id,
+            trip_id=id,
+            onwer_id=user.id
+        )
+        db.session.add(reservation)
+        db.session.commit()
+        flash("Veiksmīgi rezervēts ceļojums!")
+        return redirect(url_for('profils'))
+    flash("Lūdzu pieslēdzaties!")
+    return redirect(url_for('login'))
 
 # Aģentūru un ceļojumu dzēšana
 @app.route('/reservation/remove/<int:id>')
@@ -248,27 +277,106 @@ def reservation_remove(id):
     return redirect(url_for('profils'))
 
 @app.route('/catalogue_filter', methods=["POST"])
-def catalogue_filtes():
-    country_from = None if not request.form['from'] else int(request.form['from'])
-    country_to = None if not request.form['to'] else int(request.form['to'])
-    from_date = None if not request.form['from_date'] else datetime.strptime(request.form['from_date'], '%Y-%m-%d').date()
-    to_date = None if not request.form['to_date'] else datetime.strptime(request.form['to_date'], '%Y-%m-%d').date()
-    Trips = Trip.query.filter((Trip.country_from == country_from) | (Trip.country_to == country_to) | (Trip.date_from == from_date) | (Trip.date_to == to_date)).all()
+def catalogue_filter():
+    Trips = Trip.query.all()
+    validations = {
+        "country_from_id": None if not request.form['from'] else int(request.form['from']),
+        "country_to_id": None if not request.form['to'] else int(request.form['to']),
+        "date_from": None if not request.form['from_date'] else datetime.strptime(request.form['from_date'], '%Y-%m-%d').date(),
+        "date_to": None if not request.form['to_date'] else datetime.strptime(request.form['to_date'], '%Y-%m-%d').date()
+    }
     output = []
-
+    requirements = len(validations)
+    valids_passed = 0
     for trip in Trips:
-        if (country_from != None and int(trip.country_from) != int(country_from) or
-            country_to != None and int(trip.country_to) != int(country_to) or
-            from_date != None and trip.date_from != from_date or
-            to_date != None and trip.date_to != to_date):
-            continue
-
-        trip.cost = float(trip.cost)
         trip = trip.serialize()
-        trip['country_from'] = Country.query.filter(Country.id==trip['country_from_id']).first().country
-        trip['country_to'] = Country.query.filter(Country.id==trip['country_to_id']).first().country
-        output.append(trip)
+        for validation in validations:
+            if validations[validation] == None:
+                requirements -= 1
+                continue
+            else:
+                if (validation == "date_from" and trip[validation] >= validations[validation] or
+                    validation == "date_to" and trip[validation] <= validations[validation] or
+                    trip[validation] == validations[validation]
+                ):
+                    valids_passed += 1 
+        
+        if valids_passed == requirements:
+            trip['country_from'] = Country.query.filter(Country.id==trip['country_from_id']).first().country
+            trip['country_to'] = Country.query.filter(Country.id==trip['country_to_id']).first().country
+            output.append(trip)
+
+        requirements = len(validations)
+        valids_passed = 0
     return Response(json.dumps(output, default=str), mimetype='application/json')
+
+
+
+@app.route("/upload/<trip_id>/<owner_id>")
+def upload_reservation(trip_id, owner_id):
+    reservation = Reservation.query.filter_by(id=trip_id).first()
+    if not reservation or reservation.onwer_id != int(owner_id):
+        return redirect(url_for("profils"))
+    else:
+        html_content = f'''
+            <table>
+                <tr>
+                    <th>{reservation.owner_name + " " + reservation.owner_surname}</th>
+                    <th>Rez. Nr. {reservation.reservation_number}</th>
+                </tr>
+                <tr>
+                    <th>Maršruts</th>
+                    <th>{reservation.country_from + " - " + reservation.country_to}</th>
+                </tr>
+                <tr>
+                    <th>Izbraukšana</th>
+                    <th>{reservation.date_from}</th>
+                </tr>
+                <tr>
+                    <th>Atgriešanās</th>
+                    <th>{reservation.date_to}</th>
+                </tr>
+                <tr>
+                    <th>Dienu skaits</th>
+                    <th>{reservation.days}</th>
+                </tr>
+                <tr>
+                    <th>Cena</th>
+                    <th>{reservation.price} euro</th>
+                </tr>
+            </table>
+        
+        '''
+        html_text = '''
+            <!DOCTYPE html>
+            <html lang="lv">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Document</title>
+                    <style>
+                        table, th{
+                            text-align: left;
+                            border: 1px solid black;
+                            border-collapse: collapse;
+                        }
+                        th{
+                            width: 300px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    ''' + html_content + '''
+                </body>
+            </html>
+        '''
+        path = os.getcwd()
+        file = open(path+f"\\media\\reserved_trip.html", "w",  encoding="utf-8")
+        file.write(html_text)
+        file.close()
+        return send_file(path+f"\\media\\reserved_trip.html", as_attachment=True)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
