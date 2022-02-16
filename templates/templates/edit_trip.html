@@ -1,0 +1,46 @@
+{% extends "admin.html" %}
+{% block title %}
+    <div id="ap-selector">
+        <div id="ap-selector-list">
+            <ul class="nav-ul">
+                <a href="/admin/agencies"><li class="selector">Ceļojumu aģentūras</li></a>
+                <a href="/admin/countries"><li class="selector">Ceļojamās valstis</li></a>
+                <a href="/admin/trips"><li class="selector">Pieejamie ceļojumi</li></a>
+            </ul>
+        </div>
+        <div id="ap-selector-display">  
+            <h2 class="subtitle">Ceļojums - rediģēšana</h2>
+            <form method="POST" action="{{ url_for('admin_edit_trip', id=id) }}">
+                {{ form.csrf_token }}
+
+                {{ form.agency.label }}
+                {{ form.agency }}
+                <br/>
+                {{ form.country_from.label }}
+                {{ form.country_from }}
+                <br/>
+                {{ form.country_to.label }}
+                {{ form.country_to }}
+                <br/>
+                {{ form.date_from.label }}
+                {{ form.date_from(value=trip.date_from) }}
+                <br/>
+                {{ form.date_to.label }}
+                {{ form.date_to(value=trip.date_to) }}
+                <br/>
+                {{ form.description.label}}
+                {{ form.description(value=trip.description) }}
+                <br/>
+                {{ form.cost.label}}
+                {{ form.cost(value=trip.cost) }}
+                <br/>
+                {{ form.ticket_amount.label}}
+                {{ form.ticket_amount(value=trip.ticket_amount) }}
+
+                <div id="ap-selector-footer">
+                    <input class="ap-list-submit" type="submit" value="Iesniegt" />
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

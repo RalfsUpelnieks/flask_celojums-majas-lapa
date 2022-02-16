@@ -2,6 +2,7 @@ import os
 from random import randint
 from flask import render_template, redirect, request, Response
 from flask.helpers import url_for
+from h11 import Data
 from wtforms.fields.choices import SelectField
 from wtforms.validators import DataRequired
 from settings import app
@@ -36,7 +37,7 @@ def register():
 
 @app.route('/log_in')
 def log_in():
-    return render_template("log-in.html")
+    return render_template("log_in.html")
 
 @app.route('/admin/agencies')
 def admin_agencies():
@@ -139,6 +140,57 @@ def admin_remove_trip(id):
     db.session.delete(remove_trip)
     db.session.commit()
     return redirect(url_for('admin_trips'))
+
+# Aģentūru, valstu un ceļojumu rediģēšana
+@app.route('/admin/edit/trip/<int:id>', methods=['GET', 'POST'])
+def admin_edit_trip(id):
+    edit_trip = Trip.query.filter_by(id=id).first()
+    agencies = SelectField('Aģentūra', choices=Agency.query.all(), validators=[DataRequired()], default=Agency.query.filter_by(id=edit_trip.agency_id).first())
+    country_from = SelectField('Izceļošanas valsts', choices=Country.query.all(), validators=[DataRequired()], default = Country.query.filter_by(id=edit_trip.country_from).first())
+    country_to = SelectField('Galamērķa valsts', choices=Country.query.all(), validators=[DataRequired()], default=Country.query.filter_by(id=edit_trip.country_to).first())
+
+    setattr(AddTripForm, 'agency', agencies)
+    setattr(AddTripForm, 'country_from', country_from)
+    setattr(AddTripForm, 'country_to', country_to)
+    
+    form = AddTripForm()
+    if form.validate_on_submit():
+        country_from = Country.query.filter_by(country=form.country_from.data.split(",")[0]).first().id
+        country_to = Country.query.filter_by(country=form.country_to.data.split(",")[0]).first().id
+        edit_trip.agency_id=Agency.query.filter_by(name=form.agency.data).first().id
+        edit_trip.country_from=country_from
+        edit_trip.country_to=country_to
+        edit_trip.date_from=form.date_from.data
+        edit_trip.date_to=form.date_to.data
+        edit_trip.description=form.description.data
+        edit_trip.cost=form.cost.data
+        edit_trip.ticket_amount=form.ticket_amount.data
+        db.session.commit()
+        return redirect(url_for('admin_trips'))
+    return render_template("templates/edit_trip.html", id=id, form=form, trip=edit_trip)
+
+@app.route('/admin/edit/country/<int:id>', methods=['GET', 'POST'])
+def admin_edit_country(id):
+    country = Country.query.filter_by(id=id).first()
+    form = AddCountryForm()
+    if form.validate_on_submit():
+        country.country = form.country.data
+        country.abbreviation = form.abbreviation.data
+        db.session.commit()
+        return redirect(url_for('admin_countries'))
+    return render_template("templates/edit_country.html", form=form, id=id, country=country)
+
+@app.route('/admin/edit/agency/<int:id>', methods=['GET', 'POST'])
+def admin_edit_agency(id):
+    agency = Agency.query.filter_by(id = id).first()
+    form = AddAgencyForm()
+    if form.validate_on_submit():
+        agency.name = form.name.data
+        agency.address = form.address.data
+        agency.number = form.phone_number.data
+        db.session.commit()
+        return redirect(url_for('admin'))
+    return render_template("templates/edit_agency.html", form=form, id=id, agency=agency)
 
 @app.route('/sign_up', methods=['POST'])
 def sign_up():
