@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+             <div class="modal-content clearfix">
+                <div class="modal-body">
+                    <h3 class="title">Ienākšana</h3>
+                    <p class="description">Ievadiet savu e-pastu un paroli, lai ienāktu Travely!</p>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Ievadiet e-pastu">
+                        <span class="profile-important">*</span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Ievadiet paroli">
+                        <span class="profile-important">*</span>
+                    </div>
+                    <div class="form-group checkbox">
+                        <input type="checkbox">
+                        <label>Atcerēties mani</label>
+                    </div>
+                    <a href="" class="forgot-pass">Aizmirsāt paroli?</a>
+                    <div>
+                        <button class="btn">Ienākt</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+{% endblock %}

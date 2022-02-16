@@ -1,7 +1,5 @@
-from email.policy import default
-from itertools import count
-from os import name
-from random import randint, random
+import os
+from random import randint
 from flask import render_template, redirect, request, Response
 from flask.helpers import url_for
 from h11 import Data
@@ -13,10 +11,13 @@ from models import *
 import json
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
+from sqlalchemy import desc
+from werkzeug.utils import secure_filename
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    qry = Trip.query.order_by(desc(Trip.views)).limit(4)
+    return render_template("index.html", top_trips=qry, countries = Country.query.all())
 
 @app.route('/catalogue')
 def celojumi():
@@ -26,13 +27,21 @@ def celojumi():
 def admin():
     return redirect(url_for("admin_agencies"))
 
-@app.route('/profils')
+@app.route('/profile')
 def profils():
     return render_template("profile.html", reservation = Reservation.query.all(), trips = Trip.query.all(), countries = Country.query.all())
 
 @app.route('/register')
 def register():
     return render_template("templates/register.html") # To Do
+
+@app.route('/register')
+def register():
+    return render_template("register.html")
+
+@app.route('/log_in')
+def log_in():
+    return render_template("log-in.html")
 
 @app.route('/admin/agencies')
 def admin_agencies():
@@ -93,6 +102,11 @@ def admin_add_trips():
         agency = Agency.query.filter_by(name=form.agency.data).first().id
         country_from = Country.query.filter_by(country=form.country_from.data.split(",")[0]).first().id
         country_to = Country.query.filter_by(country=form.country_to.data.split(",")[0]).first().id
+
+        img_name = secure_filename(form.photo.data.filename)
+        img_path=os.path.join(app.root_path, 'static/images/destinations', img_name)
+        form.photo.data.save(img_path)
+
         trip = Trip(
             agency_id=agency,
             country_from=country_from,
@@ -102,7 +116,8 @@ def admin_add_trips():
             description=form.description.data,
             cost=form.cost.data,
             ticket_amount=form.ticket_amount.data,
-            views=0 )
+            img_file = img_name,
+            views=0)
         db.session.add(trip)
         db.session.commit()
         return redirect(url_for('admin_trips'))
@@ -213,6 +228,8 @@ def sign_in():
 @app.route('/reservation/<int:id>')
 def reservation(id):
     trip = Trip.query.get(id)
+    trip.views += 1
+    db.session.commit()
     return render_template("reservation.html", trip = trip, countries = Country.query.all())
     
 

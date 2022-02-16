@@ -1,21 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/css/stylesheet.css">
-    <link rel="Icon" href="static/images/favicon.ico">
-    <link href="https://fonts.googleapis.com/css?family=Thasadith&display=swap" rel="stylesheet"/>
-    <title>Document</title>
-</head>
-<body>
-    <header>
-        <img id="logo" src="static/images/png.png" width="90" height="90" />
-        <h1 id="title">Travely</h1>
-        <h1 id="number">+371 29749980</h1>
-        <button id="login"><span class="button-text">Mans profils</span></button>
-    </header>
+{% extends "index.html" %}
+{% block content %}
+<div>
     <div id="pages">
         <a href="/">Sākumlapa</a>
         <span class="pages"><b>></b></span>
@@ -49,12 +34,12 @@
                                 <h1 class="box-text">Dienu skaits:</h1>
                                 <h1 class="box-text">Cena:</h1>
                             </div>
-                            <a href="/reservation/remove/{{ reserve.id }}" class="reserve-button"><span class="reserve-button-text">Atcelt</span></a>
+                            <a href="/reservation/remove/{{ reserve.id }}" class="button" id="button-reserve">Atcelt</a>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

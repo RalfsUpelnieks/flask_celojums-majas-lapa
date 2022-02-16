@@ -6,13 +6,12 @@
     margin:0;
     padding:0;
 }
+
 body{
     font-family: 'Roboto', sans-serif;
     color:#575757;
-}
-a {
-    color: inherit;
-    text-decoration: inherit;
+    background-image: linear-gradient(aliceblue, white);
+    background-repeat: no-repeat;
 }
 
 h1 {
@@ -26,18 +25,56 @@ h2 {
 p {
     font-weight: 200;
 }
+
+a{
+    text-decoration: none;
+}
+
+a.button{
+    display: inline-block;
+    color: white !important;
+    text-align: center;
+    font-size: 22px !important;
+    font-family: Thasadith;
+    text-decoration: none;
+    line-height: 42px;
+    font-weight: normal !important;
+    background-color: #0070D8;
+    border-radius: 3px;
+    padding-right: 22px;
+    padding-left: 22px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+a.button:hover {
+    background-color: #0362bb;
+}
+
+#body-wrap{
+    margin-left: auto;
+    margin-right: auto;
+    background-image: linear-gradient(aliceblue, white);
+    background-repeat: no-repeat;
+    max-width: 1919px;
+}
+
 #logo {
     margin-top: 15px;
     margin-left: 1%;
+    src: url(../images/background.png);
 }
 
 #title{
+    text-decoration: none;
+    color: #575757;
     margin-left: 1%;
     vertical-align: text-bottom;
     font-weight: normal;
     font-size: 32px;
     line-height: 90px;
 }
+
 header{
     position: relative;
     display:flex;
@@ -50,26 +87,55 @@ header{
 }
 
 #number{
-    line-height: 90px;
+    line-height: 96px;
     text-align:right;
     margin-left:auto;
     margin-right: 30px;
-    font-size: 16px;
+    font-size: 18px;
+    color: #2e2e2e;
 }
 
-#login{
+#button-login {
+    height:40px;
+    width:90px;
     margin-top: 23px;
-    height:42px;
-    width:138px;
     margin-right:5%;
     border-radius: 3px;
-    border:none;
-    color: white;
-    background-color: #0070D8;
-    cursor: pointer;
 }
+
+#search-bar-back {
+    display: flex;
+    align-items: center;
+    background-image: url(../images/search_bar_back_main.png);
+    background-repeat: no-repeat;
+    height: 222px;
+    background-position: 50%;
+    box-shadow: inset 0px -30px 20px -30px #000000;
+}
+
+#about-us {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.about-us-desc {
+    font-size: 28px;
+    margin-left: 10%;
+    margin-right:10%;
+}
+
+.subtitle {
+    margin: 10px;
+}
+
+#button-trips {
+    margin-top: 20px;
+    font-size: 24px !important;
+}
+
 .button-text {
     line-height: 42px;
+    color: white;
     font-weight: normal !important;
     font-size: 24px !important;
     color: inherit !important;
@@ -83,21 +149,6 @@ header{
     color: #3175c2;
     font-size: 15px;
     margin-bottom: 15px;
-}
-
-a:visited, a:link {
-  text-decoration: none;
-  font-family: Thasadith;
-  font-weight: bold;
-  color: #3175c2;
-  font-size: 15px;
-}
-
-a:hover, a:active {
-  font-family: Thasadith;
-  font-weight: bold;
-  color: #3175c2;
-  font-size: 15px;
 }
 
 #background {
@@ -140,7 +191,6 @@ a:hover, a:active {
     border:none;
     color: white;
     background-color: #0070D8;
-    margin-left: 15px;
     cursor: pointer;
 }
 
@@ -159,6 +209,7 @@ a:hover, a:active {
     margin-left: 15px;
     border-style: none;
     text-indent: 10px;
+    margin-right: 15px;
 }
 
 #travelPanel {
@@ -186,17 +237,6 @@ a:hover, a:active {
     width: 250px;
 }
 
-#search_bar_back {
-    background-image: url(../images/search_bar_back_main.png);
-    background-repeat: no-repeat;
-    height:222px;
-    width: 100%;
-    margin:none;
-    text-align:center;
-    background-position:50%;
-    background-size:scale;
-    overflow: hidden;
-}
 .sub_title {
     margin: 30px;
 }
@@ -208,7 +248,55 @@ a:hover, a:active {
 }
 .trip {
     margin:auto;
+    width: 360px;
+    height: 360px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+    position: relative;
+    z-index: 1;
 }
+
+.travel-list-title {
+    text-align: center;
+}
+.trip-img {
+    width: 100%;
+    height: 100%;
+}
+.trip:hover {
+    transform:scale(1.03, 1.03);
+    cursor:pointer;
+}
+
+.trip-header {
+    height: 28px;
+    margin-bottom: -28px;
+    z-index: 2;
+    position: relative;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding-left: 10px;
+    font-size: 20px;
+    color: white;
+    align-items: center;
+}
+
+#trip-header-title{
+    font-size: 18px;
+}
+
+#trip-header-views {
+    font-size: 16px !important;
+    margin-left: auto;
+    padding-right:10px;
+    font-size: 16px;
+    line-height: 16px;
+}
+
 .travel_list_title {
     text-align: center;
 }
@@ -514,9 +602,7 @@ a:hover, a:active {
     color:#292929;
     text-decoration: none;
 }
-.subtitle {
-    margin: 10px;
-}
+
 #ap-selector-display-list {
     margin:10px;
     background-color: whitesmoke;
@@ -594,18 +680,6 @@ a:hover, a:active {
 }
 
 /* No style_main.css */
-body{
-    background-image: linear-gradient(aliceblue, white);
-    background-repeat: no-repeat;
-}
-
-#body-wrap{
-    margin-left: auto;
-    margin-right: auto;
-    background-image: linear-gradient(aliceblue, white);
-    background-repeat: no-repeat;
-    max-width: 1919px;
-}
 
 #search-page {
     display: flex;
@@ -679,17 +753,6 @@ body{
     cursor: pointer;
 }
 
-#search-bar-back {
-    display: flex;
-    align-items: center;
-    background-image: url(../images/search_bar_back_main.png);
-    background-repeat: no-repeat;
-    height: 222px;
-    background-position: 50%;
-    z-index: -4;
-    box-shadow: inset 0px -30px 20px -30px #000000;
-}
-
 .one-pixel-search-back {
     margin-left: -1px
 }
@@ -703,36 +766,6 @@ body{
     margin:50px;
     width:auto;
     max-width: 1919px;
-}
-.trip {
-    margin:auto;
-    margin-left:10px;
-    margin-right:10px;
-    -webkit-transition: all .2s;
-    -moz-transition: all .2s;
-    transition: all .2s;
-    position: relative;
-    z-index: 1;
-}
-.travel-list-title {
-    text-align: center;
-}
-.trip-img {
-    width: 100%;
-    height: 100%;
-}
-.trip:hover {
-    transform:scale(1.03, 1.03);
-    cursor:pointer;
-}
-#about-us {
-    text-align: center;
-    margin-top: 30px;
-}
-.about-us-desc {
-    font-size: 28px;
-    margin-left: 10%;
-    margin-right:10%;
 }
 #move-to-destinations {
     height:42px;
@@ -749,11 +782,18 @@ body{
     justify-content: center;
     text-align:center;
     margin:50px;
-    margin-top: 50px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fffffff5;
+    border-top: solid;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: #c0c0c0;
+    padding: 10px;
 }
 #guarantee-list-flexbox div{
     width:450px;
-    margin:auto;
 }
 #guarantee-list-flexbox div p{
     font-size: 24px;
@@ -761,24 +801,6 @@ body{
 #guarantee-list-flexbox div img {
     width:150px;
     height:150px;
-}
-.trip-header {
-    height: 28px;
-    margin-bottom: -28px;
-    z-index: 2;
-    position: relative;
-    display: flex;
-    background-color: rgba(0, 0, 0, 0.3);
-    padding-left: 10px;
-    font-size: 20px;
-    color: white;
-    align-items: center;
-}
-.trip-header-views {
-    margin-left: auto;
-    padding-right:10px;
-    font-size: 16px;
-    line-height: 16px;
 }
 footer {
     height: 30px;
@@ -834,20 +856,6 @@ footer {
 .catalogue-list-element-text {
     width: 70%;
 }
-.reserve-button {
-    color:white;
-    text-decoration: none;
-    text-align: center;
-    height: 35px;
-    width: 120px;
-    border-radius: 16px;
-    font-size: 17px;
-    border:none;
-    color: white;
-    background-color: #0070D8;
-    margin-top: auto;
-    margin-left: auto;
-}
 
 /* priekš reservation.html */
 #personal-info {
@@ -865,13 +873,6 @@ footer {
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.reserve-button-text {
-    color:white;
-    text-align: center;
-    margin-top: 53px;
-    font-size: 17px;
-    
-}
 #reservation-elements{
     background-color: white;
     color:black;
@@ -905,4 +906,114 @@ footer {
 }
 .reservetion-list-element-text {
     width: 70%;
+}
+
+#button-reserve {
+    font-size: 20px !important;
+    height:40px;
+    width:74px;
+    margin-top: auto;
+}
+
+#button-reserve-change {
+    font-size: 20px !important;
+    height:40px;
+    width:74px;
+    margin-top: auto;
+    margin-left: auto;
+}
+
+.modal-body {
+    padding: 60px 40px 40px !important;
+    align-content: center;
+}
+.modal-body .title {
+    color: #026fd4;
+    font-size: 33px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0 0 10px;
+}
+.modal-body .description {
+    color: #9A9EA9;
+    font-size: 16px;
+    margin: 0 0 20px;
+}
+.modal-body .form-group {
+    text-align: left;
+    margin-bottom: 20px;
+    position: relative;
+}
+.modal-body .form-control {
+    font-size: 17px;
+    height: 45px;
+    width: 500px;
+    padding: 6px 0 6px 15px;
+    margin: 0 auto;
+    border: 2px solid #eee;
+    border-radius: 15px;
+    box-shadow: none;
+    outline: none;
+}
+.form-control::placeholder {
+    color: #AEAFB1;
+}
+.forgot-pass:hover {
+    color: #9A9EA9;
+    text-decoration: underline;
+}
+.profile-btn{
+    margin-top: 23px;
+    height:42px;
+    width:138px;
+    margin-right:5%;
+    border-radius: 3px;
+    border:none;
+    color: white;
+    background-color: #0070D8;
+    cursor: pointer;
+}
+.profile-important {
+    color: red;
+    font-size: large;
+}
+.modal-content .modal-body .btn{
+    margin-top: 10px;
+    color: #fff;
+    background-color: #0070D8;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 38px;
+    width: 400px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 15px;
+    border: none;
+    display: inline-block;
+}
+#profile-box {
+    padding: 20px;
+    border: #575757;
+    border-style: solid;
+    border-width: 2px;
+    align-self: left;
+    font-size: 20px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    margin-left: 200px;
+    margin-right: 200px;
+    border-radius: 5px;
+    align-items: left;
+}
+.profile-text {
+    margin-bottom: 10px;
+    align-self: left;
+}
+#profile-data {
+    margin-bottom: 50px;
+    margin-top: 50px;
+    margin-left: auto;
 }

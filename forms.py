@@ -1,6 +1,7 @@
 from wtforms.validators import DataRequired
 from models import *
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms.fields import *
 
 
@@ -25,6 +26,7 @@ class AddTripForm(FlaskForm):
     description = StringField('Paskaidrojums', validators=[DataRequired()])
     cost = FloatField('Cena', validators=[DataRequired()])
     ticket_amount = IntegerField('Biļešu skaits', validators=[DataRequired()])
+    photo = FileField('Pievieno bildi', validators=[FileAllowed(['jpg', 'png'])])
 
 class AddUserForm(FlaskForm):
     email = EmailField('E-pasts', validators=[DataRequired()])

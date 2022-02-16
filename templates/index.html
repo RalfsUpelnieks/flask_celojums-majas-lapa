@@ -12,10 +12,10 @@
 <body>
     <div id="body-wrap">
         <header id="header-main">
-            <img id="logo" src="../static/images/png.png" width="60" height="60" />
-            <h1 id="title">Ceļot Prieks!</h1>
-            <h1 id="number">+371 29749980</h1>
-            <button id="login"><span class="button-text">LOG IN</span></button>
+            <a href="/" style="margin-left: 1%;"><img id="logo" src="../static/images/png.png" width="60" height="60" /></a>
+            <a href="/" id="title">Travely</a>
+            <a href="tel:+37129749980" id="number">tel. +371 29749980</h1>
+            <a href="/profile" class="button" id="button-login">LOG IN</a>
         </header>
         {% block content %}
             <div id="page-middle">
@@ -27,9 +27,9 @@
                     </div> -->
                 </div>
                 <div id="about-us">
-                    <h1 class="subtitle about-us-title">Travely - Generic catchy slogan</h1>
+                    <h1 class="subtitle">Travely - Generic catchy slogan</h1>
                     <p class="about-us-desc">Apskatiet mūsu galamērķu klāstu jūsu sapņu ceļojumam! Mēs piedāvājam izbraucienus uz kaimiņvalstīm, kā arī garus ceļojumus uz pasaules otru pusi!</p>
-                    <button id="move-to-destinations"><span><a href="/catalogue" class="button-text">Ceļojumi</a></span></button>
+                    <a href="/catalogue" class="button" id="button-trips">Ceļojumi</a>
                 </div>
                 <div id="guarantee">
                 <div id="guarantee-list-flexbox">
@@ -45,43 +45,25 @@
                     </div>
                     <div>
                         <img src="static/images/logo/cash.png">
-                        <h1>Garantēta naudas atgriezšana</h1>
+                        <h1>Garantēta naudas atgriešana</h1>
                         <p>Garantējam naudas atmaksu ceļojuma atcelšanas gadījumā - pat pēc ceļojuma!</p>
                     </div>
                 </div>
                 </div>
                 <div id="travel-list">
-                    <h1 class="sub-title">Populārākie galamērķi</h1>
+                    <h1 class="sub-title" align="center">Populārākie galamērķi</h1>
                     <div id="travel-list-flexbox">
-                        <div class="trip-1 trip">
-                            <div class="trip-header">
-                                <span class="trip-header-title">Lisabona</span>
-                                <span class="trip-header-views">4 skatījumi</span>
-                            </div>
-                            <img src="static/images/destinations/lisabon.png" class="trip-img">
-                        </div>
-                        <div class="trip-2 trip">
-                            <div class="trip-header">
-                                <span class="trip-header-title">Parīze</span>
-                                <span class="trip-header-views">17 skatījumi</span>
-        
-                            </div>
-                            <img src="static/images/destinations/paris.png" class="trip-img">
-                        </div>
-                        <div class="trip-3 trip">
-                            <div class="trip-header">
-                                <span class="trip-header-title">Santorine</span>
-                                <span class="trip-header-views">2 skatījumi</span>
-                            </div>
-                            <img src="static/images/destinations/santorine.png" class="trip-img">
-                        </div>
-                        <div class="trip-4 trip">
-                            <div class="trip-header">
-                                <span class="trip-header-title">Ņujorka</span>
-                                <span class="trip-header-views">8 skatījumi</span>
-                            </div>
-                            <img src="static/images/destinations/new_york.png" class="trip-img">
-                    </div>
+                        {% for trip in top_trips %}
+                            <a class="trip" href="/reservation/{{ trip.id }}">
+                                <div class="trip">
+                                    <div class="trip-header">
+                                        <span id="trip-header-title">{{ countries[trip.country_from - 1].country }} - {{ countries[trip.country_to - 1].country }}</span>
+                                        <span id="trip-header-views">{{ trip.views }} skatījumi</span>
+                                    </div>
+                                    <img src="{{ url_for('static', filename='/images/destinations/' + trip.img_file) }}" class="trip-img">
+                                </div>
+                            </da>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

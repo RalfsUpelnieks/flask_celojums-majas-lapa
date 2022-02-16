@@ -3,7 +3,6 @@
 
 <div id="search-bar-back" class="one-pixel-search-back">
     <div class="catalogue-search-page">
-
         <div>
             <p>Ceļojums:</p>
             <div>
@@ -34,12 +33,11 @@
     </div>
 </div>
 
-<!-- NEaizTiec -->
 <div id="catalogue-list">
     {% if trips %}
         {% for trip in trips %}
             <div class="catalogue-list-element">
-                <img src="static/images/destinations/lisabon.png" class="catalogue-list-element-img">
+                <img src="{{ url_for('static', filename='/images/destinations/' + trip.img_file) }}" class="catalogue-list-element-img">
                 <div class="catalogue-list-element-text">
                     <h2>
                         {% for country in countries %}
@@ -54,7 +52,7 @@
                     <h2>{{ trip.cost }}€</h2>
                     <p>{{ trip.date_from }} - {{ trip.date_to }}</p>
                 </div>
-                <a href="/reservation/{{ trip.id }}" class="reserve-button"><span class="reserve-button-text">Rezervēt</span></a>
+                <a href="/reservation/{{ trip.id }}" class="button" id="button-reserve">Rezervēt</a>
             </div>
         {% endfor %}
     {% endif %}
