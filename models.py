@@ -53,6 +53,8 @@ class Trip(db.Model):
     cost = db.Column(db.Float)
     ticket_amount = db.Column(db.Integer)
     views = db.Column(db.Integer)
+    img_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+
     def __repr__(self):
         return f'<Trip: {self.country_from} - {self.country_to} from agency {self.agency_id}>'
 

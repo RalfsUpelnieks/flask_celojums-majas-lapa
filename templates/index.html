@@ -53,35 +53,17 @@
                 <div id="travel-list">
                     <h1 class="sub-title" align="center">Populārākie galamērķi</h1>
                     <div id="travel-list-flexbox">
-                        <div class="trip-1 trip">
-                            <div class="trip-header">
-                                <span class="trip-header-title">Lisabona</span>
-                                <span class="trip-header-views">4 skatījumi</span>
-                            </div>
-                            <img src="static/images/destinations/lisabon.png" class="trip-img">
-                        </div>
-                        <div class="trip-2 trip">
-                            <div class="trip-header">
-                                <span class="trip-header-title">Parīze</span>
-                                <span class="trip-header-views">17 skatījumi</span>
-        
-                            </div>
-                            <img src="static/images/destinations/paris.png" class="trip-img">
-                        </div>
-                        <div class="trip-3 trip">
-                            <div class="trip-header">
-                                <span class="trip-header-title">Santorine</span>
-                                <span class="trip-header-views">2 skatījumi</span>
-                            </div>
-                            <img src="static/images/destinations/santorine.png" class="trip-img">
-                        </div>
-                        <div class="trip-4 trip">
-                            <div class="trip-header">
-                                <span class="trip-header-title">Ņujorka</span>
-                                <span class="trip-header-views">8 skatījumi</span>
-                            </div>
-                            <img src="static/images/destinations/new_york.png" class="trip-img">
-                    </div>
+                        {% for trip in top_trips %}
+                            <a class="trip" href="/reservation/{{ trip.id }}">
+                                <div class="trip">
+                                    <div class="trip-header">
+                                        <span id="trip-header-title">{{ countries[trip.country_from - 1].country }} - {{ countries[trip.country_to - 1].country }}</span>
+                                        <span id="trip-header-views">{{ trip.views }} skatījumi</span>
+                                    </div>
+                                    <img src="{{ url_for('static', filename='/images/destinations/' + trip.img_file) }}" class="trip-img">
+                                </div>
+                            </da>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
