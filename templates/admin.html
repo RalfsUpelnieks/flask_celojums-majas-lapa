@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/stylesheet.css') }}">
     <script src="../static/js/adminScript.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Thasadith&display=swap" rel="stylesheet"/>
-    <title>Document</title>
+    <title>Travely</title>
 </head>
 <body>
     <header>
-        <img id="logo" src="{{ url_for('static', filename = 'images/png.png') }}" width="90" height="90" />
-        <h1 id="title">Travely Administrācija</h1>
+        <a href="/"><img id="logo" src="{{ url_for('static', filename = 'images/png.png') }}" width="60" height="60"/></a>
+        <h1 id="title">Travely Admininistrācija</h1>
         <h1 id="number">+371 29749980</h1>
-        <button id="login"><span class="button-text">LOG IN</span></button>
+        <button id="login"><span class="button-text">IZIET</span></button>
     </header>
 
     {% block title %}

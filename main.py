@@ -18,9 +18,17 @@ def celojumi():
 def admin():
     return redirect(url_for("admin_agencies"))
 
-@app.route('/profils')
+@app.route('/profile')
 def profils():
     return render_template("profile.html")
+
+@app.route('/register')
+def register():
+    return render_template("register.html")
+
+@app.route('/log_in')
+def log_in():
+    return render_template("log-in.html")
 
 @app.route('/admin/agencies')
 def admin_agencies():
