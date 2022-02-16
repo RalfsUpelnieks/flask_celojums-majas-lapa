@@ -19,8 +19,8 @@
                             <li style="font-weight: bold;">{{ country.country }}</li>
                             <li>{{ country.abbreviation }}</li>
                         </ul>
-                        <a href="/admin/edit/country/{{ country.id }}"><h2 class="ap-list-control correct">Labot</h2></a><!-- Poga uz datu labošanas lapu -->
-                        <a href="/admin/remove/country/{{ country.id }}"><h2 class="ap-list-control">Dzēst</h2></a> <!-- Poga kas dzēš aģentūru -->
+                        <a href="/admin/edit/country/{{ country.id }}" class="button" id="button-correct">Labot</a>
+                        <a href="/admin/remove/country/{{ country.id }}" class="button" id="button-delete">Dzēst</a>
                     </div>
                     {% endfor %}
                 {% else %}
@@ -28,7 +28,7 @@
                 {% endif %}
             </div>
             <div id="ap-selector-footer">
-                <a href="/admin/add/country" style="margin-left: auto;"><h2 class="ap-list-add">Pievienot</h2></a>
+                <a href="/admin/add/country" class="button" id="button-submit">Pievienot</a>
             </div>
         </div>
     </div>
