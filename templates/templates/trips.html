@@ -37,8 +37,8 @@
                             <li>{{ trip.cost }}€</li>
                             <li>{{ trip.ticket_amount }} pieejamas vietas</li>
                         </ul>
-                        <a href="/admin/edit/trip/{{ trip.id }}"><h2 class="ap-list-control correct">Labot</h2></a> <!-- Poga uz datu labošanas lapu -->
-                        <a href="/admin/remove/trip/{{ trip.id }}"><h2 class="ap-list-control">Dzēst</h2></a> <!-- Poga kas dzēš ceļojumu -->
+                        <a href="/admin/edit/trip/{{ trip.id }}" class="button" id="button-correct">Labot</a>
+                        <a href="/admin/remove/trip/{{ trip.id }}" class="button" id="button-delete">Dzēst</a>
                     </div>
                     {% endfor %}
                 {% else %}
@@ -46,8 +46,9 @@
                 {% endif %}
             </div>
             <div id="ap-selector-footer">
-                <a href="/admin/add/trips" style="margin-left: auto;"><h2 class="ap-list-add">Pievienot</h2></a>
+                <a href="/admin/add/trips" class="button" id="button-submit">Pievienot</a>
             </div>
+            
         </div>
     </div>
 </div>

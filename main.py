@@ -1,8 +1,6 @@
 import os
-from random import randint
 from flask import render_template, redirect, request, Response, flash, session
 from flask.helpers import url_for, send_file
-from h11 import Data
 from wtforms.fields.choices import SelectField
 from wtforms.validators import DataRequired
 from settings import app
@@ -10,7 +8,7 @@ from forms import *
 from models import *
 import json
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime, date
+from datetime import datetime
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
 
