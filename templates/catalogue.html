@@ -42,9 +42,12 @@
                     <h2>
                         {% for country in countries %}
                             {% if country.id == trip.country_from %}
-                                <span>{{ country.country }} -</span>
-                            {% elif country.id == trip.country_to %}
-                                <span>{{ country.country }}</span>
+                                {{ country.country }} -
+                            {% endif %}
+                        {% endfor %}
+                        {% for country in countries %}
+                            {% if country.id == trip.country_to %}
+                                {{ country.country }}
                             {% endif %}
                         {% endfor %}
                     </h2>

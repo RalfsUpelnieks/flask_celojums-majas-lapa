@@ -19,9 +19,10 @@
                             <li style="font-weight: bold;">
                             {% for country in countries %}
                                 {% if country.id == trip.country_from %}
-                                    {{ country.country }} - 
+                                    {{ country.country }} -
                                 {% endif %}
-                                
+                            {% endfor %}
+                            {% for country in countries %}
                                 {% if country.id == trip.country_to %}
                                     {{ country.country }}
                                 {% endif %}

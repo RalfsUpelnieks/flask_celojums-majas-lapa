@@ -1,5 +1,4 @@
 $("#submit-button").click(() => {
-    console.log(2.0)
     var from = $("#from").find(":selected").val()
     var to = $("#to").find(":selected").val()
     var from_date = $("#from_date").val()
@@ -22,14 +21,14 @@ $("#submit-button").click(() => {
             response.forEach(element => {
                 var trip = `
                     <div class="catalogue-list-element">
-                        <img src="static/images/destinations/lisabon.png" class="catalogue-list-element-img">
+                        <img src="/static/images/destinations/${ element.img_file }" class="catalogue-list-element-img">\
                         <div class="catalogue-list-element-text">
                             <h2>${ element.country_from } - ${ element.country_to }</h2>
                             <p>${ element.description }</p>
-                            <h2>${ element.cost }.0€</h2>
+                            <h2>${ element.cost }€</h2>
                             <p>${ element.date_from } - ${ element.date_to }</p>
                         </div>
-                        <button class="reserve-button">Rezervēt</button>
+                        <a href="/reservation/${ element.id }" class="button" id="button-reserve">Rezervēt</a>
                     </div>
                 `
                 $("#catalogue-list").append(trip)

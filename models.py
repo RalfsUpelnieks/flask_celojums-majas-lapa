@@ -74,8 +74,9 @@ class Trip(db.Model):
             "description": self.description,
             "cost": self.cost,
             "ticket_amount": self.ticket_amount,
-            "views": self.views
-            }
+            "views": self.views,
+            "img_file": self.img_file
+        }
             
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -89,7 +90,16 @@ class User(db.Model):
     
 class Reservation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    owner_name = db.Column(db.String(30), nullable=False)
+    owner_surname = db.Column(db.String(30), nullable=False)
+    country_from =  db.Column(db.String(30), nullable=False)
+    country_to =  db.Column(db.String(30), nullable=False)
+    date_from = db.Column(db.Date)
+    date_to = db.Column(db.Date)
+    days = db.Column(db.Integer)
+    price = db.Column(db.Float)
+    reservation_number = db.Column(db.Integer)
+    onwer_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     trip_id = db.Column(db.Integer, db.ForeignKey("trip.id"))
 '''
 set FLASK_APP=models.py
