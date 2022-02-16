@@ -12,7 +12,7 @@
             <h2 class="subtitle">Ceļojums - rediģēšana</h2>
             <form method="POST" action="{{ url_for('admin_edit_trip', id=id) }}">
                 {{ form.csrf_token }}
-                
+
                 {{ form.agency.label }}
                 {{ form.agency }}
                 <br/>
@@ -38,7 +38,7 @@
                 {{ form.ticket_amount(value=trip.ticket_amount) }}
 
                 <div id="ap-selector-footer">
-                    <input class="ap-list-submit" type="submit" value="Pievienot" />
+                    <input class="ap-list-submit" type="submit" value="Iesniegt" />
                 </div>
             </form>
         </div>
