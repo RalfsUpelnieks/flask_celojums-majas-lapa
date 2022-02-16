@@ -15,7 +15,7 @@
             <a href="/" style="margin-left: 1%;"><img id="logo" src="../static/images/png.png" width="60" height="60" /></a>
             <a href="/" id="title">Travely</a>
             <a href="tel:+37129749980" id="number">tel. +371 29749980</h1>
-            <a href="/profile" class="button" id="button-login">LOG IN</a>
+            <a href="/log_in" class="button" id="button-login">LOG IN</a>
         </header>
         {% block content %}
             <div id="page-middle">
@@ -45,13 +45,13 @@
                     </div>
                     <div>
                         <img src="static/images/logo/cash.png">
-                        <h1>Garantēta naudas atgriešana</h1>
+                        <h1>Garantēta naudas atgriezšana</h1>
                         <p>Garantējam naudas atmaksu ceļojuma atcelšanas gadījumā - pat pēc ceļojuma!</p>
                     </div>
                 </div>
                 </div>
                 <div id="travel-list">
-                    <h1 class="sub-title" align="center">Populārākie galamērķi</h1>
+                    <h1 class="sub-title">Populārākie galamērķi</h1>
                     <div id="travel-list-flexbox">
                         {% for trip in top_trips %}
                             <a class="trip" href="/reservation/{{ trip.id }}">

@@ -59,6 +59,8 @@ a.button:hover {
     max-width: 1919px;
 }
 
+/* index.html */
+
 #logo {
     margin-top: 15px;
     margin-left: 1%;
@@ -73,17 +75,6 @@ a.button:hover {
     font-weight: normal;
     font-size: 32px;
     line-height: 90px;
-}
-
-header{
-    position: relative;
-    display:flex;
-    width: 100%;
-    height: 75px;
-    border-bottom: 1px solid #ADADAD;
-    justify-content: center;
-    box-shadow: 1px 1px 20px rgb(124, 124, 124);
-    padding-bottom: 1%;
 }
 
 #number{
@@ -103,6 +94,17 @@ header{
     border-radius: 3px;
 }
 
+header{
+    position: relative;
+    display:flex;
+    width: 100%;
+    height: 75px;
+    border-bottom: 1px solid #ADADAD;
+    justify-content: center;
+    box-shadow: 1px 1px 20px rgb(124, 124, 124);
+    padding-bottom: 1%;
+}
+
 #search-bar-back {
     display: flex;
     align-items: center;
@@ -118,14 +120,14 @@ header{
     margin-top: 30px;
 }
 
+.subtitle {
+    margin: 10px;
+}
+
 .about-us-desc {
     font-size: 28px;
     margin-left: 10%;
     margin-right:10%;
-}
-
-.subtitle {
-    margin: 10px;
 }
 
 #button-trips {
@@ -133,9 +135,52 @@ header{
     font-size: 24px !important;
 }
 
+#guarantee-list-flexbox{
+    display: flex;
+    justify-content: center;
+    text-align:center;
+    margin:50px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fffffff5;
+    border-top: solid;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: #c0c0c0;
+    padding: 10px;
+}
+#guarantee-list-flexbox div{
+    width:450px;
+    margin:auto;
+}
+#guarantee-list-flexbox div p{
+    font-size: 24px;
+}
+#guarantee-list-flexbox div img {
+    width:150px;
+    height:150px;
+}
+
+#travel-list-flexbox{
+    display: flex;
+    justify-content: center;
+    margin:50px;
+    width:auto;
+    max-width: 1919px;
+}
+
+
+
+/* nesasšķirots */
+
+
+
+
+
+
 .button-text {
     line-height: 42px;
-    color: white;
     font-weight: normal !important;
     font-size: 24px !important;
     color: inherit !important;
@@ -191,6 +236,7 @@ header{
     border:none;
     color: white;
     background-color: #0070D8;
+    margin-left: 15px;
     cursor: pointer;
 }
 
@@ -209,7 +255,6 @@ header{
     margin-left: 15px;
     border-style: none;
     text-indent: 10px;
-    margin-right: 15px;
 }
 
 #travelPanel {
@@ -225,27 +270,6 @@ header{
     border-width: 2px;
 }
 
-#travelImage { 
-    height: 180px;
-    width: 180px;
-    object-fit: cover;
-    
-}
-
-#travelText {
-    margin-left: 15px;
-    width: 250px;
-}
-
-.sub_title {
-    margin: 30px;
-}
-#travel_list_flexbox{
-    display: flex;
-    justify-content: center;
-    margin:50px;
-    width:auto;
-}
 .trip {
     margin:auto;
     width: 360px;
@@ -300,10 +324,7 @@ header{
 .travel_list_title {
     text-align: center;
 }
-.trip_img {
-    width: 300px;
-    height: 250px;
-}
+
 #rezervet {
     display: flex;
     font-style: normal;
@@ -492,54 +513,6 @@ header{
 #admin-upper-bottom {
     display: flex;
     margin-top: 20px;
-}
-#log-in-panel {
-  display: none;
-  flex-direction: column;
-  position: fixed;
-  left: 45%;
-  top: 30%;
-  width: 10%;
-  height: 300px;
-  background-color: white;
-  padding: 20px;
-  justify-content: center;
-  align-items: center;
-  border: solid;
-  border-width: 1px;
-  border-radius: 40px;
-  z-index: 3;
-}
-#log-in-input1 {
-  background-color: #EDEDED;
-  width: 160px;
-  height: 40px;
-  border-radius: 15px;
-  border: none;
-  margin-top: 20px;
-  text-indent: 10px;
-}
-#log-in-input2 {
-  background-color: #EDEDED;
-  width: 160px;
-  height: 40px;
-  border-radius: 15px;
-  border: none;
-  margin-top: 20px;
-  text-indent: 10px;
-}
-#cancel {
-  align-self: flex-end;
-  background: #0070D8;
-  color: #fff;
-  font-family: 'Helvetica', 'Arial', sans-serif;
-  font-size: 23px;
-  font-weight: bold;
-  text-align: center;
-  width: 25px;
-  height: 25px;
-  border-radius: 12px;
-  margin-left: 50px;
 }
 
 /* Admin Page front-end */
@@ -760,48 +733,7 @@ header{
 .sub-title {
     margin: 30px;
 }
-#travel-list-flexbox{
-    display: flex;
-    justify-content: center;
-    margin:50px;
-    width:auto;
-    max-width: 1919px;
-}
-#move-to-destinations {
-    height:42px;
-    width:138px;
-    border-radius: 16px;
-    margin-top: 20px;
-    border:none;
-    color: white;
-    background-color: #0070D8;
-    cursor: pointer;
-}
-#guarantee-list-flexbox{
-    display: flex;
-    justify-content: center;
-    text-align:center;
-    margin:50px;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #fffffff5;
-    border-top: solid;
-    border-bottom: solid;
-    border-width: 1px;
-    border-color: #c0c0c0;
-    padding: 10px;
-}
-#guarantee-list-flexbox div{
-    width:450px;
-}
-#guarantee-list-flexbox div p{
-    font-size: 24px;
-}
-#guarantee-list-flexbox div img {
-    width:150px;
-    height:150px;
-}
+
 footer {
     height: 30px;
     text-align: center;
@@ -809,19 +741,6 @@ footer {
     font-size: 14px;
     background-color:aliceblue;
     margin-top:auto;
-}
-#cancel {
-  align-self: flex-end;
-  background: #0070D8;
-  color: #fff;
-  font-family: 'Helvetica', 'Arial', sans-serif;
-  font-size: 23px;
-  font-weight: bold;
-  text-align: center;
-  width: 25px;
-  height: 25px;
-  border-radius: 12px;
-  margin-left: 50px;
 }
 
 #catalogue-list {
@@ -858,6 +777,7 @@ footer {
 }
 
 /* priekš reservation.html */
+
 #personal-info {
     background-color: #F4F4F4;
     display: flex;
@@ -913,6 +833,7 @@ footer {
     height:40px;
     width:74px;
     margin-top: auto;
+    margin-left: auto;
 }
 
 #button-reserve-change {
@@ -922,6 +843,8 @@ footer {
     margin-top: auto;
     margin-left: auto;
 }
+
+/* priekš login un register */
 
 .modal-body {
     padding: 60px 40px 40px !important;

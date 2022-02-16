@@ -32,10 +32,6 @@ def profils():
 
 @app.route('/register')
 def register():
-    return render_template("templates/register.html") # To Do
-
-@app.route('/register')
-def register():
     return render_template("register.html")
 
 @app.route('/log_in')
