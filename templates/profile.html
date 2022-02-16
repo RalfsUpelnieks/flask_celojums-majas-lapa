@@ -14,9 +14,11 @@
             </div>
             <div id="informacija-mainit">
                 <img class="profile-image" src="../static/images/logo/Group 1.svg">
-                <h1 class="profile-box-text">Vārds Uzvārds</h1>
-                <h1 class="profile-box-text">E-pasts:</h1>
-                <button id="profile-buttons">Admin</button>
+                <h1 class="profile-box-text">{{ user.name }} {{ user.surname }}</h1>
+                <h1 class="profile-box-text">{{ user.email }}</h1>
+                {% if user.role_id != 0 %}
+                    <a href="/admin"><button id="profile-buttons">Admin</button></a>
+                {% endif %}
                 <button id="profile-buttons">Dzēst datus</button>
                 <button id="profile-buttons">Lejupielādēt datus</button>
             </div>
