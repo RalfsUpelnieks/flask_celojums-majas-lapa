@@ -33,7 +33,7 @@
                                 <li style="font-weight: bold;">Aģentūra: {{ agency.name }}</li>
                                 {% endif %}
                             {% endfor %}
-                            <li>{{ trip.date_from }} - {{ trip.date_to }}</li>
+                            <li>{{ trip.date_from.strftime("%Y-%m-%d %H:%M") }} - {{ trip.date_to.strftime("%Y-%m-%d %H:%M") }}</li>
                             <li>{{ trip.cost }}€</li>
                             <li>{{ trip.ticket_amount }} pieejamas vietas</li>
                         </ul>

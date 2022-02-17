@@ -135,7 +135,6 @@ header{
     margin-top: 20px;
     font-size: 24px !important;
 }
-
 #guarantee-list-flexbox{
     display: flex;
     justify-content: center;
@@ -150,6 +149,8 @@ header{
     border-width: 1px;
     border-color: #c0c0c0;
     padding: 10px;
+    padding-top: 2%;
+    padding-bottom: 2%;
 }
 #guarantee-list-flexbox div{
     width:450px;
@@ -376,62 +377,14 @@ header{
     color: white;
     background-color: #0070D8;
 }
-/* #atcelt{
-    margin-top: 150px;
-    margin-right: 10px;
-    margin-left: 435px;
-    height: 42px;
-    width:  138px;
-    border-radius: 16px;
-    border:none;
-    color: white;
-    background-color: #0070D8;
-} */
-/* #informacija-mainit {
-    display: inline-flex;
-    justify-content: flex-end;
-} */
-/* #rezervetie-celojumi {
-    margin-left: 250px;
-    width: 800px;
-    height: 725px;
-    background: #F4F4F4;
-    border: 1px solid #ADADAD;
-    box-sizing: border-box;
-    border-radius: 7px;
-} */
-/* .DivToScroll{    */
-    /* background-color: #939393;
-    border: none;
-    border-radius: 35px;
-    color: #939393;
-    left: -1px;
-    padding: 10px 7px 5px;
-}
-.DivWithScroll{
-    height:120px;
-    overflow: scroll;
-    overflow-x: hidden;
-}
-#celojumi {
-    margin-top: 15px;
-    margin-left: 7px;
-    width: 725px;
-    height: 202px;
-    background: #FFFFFF;
-    border-radius: 8px;
-    cursor: pointer;
-} */
+
 .box-text {
     font-family: Thasadith;
     font-weight: lighter;
     font-size: 24px;
     margin-top: 1px;
 }
-/* #profile-content {
-    display: inline-flex;
-    justify-content: flex-end;
-} */
+
 #celojuma-informacija {
     margin-left: 15px;
 }
@@ -657,8 +610,6 @@ header{
 }
 
 #button-submit {
-    margin-left: auto;
-
     font-size: 18px !important;
     height:30px;
     width:70px;
@@ -853,7 +804,6 @@ footer {
     line-height: 32px;
     
     margin-top: auto;
-    margin-left: auto;
 }
 
 #button-delete-profile{
@@ -870,7 +820,6 @@ footer {
 
 
 /* priekš login un register */
-
 .modal-body {
     padding: 60px 40px 40px !important;
     align-content: center;
@@ -977,15 +926,14 @@ footer {
     margin-left: auto;
 }
 
-
-
-
 #profile {
     background: #dfdfdf;
-    width: 500px;
-    height: 350px;
-    margin-top: 46px;
-    margin-left: 100px;
+    width: 30%;
+    height: auto;
+    margin-left:auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    padding-bottom: 1%;
     border-radius: 10px;
 
     background-color: white;
@@ -998,6 +946,8 @@ footer {
 #profile-content {
     display: inline-flex;
     justify-content: flex-end;
+    margin-top: 3%;
+    width:100%;
 }
 
 .profile-titlebar {
@@ -1036,7 +986,8 @@ footer {
 
 .profile-box-text {
     margin-top: 5px;
-    padding-bottom: 5%
+    padding-bottom: 5%;
+    color: #2e2e2e;
 }
 
 #profile-buttons{
@@ -1072,17 +1023,16 @@ footer {
 }
 
 #rezervetie-celojumi {
-    width: 800px;
-    height: 700px;
+    width: 45%;
+    height: 70%;
 
     background-color: white;
     color:black;
     gap: 2%;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
-    margin-top: 47px;
+    margin-left: auto;
     margin-right: auto;
-    margin-left: 180px;
     border-radius: 10px;
 }
 
@@ -1093,16 +1043,16 @@ footer {
 }
 
 .DivWithScroll{
-    height:650px;
     overflow: auto;
     overflow-x: hidden;
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 #celojumi {
-    margin-top: 15px;
-    margin-left: 3%;
-    width: 725px;
-    height: 250px;
+    margin-left: 2%;
+    margin-right: 2%;
     background: #f7f7f7;
     border-radius: 8px;
     display: inline-flex;
@@ -1113,6 +1063,7 @@ footer {
     border-color: #c0c0c0;
 
     flex-direction: row;
+    justify-content: space-between;
 }
 
 #celojuma-informacija{
@@ -1150,4 +1101,11 @@ footer {
     border:none;
     color: white;
     background-color: #0070D8;
+}
+.user-info-control {
+    display:flex;
+    justify-content: space-around;
+}
+.user-info-control * {
+    margin-left: none;
 }
