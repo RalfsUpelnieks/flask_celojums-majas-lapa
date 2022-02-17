@@ -14,7 +14,10 @@ from werkzeug.utils import secure_filename
 import csv
 
 def is_user_logged():
-    return True if session['user'] != None else False
+    try:
+        return True if session['user'] != None else False
+    except:
+        return False
 
 def is_user_admin():
     return True if is_user_logged() and User.query.filter_by(id=session['user']).first().role_id != 0 else False
