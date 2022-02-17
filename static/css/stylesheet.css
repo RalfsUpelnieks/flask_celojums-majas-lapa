@@ -86,7 +86,7 @@ a.button:hover {
     color: #2e2e2e;
 }
 
-.button-login {
+#button-login {
     height:40px;
     width:90px;
     margin-top: 23px;
@@ -609,8 +609,6 @@ header{
 }
 
 #button-submit {
-    margin-left: auto;
-
     font-size: 18px !important;
     height:30px;
     width:70px;
@@ -805,7 +803,6 @@ footer {
     line-height: 32px;
     
     margin-top: auto;
-    margin-left: auto;
 }
 
 #button-delete-profile{
@@ -930,10 +927,12 @@ footer {
 
 #profile {
     background: #dfdfdf;
-    width: 500px;
-    height: 350px;
-    margin-top: 46px;
-    margin-left: 100px;
+    width: 30%;
+    height: auto;
+    margin-left:auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    padding-bottom: 1%;
     border-radius: 10px;
 
     background-color: white;
@@ -946,6 +945,8 @@ footer {
 #profile-content {
     display: inline-flex;
     justify-content: flex-end;
+    margin-top: 3%;
+    width:100%;
 }
 
 .profile-titlebar {
@@ -984,7 +985,8 @@ footer {
 
 .profile-box-text {
     margin-top: 5px;
-    padding-bottom: 5%
+    padding-bottom: 5%;
+    color: #2e2e2e;
 }
 
 #profile-buttons{
@@ -1020,17 +1022,16 @@ footer {
 }
 
 #rezervetie-celojumi {
-    width: 800px;
-    height: 700px;
+    width: 45%;
+    height: 70%;
 
     background-color: white;
     color:black;
     gap: 2%;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
-    margin-top: 47px;
+    margin-left: auto;
     margin-right: auto;
-    margin-left: 180px;
     border-radius: 10px;
 }
 
@@ -1041,16 +1042,16 @@ footer {
 }
 
 .DivWithScroll{
-    height:650px;
     overflow: auto;
     overflow-x: hidden;
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 #celojumi {
-    margin-top: 15px;
-    margin-left: 3%;
-    width: 725px;
-    height: 250px;
+    margin-left: 2%;
+    margin-right: 2%;
     background: #f7f7f7;
     border-radius: 8px;
     display: inline-flex;
@@ -1061,6 +1062,7 @@ footer {
     border-color: #c0c0c0;
 
     flex-direction: row;
+    justify-content: space-between;
 }
 
 #celojuma-informacija{
@@ -1098,4 +1100,11 @@ footer {
     border:none;
     color: white;
     background-color: #0070D8;
+}
+.user-info-control {
+    display:flex;
+    justify-content: space-around;
+}
+.user-info-control * {
+    margin-left: none;
 }

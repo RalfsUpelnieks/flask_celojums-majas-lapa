@@ -8,23 +8,18 @@
         {% endif %}
     {% endwith %}
     <div id="profile-content">
-        <div>
-            <div id="profile">
-                <div class="profile-titlebar">
-                    <h1 id="profile-titlebar-text">Lietotāja dati</h1>
-                </div>
-                <div id="informacija-mainit">
-                    <h2 class="profile-box-text" style="color: rgb(104, 104, 104);">E-pasts <span style="color: #2e2e2e;">{{ user.email }}</span></h2>
-                    <h2 class="profile-box-text" style="color: rgb(104, 104, 104);">Vārds <span style="color: #2e2e2e;">{{ user.name }}</span></h2>
-                    <h2 class="profile-box-text" style="color: rgb(104, 104, 104);">Uzvārds <span style="color: #2e2e2e;">{{ user.surname }}</span></h2>
-                    <h2 class="profile-box-text" style="color: rgb(104, 104, 104);">Parole <span style="color: #2e2e2e;">...</span></h2>
-                </div>
-                <div style="margin-top: -40px;">
-                    <a href="" class="button" id="button-delete-profile">Dzēzt profilu</a>
-                    <a href="" class="button" id="button-reserve" style="margin-left: 220px;">Mainīt</a>
-                </div>
+        <div id="profile">
+            <div class="profile-titlebar">
+                <h1 id="profile-titlebar-text">Lietotāja dati</h1>
             </div>
-            
+            <div id="informacija-mainit">
+                <h2 class="profile-box-text">{{ user.name }} {{ user.surname }}</h2>
+                <h2 class="profile-box-text">E-pasts: {{ user.email }}</h2>
+            </div>
+            <div class="user-info-control">
+                <a href="" class="button" id="button-delete-profile">Dzēst profilu</a>
+                <a href="" class="button" id="button-reserve">Mainīt</a>
+            </div>
         </div>
         <div id="rezervetie-celojumi">
             <div class="reservation-list-titlebar">
