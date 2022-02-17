@@ -16,7 +16,8 @@
             <a href="/" id="title">Travely</a>
             <a href="tel:+37129749980" id="number">tel. +371 29749980</h1>
             {% if session['user'] %}
-                <a href="/profile" class="button" id="button-login">Profils</a>
+                <a href="/profile" class="button" id="button-login" style="margin-right:8px;">Profils</a>
+                <a href="" class="button" id="button-login" style="margin-right: 2%;">Izrakstīties</a>
             {% else %}
                 <a href="/login" class="button" id="button-login">Ieiet</a>
             {% endif %}
@@ -66,7 +67,7 @@
                                     </div>
                                     <img src="{{ url_for('static', filename='/images/destinations/' + trip.img_file) }}" class="trip-img">
                                 </div>
-                            </da>
+                            </a>
                         {% endfor %}
                     </div>
                 </div>

@@ -257,7 +257,7 @@ def reservation_add(id):
             date_to=trip['date_to'],
             days=(trip['date_to']-trip['date_from']).days,
             price=trip['cost'],
-            reservation_number=1000000001+Reservation.query.order_by(-Reservation.id).first().id,
+            reservation_number=1000000001+Reservation.query.order_by(-Reservation.id).first().id if len(Reservation.query.all()) > 0 else 1000000001,
             trip_id=id,
             onwer_id=user.id
         )
