@@ -808,6 +808,19 @@ footer {
     margin-left: auto;
 }
 
+#button-delete-profile{
+    font-size: 18px !important;
+    height:30px;
+    width:100px;
+    line-height: 32px;
+    
+    margin-top: 100px;
+    margin-left: 9px;
+
+    background-color: red !important;
+}
+
+
 /* priekš login un register */
 .modal-body {
     padding: 60px 40px 40px !important;
@@ -915,15 +928,19 @@ footer {
     margin-left: auto;
 }
 
-/* Profile page */
 #profile {
     background: #dfdfdf;
-    width: 350px;
-    height: 500px;
-    margin-top: 47px;
+    width: 500px;
+    height: 350px;
+    margin-top: 46px;
     margin-left: 100px;
-    border: 1px solid grey;
     border-radius: 10px;
+
+    background-color: white;
+    color:black;
+    gap: 2%;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    align-items: left;
 }
 
 #profile-content {
@@ -942,19 +959,23 @@ footer {
     display: flex;
     font-style: normal;
     font-weight: normal;
-    font-size: 27px;
+    font-size: 25px;
+    line-height: 36px;
+    font-weight: normal;
     text-align: center;
     color: white;
     justify-content: center;
 }
 
 #informacija-mainit {
-    display: flex;
+    margin-top: 20px;
+    margin-left: 40px;
+    display: inline-flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-content: space-around;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: left;
 }
 
 .profile-image {
@@ -962,6 +983,7 @@ footer {
 }
 
 .profile-box-text {
+    margin-top: 5px;
     padding-bottom: 5%
 }
 
@@ -978,12 +1000,6 @@ footer {
     cursor: pointer;
 }
 
-.rezervetie-celojumi-padding {
-    padding-left: 400px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
 .reservation-list-titlebar {
     border-top-left-radius: 9px;
     border-top-right-radius: 9px;
@@ -995,7 +1011,9 @@ footer {
     display: flex;
     font-style: normal;
     font-weight: normal;
-    font-size: 27px;
+    font-size: 25px;
+    line-height: 36px;
+    font-weight: normal;
     text-align: center;
     color: white;
     justify-content: center;
@@ -1003,11 +1021,17 @@ footer {
 
 #rezervetie-celojumi {
     width: 800px;
-    height: 725px;
-    background: #dfdfdf;
-    border: 1px solid #ADADAD;
-    border-bottom-right-radius: 9px;
-    border-bottom-left-radius: 9px;
+    height: 700px;
+
+    background-color: white;
+    color:black;
+    gap: 2%;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+    margin-top: 47px;
+    margin-right: auto;
+    margin-left: 180px;
+    border-radius: 10px;
 }
 
 .DivToScroll{   
@@ -1017,7 +1041,7 @@ footer {
 }
 
 .DivWithScroll{
-    height:710px;
+    height:650px;
     overflow: auto;
     overflow-x: hidden;
 }
@@ -1027,16 +1051,34 @@ footer {
     margin-left: 3%;
     width: 725px;
     height: 250px;
-    background: #ffffff;
+    background: #f7f7f7;
     border-radius: 8px;
-    display: table;
+    display: inline-flex;
     padding-bottom: 10px;
+
+    border: solid;
+    border-width: 1px;
+    border-color: #c0c0c0;
+
+    flex-direction: row;
 }
 
-.box-text-bold {
+#celojuma-informacija{
+    display: table;
+    margin-top: 10px;
+}
+
+#destination-text-bold {
     font-weight: normal;
     padding-left: 15px;
-    color: black;
+    color: #303030;
+}
+
+#price-text-bold {
+    font-weight: normal;
+    padding-left: 15px;
+    color: #303030;
+    font-size: 26px;
 }
 
 .reservation-box-text {
@@ -1044,6 +1086,7 @@ footer {
     font-size: 24px;
     margin-top: 1px;
     padding-left: 15px;
+    color: #575757;
 }
 
 #atcelt{

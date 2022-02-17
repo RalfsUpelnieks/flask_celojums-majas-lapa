@@ -1,48 +1,51 @@
 {% extends "index.html" %}
 {% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <h1 style="color:rgb(0, 0, 0); position: absolute; top: 100px; left: 780px;">{{ message }}</h1>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <div id="profile-content">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <h1 style="color:red;">{{ message }}</h1>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        <div id="profile">
-            <div class="profile-titlebar">
-                <h1 id="profile-titlebar-text">Profils</h1>
-            </div>
-            <div id="informacija-mainit">
-                <img class="profile-image" src="../static/images/logo/Group 1.svg">
-                <h1 class="profile-box-text">{{ user.name }} {{ user.surname }}</h1>
-                <h1 class="profile-box-text">{{ user.email }}</h1>
-                {% if user.role_id != 0 %}
-                    <a href="/admin"><button id="profile-buttons">Admin</button></a>
-                {% endif %}
-                <button id="profile-buttons">Dzēst datus</button>
-                <button id="profile-buttons">Lejupielādēt datus</button>
-            </div>
-        </div>
-
-        <div class="rezervetie-celojumi-padding">
-            <div class="reservation-list-titlebar">
-                <h1 id="reservation-titlebar-text">Rezervētie ceļojumi</h1>
-            </div>
-            <div id="rezervetie-celojumi">
-                <div class="DivToScroll DivWithScroll">
-                    {% for reservation in reservations %}
-                        <div id="celojumi">
-                            <h1 class="box-text-bold">{{ reservation.country_from }} - {{ reservation.country_to }}</h1>
-                            <h1 class="reservation-box-text">{{ reservation.owner_name }} {{ reservation.owner_surname }} Rez.nr. {{ reservation.reservation_number }}</h1>
-                            <h1 class="reservation-box-text">Dienu skaits: {{ reservation.days }}</h1>
-                            <h1 class="box-text-bold">Cena: {{ reservation.price }}</h1>
-                            <h1 class="reservation-box-text">Izbraukšana: <b>{{ reservation.date_from.strftime("%Y-%m-%d %H:%M") }}</b></h1>
-                            <h1 class="reservation-box-text">Atgriešanās: <b>{{ reservation.date_to.strftime("%Y-%m-%d %H:%M") }}</b></h1>
-                            <a href="/upload/{{ reservation.id }}/{{ reservation.owner_id }}"><button id="print">Printeris</button></a>
-                            <button id="atcelt">Atcelt</button> 
-                        </div>
-                    {% endfor %}
+        <div>
+            <div id="profile">
+                <div class="profile-titlebar">
+                    <h1 id="profile-titlebar-text">Lietotāja dati</h1>
                 </div>
+                <div id="informacija-mainit">
+                    <h2 class="profile-box-text" style="color: rgb(104, 104, 104);">E-pasts <span style="color: #2e2e2e;">{{ user.email }}</span></h2>
+                    <h2 class="profile-box-text" style="color: rgb(104, 104, 104);">Vārds <span style="color: #2e2e2e;">{{ user.name }}</span></h2>
+                    <h2 class="profile-box-text" style="color: rgb(104, 104, 104);">Uzvārds <span style="color: #2e2e2e;">{{ user.surname }}</span></h2>
+                    <h2 class="profile-box-text" style="color: rgb(104, 104, 104);">Parole <span style="color: #2e2e2e;">...</span></h2>
+                </div>
+                <div style="margin-top: -40px;">
+                    <a href="" class="button" id="button-delete-profile">Dzēzt profilu</a>
+                    <a href="" class="button" id="button-reserve" style="margin-left: 220px;">Mainīt</a>
+                </div>
+            </div>
+            
+        </div>
+        <div id="rezervetie-celojumi">
+            <div class="reservation-list-titlebar">
+                <h1 id="reservation-titlebar-text">Rezervācijas</h1>
+            </div>
+            <div class="DivToScroll DivWithScroll">
+                {% for reservation in reservations %}
+                    <div id="celojumi">
+                        <div id="celojuma-informacija">
+                            <h1 id="destination-text-bold">{{ reservation.country_from }} - {{ reservation.country_to }}</h1>
+                            <h1 class="reservation-box-text">Rez.nr. {{ reservation.reservation_number }}</h1>
+                            <h1 class="reservation-box-text">Dienu skaits: {{ reservation.days }}</h1>
+                            <h1 class="reservation-box-text">Izbraukšana: <b>{{ reservation.date_from }}</b></h1>
+                            <h1 class="reservation-box-text">Atgriešanās: <b>{{ reservation.date_to }}</b></h1>
+                            <h1 id="price-text-bold">Cena: {{ reservation.price }}€</h1>
+                            <a href="/upload/{{ reservation.id }}/{{ reservation.owner_id }}" class="button" id="button-reserve" style="margin-top: 6px;">Izprintēt</a>
+                        </div>
+                        
+                        <a href="/reservation/remove/{{ reservation.id }}" class="button" id="button-reserve" style="margin-right: 10px;">Atcelt</a>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
