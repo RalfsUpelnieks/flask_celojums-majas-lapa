@@ -17,9 +17,9 @@
             <a href="tel:+37129749980" id="number">tel. +371 29749980</h1>
             {% if session['user'] %}
                 <a href="/profile" class="button" id="button-login" style="margin-right:8px;">Profils</a>
-                <a href="" class="button" id="button-login" style="margin-right: 2%;">Izrakstīties</a>
+                <a href="/logout" class="button" id="button-login" style="margin-right: 2%;">Izrakstīties</a>
             {% else %}
-                <a href="/login" class="button button-login">Ieiet</a>
+                <a href="/login" class="button" id="button-login">Ieiet</a>
             {% endif %}
         </header>
         {% block content %}
