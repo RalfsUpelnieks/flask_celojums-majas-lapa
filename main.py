@@ -47,7 +47,7 @@ def profils():
 
 @app.route('/profile/edit')
 def profils_edit():
-    return render_template("edit_profile.html", form = EditUserForm(), user = get_user_data(session['user']), is_admin = is_user_admin())
+    return render_template("edit_profile.html", form = EditUserForm(),  reservations = Reservation.query.filter_by(owner_id=session['user']).all(), trips = Trip.query.all(), countries = Country.query.all(), user = get_user_data(session['user']), is_admin = is_user_admin())
 
 
 @app.route('/profile/edit/check', methods=['POST'])

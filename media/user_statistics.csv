@@ -1,3 +1,7 @@
 ﻿id,name,surname,email,role_id
-1,skillsadmin,skillsadmin,superadmin@rvt.lv,1
-2,Nigērija,Transleiterkuņa,a@a.a,1
+1,Jānis,Birziņš,janis.birzins@inbox.lv,1
+2,Reinis,Drēska,reinis@gmail.com,0
+3,Ralfs,Upelnieks,ralfs.upelnieks@travely.lv,1
+4,Jānis,Ozols,janciks@inbox.lv,0
+5,Agris,Celms,agris.celms@inbox.lv,0
+6,Artūrs,Veinbergs,arturs@gmail.com,0

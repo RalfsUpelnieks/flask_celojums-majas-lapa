@@ -1,7 +1,10 @@
 ﻿id,owner_name,owner_surname,country_from,country_to,date_from,date_to,days,price,reservation_number,owner_id,trip_id
-1,Nigērija,Transleiterkuņa,Latvija(LV),Austrālija(AU),2022-02-02 10:40:00,2022-02-25 12:40:00,23,89.99,1000000001,2,1
-2,Nigērija,Transleiterkuņa,Latvija(LV),Austrālija(AU),2022-02-02 10:40:00,2022-02-25 12:40:00,23,89.99,1000000002,2,1
-3,Nigērija,Transleiterkuņa,Latvija(LV),Austrālija(AU),2022-02-02 10:40:00,2022-02-25 12:40:00,23,89.99,1000000003,2,1
-4,Nigērija,Transleiterkuņa,Latvija(LV),Austrālija(AU),2022-02-02 10:40:00,2022-02-25 12:40:00,23,89.99,1000000004,2,1
-5,Nigērija,Transleiterkuņa,Latvija(LV),Austrālija(AU),2022-02-02 10:40:00,2022-02-25 12:40:00,23,89.99,1000000005,2,1
-6,Nigērija,Transleiterkuņa,Latvija(LV),Austrālija(AU),2022-02-02 10:40:00,2022-02-25 12:40:00,23,89.99,1000000006,2,1
+1,Jānis,Birziņš,Latvija(LV),Lielbritānija(GB),2022-02-25 12:31:00,2022-03-05 15:34:00,8,119.99,1000000001,1,3
+2,Agris,Celms,Latvija(LV),Francija(FR),2022-02-24 12:32:00,2022-02-28 12:32:00,4,200.0,1000000002,5,4
+4,Agris,Celms,Latvija(LV),Indija(IN),2022-02-25 12:28:00,2022-02-27 16:32:00,2,92.99,1000000004,5,1
+5,Ralfs,Upelnieks,Latvija(LV),Austrālija(AU),2022-02-16 17:20:00,2022-02-24 13:21:00,7,45.6,1000000005,3,5
+6,Jānis,Ozols,Latvija(LV),Indija(IN),2022-02-25 12:28:00,2022-02-27 16:32:00,2,92.99,1000000006,4,1
+7,Jānis,Ozols,Latvija(LV),Francija(FR),2022-02-24 12:32:00,2022-02-28 12:32:00,4,200.0,1000000007,4,4
+8,Artūrs,Veinbergs,Latvija(LV),Indija(IN),2022-02-25 12:28:00,2022-02-27 16:32:00,2,92.99,1000000008,6,1
+9,Artūrs,Veinbergs,Latvija(LV),Francija(FR),2022-02-24 12:32:00,2022-02-28 12:32:00,4,200.0,1000000009,6,4
+10,Artūrs,Veinbergs,Latvija(LV),Austrālija(AU),2022-02-16 17:20:00,2022-02-24 13:21:00,7,45.6,1000000010,6,5
