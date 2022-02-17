@@ -1135,6 +1135,21 @@ footer {
     margin-left: none;
 }
 
+.statistics-flexbox {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.monthly-review{
+    margin-top: 3%;
+}
+.rt-ratio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
 .change-form {
     border: #575757;
     border-style: solid;

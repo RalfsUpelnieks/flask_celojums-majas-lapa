@@ -7,16 +7,54 @@
                 <a href="/admin/agencies"><li class="selector">Ceļojumu aģentūras</li></a>
                 <a href="/admin/countries"><li class="selector">Ceļojamās valstis</li></a>
                 <a href="/admin/trips"><li class="selector">Pieejamie ceļojumi</li></a>
+                <a href="/admin/statistics"><li class="selector" id="selected">Statistika</li></a>
             </ul>
         </div>
         <div id="ap-selector-display">  
             <h2 class="subtitle">Statistika</h2>
             <div id="ap-selector-display-list">
-                {% for trip in trips %}
-                    {% if reservations.trip_id == trip.id %}
-                    <p>+</p>
-                    {% endif %}
-                {% endfor %}
+                <div class="statistics-flexbox">
+                    <div class="statistics-unit">
+                        <h2>Lietotāju informācija</h2>
+                        <button><a href="{{ url_for('user_csv')}}">Eksportēt uz .csv</a></button>
+                        <button><a href="{{ url_for('user_json') }}">Eksportēt uz .json</a></button>
+                    </div>
+                    <div class="statistics-unit">
+                        <h2>Rezervāciju informācija</h2>
+                        <button><a href="{{ url_for('reservation_csv')}}">Eksportēt uz .csv</a></button>
+                        <button><a href="{{ url_for('reservation_json') }}">Eksportēt uz .json</a></button>
+                    </div>
+                    <div class="statistics-unit">
+                        <h2>Ceļojumu informācija</h2>
+                        <button><a href="{{ url_for('trip_csv') }}">Eksportēt uz .csv</a></button>
+                        <button><a href="{{ url_for('trip_json') }}">Eksportēt uz .json</a></button>
+                    </div>
+                    <div class="statistics-unit">
+                        <h2>Aģentūru informācija</h2>
+                        <button><a href="{{ url_for('agency_csv')}}">Eksportēt uz .csv</a></button>
+                        <button><a href="{{ url_for('agency_json') }}">Eksportēt uz .json</a></button>
+                    </div>
+                </div>
+                <div class="monthly-review">
+                    <h1 class="subtitle">Mēneša pārskats</h1>
+                    <div class="rt-ratio">
+                        <div class="rt-ratio-sub">
+                        <h2>Rezervācijas / ceļojumu attiecība</h2>
+                        <p>1/100 - 0.01%</p>
+                    </div>
+                    <div class="rt-ratio-sub">
+                        <h2>Rezervētākais ceļojums</h2>
+                        <p>Francija - Lielbritānija</p>
+                        <p>4 skatījumi</p>
+                        <p>2 rezervācijas</p>
+                    </div>
+                    <div class="rt-ratio-sub">
+                        <h2>Apskatītākais ceļojums</h2>
+                        <p>{{ countries[popular_trip.country_from - 1].country }} - {{ countries[popular_trip.country_to - 1].country }}</p>
+                        <p>{{ popular_trip.views }} skatījumi</p>
+                        <p>2 rezervācijas</p>
+                    </div>
+                </div>
             </div>
             <div id="ap-selector-footer">
                 

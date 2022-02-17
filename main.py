@@ -8,9 +8,10 @@ from forms import *
 from models import *
 import json
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime
+from datetime import datetime, date
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
+import csv
 
 def is_user_logged():
     return True if session['user'] != None else False
@@ -90,7 +91,7 @@ def admin_trips():
 
 @app.route('/admin/statistics')
 def statistics():
-    return render_template("templates/statistics.html", trips = Trip.query.all(), reservations = Reservation.query.all()) if is_user_logged() and is_user_admin() else redirect(url_for("login"))
+    return render_template("templates/statistics.html", countries = Country.query.all(), popular_trip=Trip.query.order_by(-Trip.views).first(), trips = Trip.query.all(), reservations = Reservation.query.all()) if is_user_logged() and is_user_admin() else redirect(url_for("login"))
 
 # Aģentūru un ceļojumu pievienošana
 @app.route('/admin/add')
@@ -266,15 +267,19 @@ def admin_edit_agency(id):
 @app.route('/sign_up', methods=['POST'])
 def sign_up():
     if request.method == "POST":
-        user = User(
-            email = request.form['email'],
-            password = generate_password_hash(request.form['password'], method='sha256'),
-            name = request.form['name'],
-            surname = request.form['surname'],
-            role_id = 0 )
-        db.session.add(user)
-        db.session.commit()
-        return redirect(url_for('profils'))
+        if request.form['password'] == request.form['re-password']:
+            user = User(
+                email = request.form['email'],
+                password = generate_password_hash(request.form['password'], method='sha256'),
+                name = request.form['name'],
+                surname = request.form['surname'],
+                role_id = 0 )
+            db.session.add(user)
+            db.session.commit()
+            return redirect(url_for('profils'))
+        else:
+            flash("Ievadītās paroles nesakrīt")
+            return redirect(url_for('register'))
     return "404"
 
 @app.route('/sign_in', methods=['POST'])
@@ -346,8 +351,8 @@ def catalogue_filter():
     validations = {
         "country_from_id": None if not request.form['from'] else int(request.form['from']),
         "country_to_id": None if not request.form['to'] else int(request.form['to']),
-        "date_from": None if not request.form['from_date'] else datetime.strptime(request.form['from_date'], '%Y-%m-%d').date(),
-        "date_to": None if not request.form['to_date'] else datetime.strptime(request.form['to_date'], '%Y-%m-%d').date()
+        "date_from": None if not request.form['from_date'] else datetime.strptime(request.form['from_date'], '%Y-%m-%d'),
+        "date_to": None if not request.form['to_date'] else datetime.strptime(request.form['to_date'], '%Y-%m-%d')
     }
     output = []
     requirements = len(validations)
@@ -441,6 +446,108 @@ def upload_reservation(trip_id, owner_id):
         file.close()
         return send_file(path+f"\\media\\reserved_trip.html", as_attachment=True)
 
+@app.route("/admin/statistics/user")
+def user_csv():
+    path = os.getcwd()
+    file = open(path+f"\\media\\user_statistics.csv", "w",  encoding="utf_8_sig") # UTF-8 with BOM lai Excel atpazītu kā Unicode
+    
+    file.write("id,name,surname,email,role_id\n")
+    for user in User.query.all():
+        file.write(f"{user.id},{user.name},{user.surname},{user.email},{user.role_id}\n")
+    
+    file.close()
+    return send_file(path+f"\\media\\user_statistics.csv", as_attachment=True)
+
+@app.route("/admin/statistics/agency")
+def agency_csv():
+    path = os.getcwd()
+    file = open(path+f"\\media\\agency_statistics.csv", "w",  encoding="utf_8_sig") # UTF-8 with BOM lai Excel atpazītu kā Unicode
+    
+    file.write("id,name,address,number\n")
+    for agency in Agency.query.all():
+        file.write(f"{agency.id},\"{agency.name}\",\"{agency.address}\",{agency.number}\n")
+    
+    file.close()
+    return send_file(path+f"\\media\\agency_statistics.csv", as_attachment=True)
+
+@app.route("/admin/statistics/reservation")
+def reservation_csv():
+    path = os.getcwd()
+    file = open(path+f"\\media\\reservation_statistics.csv", "w",  encoding="utf_8_sig") # UTF-8 with BOM lai Excel atpazītu kā Unicode
+    
+    file.write("id,owner_name,owner_surname,country_from,country_to,date_from,date_to,days,price,reservation_number,owner_id,trip_id\n")
+    for reservation in Reservation.query.all():
+        file.write(f"{reservation.id},{reservation.owner_name},{reservation.owner_surname},{reservation.country_from},{reservation.country_to},{reservation.date_from},{reservation.date_to},{reservation.days},{reservation.price},{reservation.reservation_number},{reservation.owner_id},{reservation.trip_id}\n")
+    
+    file.close()
+    return send_file(path+f"\\media\\reservation_statistics.csv", as_attachment=True)
+
+@app.route("/admin/statistics/trip")
+def trip_csv():
+    path = os.getcwd()
+    file = open(path+f"\\media\\trip_statistics.csv", "w",  encoding="utf_8_sig") # UTF-8 with BOM lai Excel atpazītu kā Unicode
+    
+    file.write("id,agency_id,country_from,country_to,date_from,date_to,description,cost,ticket_amount,views,img_file\n")
+    for trip in Trip.query.all():
+        file.write(f"{trip.id},{trip.agency_id},{trip.country_from},{trip.country_to},{trip.date_from},{trip.date_to},\"{trip.description}\",{trip.cost},{trip.ticket_amount},{trip.views},{trip.img_file}\n")
+    
+    file.close()
+    return send_file(path+f"\\media\\trip_statistics.csv", as_attachment=True)
+
+
+@app.route("/admin/statistics/user_json")
+def user_json():
+    path = os.getcwd()
+    file = open(path+f"\\media\\user_statistics.json", "w",  encoding="utf_8_sig") # UTF-8 with BOM lai Excel atpazītu kā Unicode
+    users = []
+    for user in User.query.all():
+        users.append(user.serialize())
+    
+    file.write(json.dumps(users))
+
+    file.close()
+    return send_file(path+f"\\media\\user_statistics.json", as_attachment=True)
+
+
+@app.route("/admin/statistics/agency_json")
+def agency_json():
+    path = os.getcwd()
+    file = open(path+f"\\media\\agency_statistics.json", "w",  encoding="utf_8_sig") # UTF-8 with BOM lai Excel atpazītu kā Unicode
+    
+    agencies = []
+    for agency in Agency.query.all():
+        agencies.append(agency.serialize())
+    
+    file.write(json.dumps(agencies))
+    
+    file.close()
+    return send_file(path+f"\\media\\agency_statistics.json", as_attachment=True)
+
+@app.route("/admin/statistics/reservation_json")
+def reservation_json():
+    path = os.getcwd()
+    file = open(path+f"\\media\\reservation_statistics.json", "w",  encoding="utf_8_sig") # UTF-8 with BOM lai Excel atpazītu kā Unicode
+    reservations = []
+    for reservation in Reservation.query.all():
+        reservations.append(reservation.serialize())
+    
+    file.write(json.dumps(reservations, default=str))
+    
+    file.close()
+    return send_file(path+f"\\media\\reservation_statistics.json", as_attachment=True)
+
+@app.route("/admin/statistics/trip_json")
+def trip_json():
+    path = os.getcwd()
+    file = open(path+f"\\media\\trip_statistics.json", "w",  encoding="utf_8_sig") # UTF-8 with BOM lai Excel atpazītu kā Unicode
+    trips = []
+    for trip in Trip.query.all():
+        trips.append(trip.serialize())
+    
+    file.write(json.dumps(trips, default=str))
+    
+    file.close()
+    return send_file(path+f"\\media\\trip_statistics.json", as_attachment=True)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)

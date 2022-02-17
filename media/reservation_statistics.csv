@@ -1,0 +1,7 @@
+﻿id,owner_name,owner_surname,country_from,country_to,date_from,date_to,days,price,reservation_number,owner_id,trip_id
+1,Nigērija,Transleiterkuņa,Latvija(LV),Austrālija(AU),2022-02-02 10:40:00,2022-02-25 12:40:00,23,89.99,1000000001,2,1
+2,Nigērija,Transleiterkuņa,Latvija(LV),Austrālija(AU),2022-02-02 10:40:00,2022-02-25 12:40:00,23,89.99,1000000002,2,1
+3,Nigērija,Transleiterkuņa,Latvija(LV),Austrālija(AU),2022-02-02 10:40:00,2022-02-25 12:40:00,23,89.99,1000000003,2,1
+4,Nigērija,Transleiterkuņa,Latvija(LV),Austrālija(AU),2022-02-02 10:40:00,2022-02-25 12:40:00,23,89.99,1000000004,2,1
+5,Nigērija,Transleiterkuņa,Latvija(LV),Austrālija(AU),2022-02-02 10:40:00,2022-02-25 12:40:00,23,89.99,1000000005,2,1
+6,Nigērija,Transleiterkuņa,Latvija(LV),Austrālija(AU),2022-02-02 10:40:00,2022-02-25 12:40:00,23,89.99,1000000006,2,1
