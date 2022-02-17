@@ -13,7 +13,10 @@ from sqlalchemy import desc
 from werkzeug.utils import secure_filename
 
 def is_user_logged():
-    return True if 'user' in session else False
+    return True if session['user'] != None else False
+
+def is_user_admin():
+    return True if User.query.filter_by(id=session['user']).first().role_id != 0 else False
 
 def get_user_data(id):
     return User.query.filter_by(id=id).first()
@@ -34,7 +37,7 @@ def admin():
 @app.route('/profile')
 def profils():
     if is_user_logged():
-        return render_template("profile.html", reservations = Reservation.query.filter_by(onwer_id=session['user']).all(), trips = Trip.query.all(), countries = Country.query.all())
+        return render_template("profile.html", reservations = Reservation.query.filter_by(onwer_id=session['user']).all(), trips = Trip.query.all(), countries = Country.query.all(), user = get_user_data(session['user']))
     else:
         return redirect(url_for("login"))
 
@@ -44,160 +47,193 @@ def register():
 
 @app.route('/login')
 def login():
-    return render_template("login.html", form = SignInForm())
+    return render_template("login.html", form = SignInForm()) if is_user_logged() == False else redirect(url_for("profils"))
+
+@app.route('/logout')
+def logout():
+    session['user'] = None
+    return redirect(url_for("index"))
 
 @app.route('/admin/agencies')
 def admin_agencies():
-    return render_template("templates/agencies.html", agencies = Agency.query.all())
+    return render_template("templates/agencies.html", agencies = Agency.query.all()) if is_user_logged() and is_user_admin() else redirect(url_for("login"))
 
 @app.route('/admin/countries')
 def admin_countries():
-    return render_template("templates/countries.html", countries = Country.query.all(), agencies = Agency.query.all())
+    return render_template("templates/countries.html", countries = Country.query.all(), agencies = Agency.query.all()) if is_user_logged() and is_user_admin() else redirect(url_for("login"))
 
 @app.route('/admin/trips')
 def admin_trips():
-    return render_template("templates/trips.html", trips = Trip.query.all(), agencies = Agency.query.all(), countries = Country.query.all())
+    return render_template("templates/trips.html", trips = Trip.query.all(), agencies = Agency.query.all(), countries = Country.query.all()) if is_user_logged() and is_user_admin() else redirect(url_for("login"))
 
 # Aģentūru un ceļojumu pievienošana
 @app.route('/admin/add')
 def admin_add():
-    return redirect(url_for("admin_add_agencies"))
+    return redirect(url_for("admin_add_agencies")) if is_user_logged() and is_user_admin() else redirect(url_for("login"))
 
 @app.route('/admin/add/agencies', methods=['GET', 'POST'])
 def admin_add_agencies():
-    form = AddAgencyForm()
-    if form.validate_on_submit():
-        # --Gundars
-        # Vēlāk šeit (un admin_add_trips()) tiks pievienotas datu pārbaudes
-        # Pagaidām, lai būtu iespējams strādāt ar datiem, atstāšu tīrus inputus
-        agency = Agency(name=form.name.data, address=form.address.data, number=form.phone_number.data)
-        db.session.add(agency)
-        db.session.commit()
-        return redirect(url_for('admin'))
-    return render_template("templates/add_agency.html", form=form)
+    if is_user_logged() and is_user_admin():
+        form = AddAgencyForm()
+        if form.validate_on_submit():
+            # --Gundars
+            # Vēlāk šeit (un admin_add_trips()) tiks pievienotas datu pārbaudes
+            # Pagaidām, lai būtu iespējams strādāt ar datiem, atstāšu tīrus inputus
+            agency = Agency(name=form.name.data, address=form.address.data, number=form.phone_number.data)
+            db.session.add(agency)
+            db.session.commit()
+            return redirect(url_for('admin'))
+        return render_template("templates/add_agency.html", form=form)
+    else:
+        redirect(url_for("login"))
 
 @app.route('/admin/add/country', methods=['GET', 'POST'])
 def admin_add_country():
-    form = AddCountryForm()
-    if form.validate_on_submit():
-        country = Country(country=form.country.data, abbreviation=form.abbreviation.data)
-        db.session.add(country)
-        db.session.commit()
-        return redirect(url_for('admin_countries'))
-    return render_template("templates/add_country.html", form=form)
+    if is_user_logged() and is_user_admin():
+        form = AddCountryForm()
+        if form.validate_on_submit():
+            country = Country(country=form.country.data, abbreviation=form.abbreviation.data)
+            db.session.add(country)
+            db.session.commit()
+            return redirect(url_for('admin_countries'))
+        return render_template("templates/add_country.html", form=form)
+    else:
+        redirect(url_for("login"))
 
 @app.route('/admin/add/trips', methods=['GET', 'POST'])
 def admin_add_trips():
-    # Lai dinamiski atjauninātu aģentūru sarakstu ceļojumu izveides lapā
-    # Aģentūru izvēlnes attribūts tiek pievienots klases struktūrai, ne instancei
-    agencies = SelectField('Aģentūra', choices=Agency.query.all(), validators=[DataRequired()])
-    country_from = SelectField('Izceļošanas valsts', choices=Country.query.all(), validators=[DataRequired()])
-    country_to = SelectField('Galamērķa valsts', choices=Country.query.all(), validators=[DataRequired()])
+    if is_user_logged() and is_user_admin():
+        # Lai dinamiski atjauninātu aģentūru sarakstu ceļojumu izveides lapā
+        # Aģentūru izvēlnes attribūts tiek pievienots klases struktūrai, ne instancei
+        agencies = SelectField('Aģentūra', choices=Agency.query.all(), validators=[DataRequired()])
+        country_from = SelectField('Izceļošanas valsts', choices=Country.query.all(), validators=[DataRequired()])
+        country_to = SelectField('Galamērķa valsts', choices=Country.query.all(), validators=[DataRequired()])
 
-    setattr(AddTripForm, 'agency', agencies)
-    setattr(AddTripForm, 'country_from', country_from)
-    setattr(AddTripForm, 'country_to', country_to)
-    
-    # Pēc tā var izveidot 'form' objektu ar atjauninātu aģentūru sarakstu
-    form = AddTripForm()
-    if form.validate_on_submit():
-        # Pārbaude
-        agency = Agency.query.filter_by(name=form.agency.data).first().id
-        country_from = Country.query.filter_by(country=form.country_from.data.split(",")[0]).first().id
-        country_to = Country.query.filter_by(country=form.country_to.data.split(",")[0]).first().id
+        setattr(AddTripForm, 'agency', agencies)
+        setattr(AddTripForm, 'country_from', country_from)
+        setattr(AddTripForm, 'country_to', country_to)
+        
+        # Pēc tā var izveidot 'form' objektu ar atjauninātu aģentūru sarakstu
+        form = AddTripForm()
+        if form.validate_on_submit():
+            # Pārbaude
+            agency = Agency.query.filter_by(name=form.agency.data).first().id
+            country_from = Country.query.filter_by(country=form.country_from.data.split(",")[0]).first().id
+            country_to = Country.query.filter_by(country=form.country_to.data.split(",")[0]).first().id
 
-        img_name = secure_filename(form.photo.data.filename)
-        img_path=os.path.join(app.root_path, 'static/images/destinations', img_name)
-        form.photo.data.save(img_path)
+            img_name = secure_filename(form.photo.data.filename)
+            img_path=os.path.join(app.root_path, 'static/images/destinations', img_name)
+            form.photo.data.save(img_path)
 
-        trip = Trip(
-            agency_id=agency,
-            country_from=country_from,
-            country_to=country_to,
-            date_from=form.date_from.data,
-            date_to=form.date_to.data,
-            description=form.description.data,
-            cost=form.cost.data,
-            ticket_amount=form.ticket_amount.data,
-            img_file = img_name,
-            views=0)
-        db.session.add(trip)
-        db.session.commit()
-        return redirect(url_for('admin_trips'))
-    return render_template("templates/add_trip.html", form=form)
+            trip = Trip(
+                agency_id=agency,
+                country_from=country_from,
+                country_to=country_to,
+                date_from=form.date_from.data,
+                date_to=form.date_to.data,
+                description=form.description.data,
+                cost=form.cost.data,
+                ticket_amount=form.ticket_amount.data,
+                img_file = img_name,
+                views=0)
+            db.session.add(trip)
+            db.session.commit()
+            return redirect(url_for('admin_trips'))
+        return render_template("templates/add_trip.html", form=form)
+    else:
+        redirect(url_for("login"))
+
 
 # Aģentūru un ceļojumu dzēšana
 @app.route('/admin/remove/agency/<int:id>')
 def admin_remove_agency(id):
-    remove_agency = Agency.query.filter_by(id=id).first()
-    db.session.delete(remove_agency)
-    db.session.commit()
-    return redirect(url_for('admin_agencies'))
+    if is_user_logged() and is_user_admin():
+        remove_agency = Agency.query.filter_by(id=id).first()
+        db.session.delete(remove_agency)
+        db.session.commit()
+        return redirect(url_for('admin_agencies'))
+    else:
+        redirect(url_for("login"))
 
 @app.route('/admin/remove/country/<int:id>')
 def admin_remove_country(id):
-    remove_country = Country.query.filter_by(id=id).first()
-    db.session.delete(remove_country)
-    db.session.commit()
-    return redirect(url_for('admin_countries'))
+    if is_user_logged() and is_user_admin():
+        remove_country = Country.query.filter_by(id=id).first()
+        db.session.delete(remove_country)
+        db.session.commit()
+        return redirect(url_for('admin_countries'))
+    else:
+        redirect(url_for("login"))
 
 @app.route('/admin/remove/trip/<int:id>')
 def admin_remove_trip(id):
-    remove_trip = Trip.query.filter_by(id=id).first()
-    db.session.delete(remove_trip)
-    db.session.commit()
-    return redirect(url_for('admin_trips'))
+    if is_user_logged() and is_user_admin():
+        remove_trip = Trip.query.filter_by(id=id).first()
+        db.session.delete(remove_trip)
+        db.session.commit()
+        return redirect(url_for('admin_trips'))
+    else:
+        redirect(url_for("login"))
 
 # Aģentūru, valstu un ceļojumu rediģēšana
 @app.route('/admin/edit/trip/<int:id>', methods=['GET', 'POST'])
 def admin_edit_trip(id):
-    edit_trip = Trip.query.filter_by(id=id).first()
-    agencies = SelectField('Aģentūra', choices=Agency.query.all(), validators=[DataRequired()], default=Agency.query.filter_by(id=edit_trip.agency_id).first())
-    country_from = SelectField('Izceļošanas valsts', choices=Country.query.all(), validators=[DataRequired()], default = Country.query.filter_by(id=edit_trip.country_from).first())
-    country_to = SelectField('Galamērķa valsts', choices=Country.query.all(), validators=[DataRequired()], default=Country.query.filter_by(id=edit_trip.country_to).first())
+    if is_user_logged() and is_user_admin():
+        edit_trip = Trip.query.filter_by(id=id).first()
+        agencies = SelectField('Aģentūra', choices=Agency.query.all(), validators=[DataRequired()], default=Agency.query.filter_by(id=edit_trip.agency_id).first())
+        country_from = SelectField('Izceļošanas valsts', choices=Country.query.all(), validators=[DataRequired()], default = Country.query.filter_by(id=edit_trip.country_from).first())
+        country_to = SelectField('Galamērķa valsts', choices=Country.query.all(), validators=[DataRequired()], default=Country.query.filter_by(id=edit_trip.country_to).first())
 
-    setattr(AddTripForm, 'agency', agencies)
-    setattr(AddTripForm, 'country_from', country_from)
-    setattr(AddTripForm, 'country_to', country_to)
-    
-    form = AddTripForm()
-    if form.validate_on_submit():
-        country_from = Country.query.filter_by(country=form.country_from.data.split(",")[0]).first().id
-        country_to = Country.query.filter_by(country=form.country_to.data.split(",")[0]).first().id
-        edit_trip.agency_id=Agency.query.filter_by(name=form.agency.data).first().id
-        edit_trip.country_from=country_from
-        edit_trip.country_to=country_to
-        edit_trip.date_from=form.date_from.data
-        edit_trip.date_to=form.date_to.data
-        edit_trip.description=form.description.data
-        edit_trip.cost=form.cost.data
-        edit_trip.ticket_amount=form.ticket_amount.data
-        db.session.commit()
-        return redirect(url_for('admin_trips'))
-    return render_template("templates/edit_trip.html", id=id, form=form, trip=edit_trip)
+        setattr(AddTripForm, 'agency', agencies)
+        setattr(AddTripForm, 'country_from', country_from)
+        setattr(AddTripForm, 'country_to', country_to)
+        
+        form = AddTripForm()
+        if form.validate_on_submit():
+            country_from = Country.query.filter_by(country=form.country_from.data.split(",")[0]).first().id
+            country_to = Country.query.filter_by(country=form.country_to.data.split(",")[0]).first().id
+            edit_trip.agency_id=Agency.query.filter_by(name=form.agency.data).first().id
+            edit_trip.country_from=country_from
+            edit_trip.country_to=country_to
+            edit_trip.date_from=form.date_from.data
+            edit_trip.date_to=form.date_to.data
+            edit_trip.description=form.description.data
+            edit_trip.cost=form.cost.data
+            edit_trip.ticket_amount=form.ticket_amount.data
+            db.session.commit()
+            return redirect(url_for('admin_trips'))
+        return render_template("templates/edit_trip.html", id=id, form=form, trip=edit_trip)
+    else:
+        redirect(url_for("login"))
 
 @app.route('/admin/edit/country/<int:id>', methods=['GET', 'POST'])
 def admin_edit_country(id):
-    country = Country.query.filter_by(id=id).first()
-    form = AddCountryForm()
-    if form.validate_on_submit():
-        country.country = form.country.data
-        country.abbreviation = form.abbreviation.data
-        db.session.commit()
-        return redirect(url_for('admin_countries'))
-    return render_template("templates/edit_country.html", form=form, id=id, country=country)
-
+    if is_user_logged() and is_user_admin():
+        country = Country.query.filter_by(id=id).first()
+        form = AddCountryForm()
+        if form.validate_on_submit():
+            country.country = form.country.data
+            country.abbreviation = form.abbreviation.data
+            db.session.commit()
+            return redirect(url_for('admin_countries'))
+        return render_template("templates/edit_country.html", form=form, id=id, country=country)
+    else:
+        redirect(url_for("login"))
+    
 @app.route('/admin/edit/agency/<int:id>', methods=['GET', 'POST'])
 def admin_edit_agency(id):
-    agency = Agency.query.filter_by(id = id).first()
-    form = AddAgencyForm()
-    if form.validate_on_submit():
-        agency.name = form.name.data
-        agency.address = form.address.data
-        agency.number = form.phone_number.data
-        db.session.commit()
-        return redirect(url_for('admin'))
-    return render_template("templates/edit_agency.html", form=form, id=id, agency=agency)
+    if is_user_logged() and is_user_admin():
+        agency = Agency.query.filter_by(id = id).first()
+        form = AddAgencyForm()
+        if form.validate_on_submit():
+            agency.name = form.name.data
+            agency.address = form.address.data
+            agency.number = form.phone_number.data
+            db.session.commit()
+            return redirect(url_for('admin'))
+        return render_template("templates/edit_agency.html", form=form, id=id, agency=agency)
+    else:
+        redirect(url_for("login"))
 
 @app.route('/sign_up', methods=['POST'])
 def sign_up():
@@ -315,7 +351,7 @@ def catalogue_filter():
 @app.route("/upload/<trip_id>/<owner_id>")
 def upload_reservation(trip_id, owner_id):
     reservation = Reservation.query.filter_by(id=trip_id).first()
-    if not reservation or reservation.onwer_id != int(owner_id):
+    if not reservation or reservation.onwer_id != int(owner_id) or int(owner_id) != session['user']:
         return redirect(url_for("profils"))
     else:
         html_content = f'''
