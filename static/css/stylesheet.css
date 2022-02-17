@@ -95,6 +95,24 @@ a.button:hover {
     border-radius: 3px;
 }
 
+#button-logout {
+    height:35px;
+    width:85px;
+    line-height: 35px;
+    margin-top: 26px;
+    margin-right: 2%;
+    border-radius: 3px;
+}
+
+#button-admin {
+    height:35px;
+    width:85px;
+    line-height: 35px;
+    margin-top: 26px;
+    margin-right: 0.5%;
+    border-radius: 3px;
+}
+
 header{
     position: relative;
     display:flex;
@@ -339,13 +357,7 @@ header{
     margin-bottom: 15px;
     margin-left: 250px;
 }
-/* #profile {
-    background-color: #F4F4F4;
-    width: 650px;
-    height: 163px;
-    margin-top: 47px;
-    margin-left: 100px;
-} */
+
 #informacija {
     margin-left: 18px;
     padding-top: 8px;
@@ -593,7 +605,17 @@ header{
     margin-top: auto;
     margin-bottom: auto;
     margin-left: auto;
-    margin-right: 15px;
+    margin-right: 2%;
+    height:30px;
+    width:70px;
+}
+
+#button-correct-2 {
+    line-height: 32px;
+    font-size: 18px !important;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: 2%;
     height:30px;
     width:70px;
 }
@@ -813,7 +835,8 @@ footer {
     line-height: 32px;
     
     margin-top: 100px;
-    margin-left: 9px;
+    margin-right: auto;
+    margin-left: 4%;
 
     background-color: red !important;
 }
@@ -970,14 +993,12 @@ footer {
 }
 
 #informacija-mainit {
-    margin-top: 20px;
-    margin-left: 40px;
+    margin-top: 4%;
+    margin-left: 20%;
     display: inline-flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-content: space-around;
-    flex-wrap: wrap;
-    align-items: left;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
 }
 
 .profile-image {
@@ -985,9 +1006,13 @@ footer {
 }
 
 .profile-box-text {
-    margin-top: 5px;
-    padding-bottom: 5%;
+    margin-top: 16px;
     color: #2e2e2e;
+}
+
+.profile-box-text-gray {
+    margin-top: 16px;
+    color: rgb(104, 104, 104);
 }
 
 #profile-buttons{
@@ -1124,4 +1149,46 @@ footer {
     justify-content: space-evenly;
     padding-top: 3%;
     padding-bottom: 3%;
+}
+.change-form {
+    border: #575757;
+    border-style: solid;
+    border-width: 1px;
+    margin-top: 2%;
+    margin-left: 20%;
+    margin-right: auto;
+    margin-top: 10.5%;
+    color: rgb(51, 51, 51);
+    background-color: #ffffff;
+    font-size: 16px;
+    line-height: 38px;
+    width: 90%;
+    height: 30%;
+    padding: 1%;
+    padding-left: 3%;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+#save-button{
+    color: white !important;
+    text-align: center;
+    font-size: 18px !important;
+    font-family: Thasadith;
+    text-decoration: none;
+    line-height: 42px;
+    font-weight: normal !important;
+    background-color: #0070D8;
+    border-radius: 3px;
+
+    margin-top: 10px;
+    color: rgb(255, 255, 255);
+    background-color: #0070D8;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 38px;
+    width: 50%;
+    height: 40px;
+    border: none;
 }

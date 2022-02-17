@@ -10,27 +10,36 @@
     <div id="profile-content">
         <div id="profile">
             <div class="profile-titlebar">
-                <h1 id="profile-titlebar-text">Lietotāja dati</h1>
+                <h1 id="profile-titlebar-text">Ievadiet datus kur nepieciešams</h1>
             </div>
             <div id="informacija-mainit">
                 <div>
                     <h2 class="profile-box-text-gray">Vārds</h2>
                     <h2 class="profile-box-text-gray">Uzvārds</h2>
                     <h2 class="profile-box-text-gray">E-pasts</h2>
-                    <h2 class="profile-box-text-gray">Parole</h2>
-
+                    <h2 class="profile-box-text-gray">Jauna parole</h2>
+                    <h2 class="profile-box-text-gray">Atkātojiet paroli</h2>
+    
                 </div>
-                <div style="margin-left: 30%;">
-                    <h2 class="profile-box-text">{{ user.name }}</h2>
-                    <h2 class="profile-box-text">{{ user.surname }}</h2>
-                    <h2 class="profile-box-text">{{ user.email }}</h2>
-                    <h2 class="profile-box-text">...</h2>
-
-                </div>
-            </div>
-            <div class="user-info-control">
-                <a href="" class="button" id="button-delete-profile">Dzēst profilu</a>
-                <a href="/profile/edit" class="button" id="button-correct-2">Mainīt</a>
+                <form action="/profile/edit/check" method="POST">
+                    {{ form.csrf_token }}
+                    <div class="change-group">
+                        {{ form.name(placeholder="Ievadiet savu vārdu", class="change-form") }}
+                    </div>
+                    <div class="change-group">
+                        {{ form.surname(placeholder="Ievadiet savu uzvārdu", class="change-form") }}
+                    </div>
+                    <div class="change-group">
+                        {{ form.email(placeholder="Ievadiet e-pastu", class="change-form") }}
+                    </div>
+                    <div class="change-group">
+                        {{ form.password(placeholder="Jauna parole", class="change-form") }}
+                    </div>
+                    <div class="change-group">
+                        <input type="password" class="change-form" placeholder="Atkārtojiet jauno paroli">
+                    </div>
+                    <a href="/profile" style="margin-right: 10%;">Atcelt</a><button type="submit" id="save-button">Saglabāt</button>
+                </form>
             </div>
         </div>
         <div id="rezervetie-celojumi">
@@ -44,8 +53,8 @@
                             <h1 id="destination-text-bold">{{ reservation.country_from }} - {{ reservation.country_to }}</h1>
                             <h1 class="reservation-box-text">Rez.nr. {{ reservation.reservation_number }}</h1>
                             <h1 class="reservation-box-text">Dienu skaits: {{ reservation.days }}</h1>
-                            <h1 class="reservation-box-text">Izbraukšana: <b>{{ reservation.date_from.strftime("%Y-%m-%d %H:%M") }}</b></h1>
-                            <h1 class="reservation-box-text">Atgriešanās: <b>{{ reservation.date_to.strftime("%Y-%m-%d %H:%M") }}</b></h1>
+                            <h1 class="reservation-box-text">Izbraukšana: <b>{{ reservation.date_from }}</b></h1>
+                            <h1 class="reservation-box-text">Atgriešanās: <b>{{ reservation.date_to }}</b></h1>
                             <h1 id="price-text-bold">Cena: {{ reservation.price }}€</h1>
                             <a href="/upload/{{ reservation.id }}/{{ reservation.owner_id }}" class="button" id="button-reserve" style="margin-top: 6px;">Izprintēt</a>
                         </div>

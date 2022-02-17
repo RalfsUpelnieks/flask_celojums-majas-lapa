@@ -37,3 +37,9 @@ class AddUserForm(FlaskForm):
 class SignInForm(FlaskForm):
     email = EmailField('E-pasts', validators=[DataRequired()])
     password = PasswordField('Parole', validators=[DataRequired()])
+
+class EditUserForm(FlaskForm):
+    email = EmailField('E-pasts')
+    password = PasswordField('Parole')
+    name = StringField('Vārds')
+    surname = StringField('Uzvārds')
