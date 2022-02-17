@@ -13,10 +13,13 @@ from sqlalchemy import desc
 from werkzeug.utils import secure_filename
 
 def is_user_logged():
-    return True if session['user'] != None else False
+    return True if session.get('user') == True else False
 
 def is_user_admin():
-    return True if User.query.filter_by(id=session['user']).first().role_id != 0 else False
+    if is_user_logged():
+        return True if User.query.filter_by(id=session['user']).first().role_id != 0 else False
+    else:
+        return False
 
 def get_user_data(id):
     return User.query.filter_by(id=id).first()
