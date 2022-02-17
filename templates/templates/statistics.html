@@ -1,0 +1,27 @@
+{% extends "admin.html" %}
+{% block title %}
+<div id="admin-page-content">
+    <div id="ap-selector">
+        <div id="ap-selector-list">
+            <ul class="nav-ul">
+                <a href="/admin/agencies"><li class="selector">Ceļojumu aģentūras</li></a>
+                <a href="/admin/countries"><li class="selector">Ceļojamās valstis</li></a>
+                <a href="/admin/trips"><li class="selector">Pieejamie ceļojumi</li></a>
+            </ul>
+        </div>
+        <div id="ap-selector-display">  
+            <h2 class="subtitle">Statistika</h2>
+            <div id="ap-selector-display-list">
+                {% for trip in trips %}
+                    {% if reservations.trip_id == trip.id %}
+                    <p>+</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div id="ap-selector-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

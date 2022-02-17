@@ -66,6 +66,10 @@ def admin_countries():
 def admin_trips():
     return render_template("templates/trips.html", trips = Trip.query.all(), agencies = Agency.query.all(), countries = Country.query.all()) if is_user_logged() and is_user_admin() else redirect(url_for("login"))
 
+@app.route('/admin/statistics')
+def statistics():
+    return render_template("templates/statistics.html", trips = Trip.query.all(), reservations = Reservation.query.all()) if is_user_logged() and is_user_admin() else redirect(url_for("login"))
+
 # Aģentūru un ceļojumu pievienošana
 @app.route('/admin/add')
 def admin_add():
