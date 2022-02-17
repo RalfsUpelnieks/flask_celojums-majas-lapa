@@ -37,7 +37,7 @@ def admin():
 @app.route('/profile')
 def profils():
     if is_user_logged():
-        return render_template("profile.html", reservations = Reservation.query.filter_by(onwer_id=session['user']).all(), trips = Trip.query.all(), countries = Country.query.all(), user = get_user_data(session['user']))
+        return render_template("profile.html", reservations = Reservation.query.filter_by(owner_id=session['user']).all(), trips = Trip.query.all(), countries = Country.query.all(), user = get_user_data(session['user']))
     else:
         return redirect(url_for("login"))
 
@@ -117,6 +117,8 @@ def admin_add_trips():
         form = AddTripForm()
         if form.validate_on_submit():
             # Pārbaude
+            print(form.date_from.data)
+
             agency = Agency.query.filter_by(name=form.agency.data).first().id
             country_from = Country.query.filter_by(country=form.country_from.data.split(",")[0]).first().id
             country_to = Country.query.filter_by(country=form.country_to.data.split(",")[0]).first().id
@@ -270,7 +272,7 @@ def reservation(id):
         trip = Trip.query.get(id)
         trip.views += 1
         db.session.commit()
-        return render_template("reservation.html", trip = trip, countries = Country.query.all())
+        return render_template("reservation.html", trip = trip, countries = Country.query.all(), user = get_user_data(session['user']))
     flash("Lūdzu pieslēdzaties!")
     return redirect(url_for('login'))
 
@@ -295,7 +297,7 @@ def reservation_add(id):
             price=trip['cost'],
             reservation_number=1000000001+Reservation.query.order_by(-Reservation.id).first().id if len(Reservation.query.all()) > 0 else 1000000001,
             trip_id=id,
-            onwer_id=user.id
+            owner_id=user.id
         )
         db.session.add(reservation)
         db.session.commit()
@@ -351,7 +353,7 @@ def catalogue_filter():
 @app.route("/upload/<trip_id>/<owner_id>")
 def upload_reservation(trip_id, owner_id):
     reservation = Reservation.query.filter_by(id=trip_id).first()
-    if not reservation or reservation.onwer_id != int(owner_id) or int(owner_id) != session['user']:
+    if not reservation or reservation.owner_id != int(owner_id) or int(owner_id) != session['user']:
         return redirect(url_for("profils"))
     else:
         html_content = f'''
@@ -366,11 +368,11 @@ def upload_reservation(trip_id, owner_id):
                 </tr>
                 <tr>
                     <th>Izbraukšana</th>
-                    <th>{reservation.date_from}</th>
+                    <th>{reservation.date_from.strftime("%Y-%m-%d %H:%M")}</th>
                 </tr>
                 <tr>
                     <th>Atgriešanās</th>
-                    <th>{reservation.date_to}</th>
+                    <th>{reservation.date_to.strftime("%Y-%m-%d %H:%M")}</th>
                 </tr>
                 <tr>
                     <th>Dienu skaits</th>

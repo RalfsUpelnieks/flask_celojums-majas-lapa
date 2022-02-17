@@ -36,9 +36,9 @@
                             <h1 class="reservation-box-text">{{ reservation.owner_name }} {{ reservation.owner_surname }} Rez.nr. {{ reservation.reservation_number }}</h1>
                             <h1 class="reservation-box-text">Dienu skaits: {{ reservation.days }}</h1>
                             <h1 class="box-text-bold">Cena: {{ reservation.price }}</h1>
-                            <h1 class="reservation-box-text">Izbraukšana:<b>{{ reservation.date_from }}</b></h1>
-                            <h1 class="reservation-box-text">Atgriešanās:<b>{{ reservation.date_to }}</b></h1>
-                            <a href="/upload/{{ reservation.id }}/{{ reservation.onwer_id }}"><button id="print">Printeris</button></a>
+                            <h1 class="reservation-box-text">Izbraukšana: <b>{{ reservation.date_from.strftime("%Y-%m-%d %H:%M") }}</b></h1>
+                            <h1 class="reservation-box-text">Atgriešanās: <b>{{ reservation.date_to.strftime("%Y-%m-%d %H:%M") }}</b></h1>
+                            <a href="/upload/{{ reservation.id }}/{{ reservation.owner_id }}"><button id="print">Printeris</button></a>
                             <button id="atcelt">Atcelt</button> 
                         </div>
                     {% endfor %}
