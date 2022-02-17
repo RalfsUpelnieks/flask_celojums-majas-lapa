@@ -16,8 +16,11 @@
             <a href="/" id="title">Travely</a>
             <a href="tel:+37129749980" id="number">tel. +371 29749980</h1>
             {% if session['user'] %}
-                <a href="/profile" class="button" id="button-login" style="margin-right:8px;">Profils</a>
-                <a href="/logout" class="button" id="button-login" style="margin-right: 2%;">Izrakstīties</a>
+                {% if is_admin %}
+                    <a href="/admin" class="button" id="button-admin">admin</a>
+                {% endif %}
+                <a href="/profile" class="button" id="button-login" style="margin-right: 0.5%;">Profils</a>
+                <a href="/logout" class="button" id="button-logout">Izrakstīties</a>
             {% else %}
                 <a href="/login" class="button" id="button-login">Ieiet</a>
             {% endif %}

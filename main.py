@@ -13,13 +13,10 @@ from sqlalchemy import desc
 from werkzeug.utils import secure_filename
 
 def is_user_logged():
-    return True if session.get('user') == True else False
+    return True if session['user'] != None else False
 
 def is_user_admin():
-    if is_user_logged():
-        return True if User.query.filter_by(id=session['user']).first().role_id != 0 else False
-    else:
-        return False
+    return True if is_user_logged() and User.query.filter_by(id=session['user']).first().role_id != 0 else False
 
 def get_user_data(id):
     return User.query.filter_by(id=id).first()
@@ -27,11 +24,11 @@ def get_user_data(id):
 @app.route('/')
 def index():
     qry = Trip.query.order_by(desc(Trip.views)).limit(4)
-    return render_template("index.html", top_trips=qry, countries = Country.query.all())
+    return render_template("index.html", top_trips=qry, countries = Country.query.all(), is_admin = is_user_admin())
 
 @app.route('/catalogue')
 def celojumi():
-    return render_template("catalogue.html", trips = Trip.query.all(), countries = Country.query.all())
+    return render_template("catalogue.html", trips = Trip.query.all(), countries = Country.query.all(), is_admin = is_user_admin())
 
 @app.route('/admin')
 def admin():
@@ -40,9 +37,31 @@ def admin():
 @app.route('/profile')
 def profils():
     if is_user_logged():
-        return render_template("profile.html", reservations = Reservation.query.filter_by(owner_id=session['user']).all(), trips = Trip.query.all(), countries = Country.query.all(), user = get_user_data(session['user']))
+        return render_template("profile.html", reservations = Reservation.query.filter_by(owner_id=session['user']).all(), trips = Trip.query.all(), countries = Country.query.all(), user = get_user_data(session['user']), is_admin = is_user_admin())
     else:
         return redirect(url_for("login"))
+
+@app.route('/profile/edit')
+def profils_edit():
+    return render_template("edit_profile.html", form = EditUserForm(), user = get_user_data(session['user']), is_admin = is_user_admin())
+
+
+@app.route('/profile/edit/check', methods=['POST'])
+def profils_edit_check():
+    if request.method == "POST":
+        user =  User.query.filter_by(id=session['user']).first()
+
+        if request.form['password'] != "":
+            user.password = generate_password_hash(request.form['password'], method='sha256')
+        if request.form['name'] != "":
+            user.name = request.form['name']
+        if request.form['surname'] != "":
+            user.surname = request.form['surname']
+        if request.form['email'] != "":
+            user.email = request.form['email']
+        db.session.commit()
+        return redirect(url_for("profils"))
+    return "404"
 
 @app.route('/register')
 def register():
@@ -279,7 +298,7 @@ def reservation(id):
         trip = Trip.query.get(id)
         trip.views += 1
         db.session.commit()
-        return render_template("reservation.html", trip = trip, countries = Country.query.all(), user = get_user_data(session['user']))
+        return render_template("reservation.html", trip = trip, countries = Country.query.all(), user = get_user_data(session['user']), is_admin = is_user_admin())
     flash("Lūdzu pieslēdzaties!")
     return redirect(url_for('login'))
 
