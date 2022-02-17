@@ -7,6 +7,13 @@
                     <h3 class="title">Reģistrēšanās</h3>
                     <p class="description">Ievadiet savu pilno vārdu, e-pastu un paroli, lai reģistrētos Travely!</p>
                     <form action="/sign_up" method="POST">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <h1 style="color:red;">{{ message }}</h1>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
                         {{ form.csrf_token }}
                         <div class="form-group">
                             {{ form.name(placeholder="Ievadiet savu vārdu", class="form-control") }}
@@ -25,7 +32,7 @@
                             <span class="profile-important">*</span>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Atkārtoti ievadiet paroli vēlreiz">
+                            <input name="re-password" type="password" class="form-control" placeholder="Atkārtoti ievadiet paroli vēlreiz">
                             <span class="profile-important">*</span>
                         </div>
                         <div class="form-group checkbox">

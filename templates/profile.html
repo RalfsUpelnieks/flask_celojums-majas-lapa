@@ -32,8 +32,8 @@
                             <h1 id="destination-text-bold">{{ reservation.country_from }} - {{ reservation.country_to }}</h1>
                             <h1 class="reservation-box-text">Rez.nr. {{ reservation.reservation_number }}</h1>
                             <h1 class="reservation-box-text">Dienu skaits: {{ reservation.days }}</h1>
-                            <h1 class="reservation-box-text">Izbraukšana: <b>{{ reservation.date_from }}</b></h1>
-                            <h1 class="reservation-box-text">Atgriešanās: <b>{{ reservation.date_to }}</b></h1>
+                            <h1 class="reservation-box-text">Izbraukšana: <b>{{ reservation.date_from.strftime("%Y-%m-%d %H:%M") }}</b></h1>
+                            <h1 class="reservation-box-text">Atgriešanās: <b>{{ reservation.date_to.strftime("%Y-%m-%d %H:%M") }}</b></h1>
                             <h1 id="price-text-bold">Cena: {{ reservation.price }}€</h1>
                             <a href="/upload/{{ reservation.id }}/{{ reservation.owner_id }}" class="button" id="button-reserve" style="margin-top: 6px;">Izprintēt</a>
                         </div>

@@ -35,12 +35,27 @@ class Agency(db.Model):
     def __repr__(self):
         return self.name
 
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "address": self.address,
+            "number": self.number
+        }
+
 class Country(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     country = db.Column(db.String(48), nullable=False)
     abbreviation = db.Column(db.String(2), nullable=False)
     def __repr__(self):
         return f'{self.country}, {self.abbreviation}'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "country": self.country,
+            "abbreviation": self.abbreviation
+        }
 
 class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -85,9 +100,19 @@ class User(db.Model):
     name = db.Column(db.String(30), nullable=False)
     surname = db.Column(db.String(30), nullable=False)
     role_id = db.Column(db.Integer)
+    
     def __repr__(self):
         return f'User: {self.name} {self.surname}, roleID = {self.role_id}'
     
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "surname": self.surname,
+            "email": self.email,
+            "role_id": self.role_id
+        }
+
 class Reservation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     owner_name = db.Column(db.String(30), nullable=False)
@@ -101,6 +126,22 @@ class Reservation(db.Model):
     reservation_number = db.Column(db.Integer)
     owner_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     trip_id = db.Column(db.Integer, db.ForeignKey("trip.id"))
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "owner_name": self.owner_name,
+            "owner_surname": self.owner_surname,
+            "country_from": self.country_from,
+            "country_to": self.country_to,
+            "date_from": self.date_from,
+            "date_to": self.date_to,
+            "days": self.days,
+            "price": self.price,
+            "reservation_number": self.reservation_number,
+            "owner_id": self.owner_id,
+            "trip_id": self.trip_id
+        }
 '''
 set FLASK_APP=models.py
 
